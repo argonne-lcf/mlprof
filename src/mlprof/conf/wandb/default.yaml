@@ -6,5 +6,4 @@ setup:
     mode: online
     resume: allow
     magic: true
-    entity: saforem2
-    project: mpiprof
+    project: mlprof
