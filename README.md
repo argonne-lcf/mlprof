@@ -1,4 +1,3 @@
-
 # mlprof 
 
 [<img src="https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28.svg" alt="Weights & Biases monitoring" height=20 style="padding: 0% 0%;">](https://wandb.ai/alcf-mlops/mlprof)
@@ -28,6 +27,13 @@ Profiling tools for performance studies of competing ML frameworks on HPC system
 
 ## Setup
 
+> **Note**
+> <br> These instructions assume that your active environment already has 
+> the required ML libraries installed.
+>
+> This allows us to perform an isolated editable installation _inside_ our
+existing environment, and allows it to access previously installed libraries.
+
 To install:
 
 ```bash
@@ -37,18 +43,22 @@ python3 -m pip install --upgrade pip setuptools wheel
 python3 -m pip install -e .
 ```
 
-To run:
+## Running Experiments
+
+To train:
 
 ```bash
 cd src/mlprof
 ./train.sh > train.log 2>&1 &
 ```
 
-To view output:
+and view the resulting output:
 
 ```bash
 tail -f train.log $(tail -1 logs/latest)
 ```
+
+### Configuration
 
 Configuration options can be overridden on the command line, e.g.
 (and are specified in [`src/mlprof/conf/config.yaml`](src/mlprof/conf/config.yaml))
@@ -57,7 +67,7 @@ Configuration options can be overridden on the command line, e.g.
 ./train.sh data.batch_size=256 network.hidden_size=64 > train.log 2>&1 &
 ```
 
-## Profiling
+### Profiling
 
 To run an experiment with `mpitrace` enabled, on Polaris, we can explicitly set the `LD_PRELOAD` environment variable, e.g.
 
