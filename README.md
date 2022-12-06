@@ -1,20 +1,29 @@
-# mlprof
 
-[<img src="https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28.svg" alt="Weights & Biases monitoring" height=20>](https://wandb.ai/alcf-mlops/mlprof)
+# mlprof 
+
+[<img src="https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28.svg" alt="Weights & Biases monitoring" height=20 style="padding: 0% 0%;">](https://wandb.ai/alcf-mlops/mlprof)
+
+<a href="https://pytorch.org/get-started/locally/"><img alt="pyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white" style="padding: 0% 0% 0% 0%;" height=20></a> <a href="https://www.tensorflow.org"><img alt="tensorflow" src="https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?&logo=TensorFlow&logoColor=white" style="padding: 0% 0%;" height=20></a> 
 
 Profiling tools for performance studies of competing ML frameworks on HPC systems
 
+</div>
 
-## To do
+<details closed><summary><b>TODO</b></summary>
+<p>
 
 - [ ] Write DeepSpeed Trainer that wraps [`src/mlprof/network/pytorch/network.py`](./src/mlprof/network/pytorch/network.py)
     - Reference: [DeepSpeed -- Getting Started](https://www.deepspeed.ai/getting-started/)
 - [ ] MPI Profiling to get all collective comm. ops with same model in DeepSpeed, DDP, and Horovod
+   - Reference: [Profiling](https://github.com/argonne-lcf/mlprof#profiling) using `libmpitrace.so` on Polaris
 - [ ] Start with 2 nodes first and next scale w/ increasing number of nodes
 - [ ] Get profiles for DeepSpeed Zero 1, 2, 3 and Mixture of experts (MoE)
 - [ ] Identify what parameters can impact performance such as NCCL environment variables and framework-specific parameters
 - [ ] Do the analysis for standard models and large language models (LLMs)
-- [ ] (optional for now) Develop auto-tuning methods to set these parameters for optimal performance
+- [ ] Develop auto-tuning methods to set these parameters for optimal performance
+
+</p>
+</details>
 
 
 ## Setup
@@ -57,6 +66,9 @@ LD_PRELOAD=/soft/perftools/mpitrace/lib/libmpitrace.so ./train.sh > train.log 2>
 ```
 
 which will write MPI Profiling information to a `mpi_profile.XXXXXX.Y` file containing the following information:
+
+<details closed><summary>MPI Profile Results</summary>
+<p>
 
 ```bash
 Data for MPI rank 0 of 8:
@@ -104,3 +116,6 @@ taskid             host    cpu    comm(s)  elapsed(s)     user(s)   system(s)   
      6    x3210c0s7b0n0      2       0.00      227.64      134.53       87.16     3968.59   229010244
      7    x3210c0s7b0n0      3       0.00      227.67      125.24       96.90     4004.26   233186459
 ```
+
+</p>
+</details>
