@@ -1,0 +1,4 @@
+_target_: mpiprof.configs.DataConfig
+
+dataset: MNIST
+batch_size: 256
