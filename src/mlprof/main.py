@@ -26,7 +26,7 @@ import wandb
 
 from mlprof.configs import PROJECT_DIR
 from mlprof.configs import NetworkConfig
-from mlprof.network import Net
+from mlprof.network.pytorch.network import Net
 from mlprof.utils.pylogger import get_pylogger
 
 log = get_pylogger(__name__)
@@ -220,7 +220,7 @@ def setup_wandb(cfg: DictConfig) -> dict:
                 mode='online',
                 resume='allow',
                 save_code=True,
-                project='sdl-wandb',
+                project=cfg.wandb.setup.project,
             )
             assert wbrun is not None and wbrun is wandb.run
             wbrun.log_code(cfg.get('work_dir', PROJECT_DIR))
