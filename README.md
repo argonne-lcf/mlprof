@@ -23,3 +23,10 @@ To view output:
 ```bash
 tail -f train.log $(tail -1 logs/latest)
 ```
+
+Configuration options can be overridden on the command line, e.g.
+(and are specified in [`src/mlprof/conf/config.yaml`](src/mlprof/conf/config.yaml))
+
+```bash
+./train.sh data.batch_size=256 network.hidden_size=64 > train.log 2>&1 &
+```
