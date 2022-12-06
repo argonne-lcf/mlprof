@@ -1,5 +1,7 @@
 # mlprof
 
+[<img src="https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28.svg" alt="Weights & Biases monitoring" height=20>](https://wandb.ai/alcf-mlops/mlprof)
+
 Profiling tools for performance studies of competing ML frameworks on HPC systems
 
 
