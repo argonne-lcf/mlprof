@@ -19,7 +19,7 @@ from torchvision import datasets, transforms
 import wandb
 
 from mlprof.configs import DATA_DIR, ExperimentConfig, NetworkConfig
-from mlprof.network import Net
+from mlprof.network.pytorch.network import Net
 from mlprof.utils.pylogger import get_pylogger
 
 log = get_pylogger(__name__)
