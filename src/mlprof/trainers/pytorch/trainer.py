@@ -64,16 +64,6 @@ class Trainer:
             config if isinstance(config, ExperimentConfig)
             else instantiate(config)
         )
-        # else:
-        #     raise TypeError(
-        #         'Expected `config` to be of type: '
-        #         '`dict | DictConfig | ExperimentConfig`'
-        #     )
-
-        # self.rank = dist.get_rank()
-        # self.world_size = dist.get_world_size()
-        # self.local_size = 1
-        # self._ngpus = 0
         dsetup = setup_torch_distributed(self.config.backend)
         self._dtype = torch.get_default_dtype()
         self._device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -93,11 +83,6 @@ class Trainer:
 
         self.loss_fn = nn.CrossEntropyLoss()
 
-        # self.device = 'gpu' if torch.cuda.is_available() else 'cpu'
-        # self.rank = 0
-        # self._ngpus = 1
-        # self.world_size = 1
-        # self.setup_torch()
         self.data = self.setup_data()
         self.model = (
             model if model is not None and isinstance(model, nn.Module)
@@ -157,7 +142,7 @@ class Trainer:
             if self.use_fp16:
                 self._dtype = torch.half
 
-        elif self.config.backend in ['hvd', 'horovod']:
+        elif self.config.backend.lower() in ['hvd', 'horovod']:
             import horovod.torch as hvd
             compression = (
                 hvd.Compression.fp16

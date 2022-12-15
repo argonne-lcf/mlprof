@@ -124,7 +124,7 @@ def setup_wandb(
 
 
 def train_mnist(cfg: DictConfig, wbrun: Optional[Any] = None) -> float:
-    from mlprof.trainers.DDP.trainer import Trainer
+    from mlprof.trainers.pytorch.trainer import Trainer
     from mlprof.configs import ExperimentConfig
     start = time.time()
     config: ExperimentConfig = instantiate(cfg)
