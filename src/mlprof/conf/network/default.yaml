@@ -1,4 +1,4 @@
-_target_: mpiprof.configs.NetworkConfig
+_target_: mlprof.configs.NetworkConfig
 
 drop1: 0.1
 drop2: 0.25

@@ -1,4 +1,4 @@
-_target_: mpiprof.configs.TrainerConfig
+_target_: mlprof.configs.TrainerConfig
 
 lr_init: 0.001
 logfreq: 5

@@ -1,5 +1,5 @@
 # @package _global_
-_target_: mpiprof.configs.ExperimentConfig
+_target_: mlprof.configs.ExperimentConfig
 
 # Specify here default configuration
 # Ordering determines precedence, i.e.
