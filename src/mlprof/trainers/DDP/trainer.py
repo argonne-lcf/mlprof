@@ -3,10 +3,14 @@ ddp/trainer.py
 """
 from __future__ import absolute_import, annotations, division, print_function
 import time
+import os
 from typing import Optional, Any
 
 from hydra.utils import instantiate
 from omegaconf import DictConfig
+from rich import print_json
+from pathlib import Path
+import json
 import torch
 from torch import optim
 from torch.cuda.amp.grad_scaler import GradScaler
@@ -18,11 +22,15 @@ import torch.utils.data.distributed
 from torchvision import datasets, transforms
 import wandb
 
-from mlprof.configs import DATA_DIR, ExperimentConfig, NetworkConfig
+from mlprof.trainers.trainer import BaseTrainer
+from mlprof.configs import CONF_DIR, DATA_DIR, ExperimentConfig, NetworkConfig
 from mlprof.network.pytorch.network import Net
 from mlprof.utils.pylogger import get_pylogger
+from mlprof.utils.dist import setup_torch_distributed
 
 log = get_pylogger(__name__)
+
+Optimizer = torch.optim.Optimizer
 
 
 def metric_average(val: torch.Tensor, size: int = 1):
@@ -35,6 +43,14 @@ def metric_average(val: torch.Tensor, size: int = 1):
     return val / size
 
 
+def load_ds_config(fpath: os.PathLike) -> dict:
+    ds_config_path = Path(fpath)
+    with ds_config_path.open('r') as f:
+        ds_config = json.load(f)
+
+    return ds_config
+
+
 class Trainer:
     def __init__(
             self,
@@ -44,15 +60,30 @@ class Trainer:
             model: Optional[torch.nn.Module] = None,
             optimizer: Optional[torch.optim.Optimizer] = None,
     ):
-        if isinstance(config, (dict, DictConfig)):
-            self.config = instantiate(config)
-        elif isinstance(config, ExperimentConfig):
-            self.config = config
-        else:
-            raise TypeError(
-                'Expected `config` to be of type: '
-                '`dict | DictConfig | ExperimentConfig`'
-            )
+        self.config: ExperimentConfig = (
+            config if isinstance(config, ExperimentConfig)
+            else instantiate(config)
+        )
+        # else:
+        #     raise TypeError(
+        #         'Expected `config` to be of type: '
+        #         '`dict | DictConfig | ExperimentConfig`'
+        #     )
+
+        # self.rank = dist.get_rank()
+        # self.world_size = dist.get_world_size()
+        # self.local_size = 1
+        # self._ngpus = 0
+        dsetup = setup_torch_distributed(self.config.backend)
+        self._dtype = torch.get_default_dtype()
+        self._device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.world_size = dsetup['size']
+        self.rank = dsetup['rank']
+        self.local_rank = dsetup['local_rank']
+        self._is_chief = (self.local_rank == 0 and self.rank == 0)
+        if torch.cuda.is_available():
+            self.local_size = torch.cuda.device_count()
+            self._ngpus = self.world_size * torch.cuda.device_count()
 
         if scaler is None:
             self.scaler = None
@@ -61,27 +92,25 @@ class Trainer:
         self._global_step = 0
 
         self.loss_fn = nn.CrossEntropyLoss()
-        self.device = 'gpu' if torch.cuda.is_available() else 'cpu'
 
-        self.rank = 0
-        self._ngpus = 1
-        self.world_size = 1
+        # self.device = 'gpu' if torch.cuda.is_available() else 'cpu'
+        # self.rank = 0
+        # self._ngpus = 1
+        # self.world_size = 1
         # self.setup_torch()
         self.data = self.setup_data()
-        if model is None:
-            self.model = self.build_model(self.config.network)
+        self.model = (
+            model if model is not None and isinstance(model, nn.Module)
+            else self.build_model(self.config.network)
+        )
         if optimizer is None:
-            self.optimizer = self.build_optimizer(
+            self._optimizer = self.build_optimizer(
                 model=self.model,
                 lr_init=self.config.trainer.lr_init
             )
 
         if torch.cuda.is_available():
             self.model.cuda()
-            self.rank = dist.get_rank()
-            self.world_size = dist.get_world_size()
-            self.local_size = torch.cuda.device_count()
-            self._ngpus = self.world_size * torch.cuda.device_count()
 
         self.wbrun = wbrun
         if self.wbrun is not None:
@@ -94,6 +123,62 @@ class Trainer:
                 log_freq=self.config.trainer.logfreq,
             )
 
+        self.model_engine = None
+        self.use_fp16 = False
+        self.ds_config = None
+        if self.config.backend == 'DDP':
+            self.model_engine = DDP(self.model)
+            self.optimizer = self._optimizer
+
+        elif self.config.backend.lower() in ['ds', 'deepspeed']:
+            import deepspeed
+            ds_config_path = Path(CONF_DIR).joinpath('ds_config.json')
+            self.ds_config = load_ds_config(ds_config_path)
+            log.info(f'Loaded DeepSpeed config from: {ds_config_path}')
+            if self._is_chief:
+                print_json(json.dumps(self.ds_config, indent=4))
+
+            if self.ds_config['fp16']['enabled']:
+                self.model = self.model.to(torch.half)
+
+            params = filter(
+                lambda p: p.requires_grad,
+                self.model.parameters()
+            )
+            engine, optimizer, _, _ = deepspeed.initialize(
+                model=self.model,
+                model_parameters=params,  # type: ignore
+                # optimizer=self._optimizer,
+                config=self.ds_config
+            )
+            self.model_engine = engine
+            self.optimizer = optimizer
+            self.use_fp16 = self.model_engine.fp16_enabled()
+            if self.use_fp16:
+                self._dtype = torch.half
+
+        elif self.config.backend in ['hvd', 'horovod']:
+            import horovod.torch as hvd
+            compression = (
+                hvd.Compression.fp16
+                if self.config.compression == 'fp16'
+                else hvd.Compression.none
+            )
+            self.optimizer = hvd.DistributedOptimizer(
+                self._optimizer,
+                named_parameters=self.model.named_parameters(),
+                compression=compression  # type:ignore
+            )
+            hvd.broadcast_parameters(self.model.state_dict(), root_rank=0)
+            hvd.broadcast_optimizer_state(self.optimizer, root_rank=0)
+
+        else:
+            self.model_engine = None
+            self.optimizer = self._optimizer
+            raise ValueError(
+                f'Unexpected value for `config.backend`: {self.config.backend}'
+            )
+
     def build_model(self, net_config: NetworkConfig) -> nn.Module:
         assert net_config is not None
         model = Net(net_config)
@@ -104,9 +189,6 @@ class Trainer:
             x = x.cuda()
 
         _ = model(x)
-
-        if self.world_size > 1:
-            model = DDP(model)
 
         return model
 
@@ -137,7 +219,7 @@ class Trainer:
                 f' Number of threads: {torch.get_num_threads()}',
             ]))
 
-    def get_mnist_datasets(self)-> dict[str, torch.utils.data.Dataset]:
+    def get_mnist_datasets(self) -> dict[str, torch.utils.data.Dataset]:
         train_dataset = (
             datasets.MNIST(
                 DATA_DIR.as_posix(),
@@ -165,8 +247,7 @@ class Trainer:
             'test': test_dataset,
         }
 
-
-    def get_fashionmnist_datasets(self)-> dict[str, torch.utils.data.Dataset]:
+    def get_fashionmnist_datasets(self) -> dict[str, torch.utils.data.Dataset]:
         train_dataset = (
             datasets.FashionMNIST(
                 DATA_DIR.as_posix(),
@@ -193,7 +274,6 @@ class Trainer:
             'train': train_dataset,
             'test': test_dataset,
         }
-
 
     def get_datasets(self, dset: str) -> dict[str, torch.utils.data.Dataset]:
         assert dset in datasets.__all__
@@ -220,19 +300,18 @@ class Trainer:
             'test': test_dataset,
         }
 
-
     def setup_data(
             self,
             datasets: Optional[dict[str, torch.utils.data.Dataset]] = None,
     ):
         kwargs = {}
 
-        if self.device == 'gpu':
+        if self._device == 'cuda':
             kwargs = {'num_workers': 0, 'pin_memory': True}
 
         if datasets is None:
             # datasets = self.get_mnist_datasets()
-            # if self.config.dataset.lower() == 'fashionmnist': 
+            # if self.config.dataset.lower() == 'fashionmnist':
             if self.config.data.dataset.lower() == 'fashionmnist':
                 datasets = self.get_fashionmnist_datasets()
             else:
@@ -245,7 +324,9 @@ class Trainer:
         self._xshape = [28, 28]
         # DDP: use DistributedSampler to partition training data
         train_sampler = torch.utils.data.DistributedSampler(
-            train_dataset, num_replicas=self.world_size, rank=self.rank,
+            train_dataset,
+            num_replicas=self.world_size,
+            rank=self.rank,
         )
         train_loader = torch.utils.data.DataLoader(
             train_dataset,
@@ -281,6 +362,7 @@ class Trainer:
         if torch.cuda.is_available():
             data, target = data.cuda(), target.cuda()
 
+        assert self.optimizer is not None
         self.optimizer.zero_grad()
         probs = self.model(data)
         loss = self.loss_fn(probs, target)
@@ -367,7 +449,7 @@ class Trainer:
         loss_avg = metric_average(running_loss, size=self._ngpus)
         if self.rank == 0:
             assert (
-                self.wbrun is not None 
+                self.wbrun is not None
                 and self.wbrun is wandb.run  # type:ignore
             )
             self.wbrun.log({'train/loss': loss_avg, 'train/acc': training_acc})
@@ -380,7 +462,7 @@ class Trainer:
         self.model.eval()
         with torch.no_grad():
             for data, target in self.data['test']['loader']:
-                if self.device == 'gpu':
+                if self._device == 'cuda':
                     data, target = data.cuda(), target.cuda()
 
                 probs = self.model(data)
