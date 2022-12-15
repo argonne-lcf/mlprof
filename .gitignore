@@ -1,3 +1,10 @@
+# User added
+venvs/*
+src/mlprof/data/*
+src/mlprof/logs/*
+src/mlprof/old/*
+src/mlprof/outputs/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
