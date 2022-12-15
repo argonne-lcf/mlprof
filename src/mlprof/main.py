@@ -143,8 +143,9 @@ def build_model(
     return model
         
 def train_mnist(cfg: DictConfig, wbrun: Optional[Any] = None) -> float:
-    from mpiprof.trainer import Trainer
-    from mpiprof.configs import ExperimentConfig
+    # from mlprof.trainer import Trainer
+    from mlprof.trainers.DDP.trainer import Trainer
+    from mlprof.configs import ExperimentConfig
     start = time.time()
     config = instantiate(cfg)
     assert isinstance(config, ExperimentConfig)
