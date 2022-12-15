@@ -78,9 +78,10 @@ elif [[ $(hostname) == theta* ]]; then
   export HOSTFILE="${COBALT_NODEFILE}"
   export NRANKS=$(wc -l < "${COBALT_NODEFILE}")
   export NGPU_PER_RANK=$(nvidia-smi -L | wc -l)
-  export NGPUS=$(("${NRANKS}"*"${NGPU_PER_RANK}"))
+  # export NGPUS=$(("${NRANKS}"*"${NGPU_PER_RANK}"))
+  export NGPUS=$((${NRANKS}*${NGPU_PER_RANK}))
   module load conda; conda activate base
-  VENV_PREFIX="2022-07-21"
+  VENV_PREFIX="2022-07-01"
   MPI_COMMAND=$(which mpirun)
   MPI_FLAGS="-x LD_LIBRARY_PATH \
     -x PATH \
@@ -142,18 +143,19 @@ else
   source "${VENV_DIR}/bin/activate"
 fi
 
-python3 -m pip install --upgrade pip setuptools wheel
-python3 -m pip install --upgrade wandb
-python3 -m pip install -e "${ROOT}"
+# python3 -m pip install --upgrade pip setuptools wheel
+# python3 -m pip install --upgrade wandb
+# python3 -m pip install -e "${ROOT}"
 # ---- Environment settings ------------------------------------------
 # export NCCL_DEBUG=INFO
 # export KMP_SETTINGS=TRUE
 # export OMP_NUM_THREADS=16
 # export TF_ENABLE_AUTO_MIXED_PRECISION=1
-chmod +x ${AFFINITY_SCRIPT}
+#
+# chmod +x ${AFFINITY_SCRIPT}
+# EXEC="${MPI_COMMAND} ${MPI_FLAGS} ${AFFINITY_SCRIPT} $(which python3) ${MAIN}"
 
-
-EXEC="${MPI_COMMAND} ${MPI_FLAGS} ${AFFINITY_SCRIPT} $(which python3) ${MAIN}"
+EXEC="${MPI_COMMAND} ${MPI_FLAGS} $(which python3) ${MAIN}"
 
 printf '%.s─' $(seq 1 $(tput cols))
 
