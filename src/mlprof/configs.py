@@ -4,22 +4,20 @@ configs.py
 Implements various configuration objects.
 """
 from __future__ import absolute_import, annotations, division, print_function
-from collections.abc import Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import datetime
 import logging
 import os
 from pathlib import Path
 import random
-from typing import Any, Optional, Union
-from typing import Callable
+from typing import Any, Optional
 
 # from ConfigSpace.api.distributions import Distribution
 from hydra.core.config_store import ConfigStore
 import numpy as np
 import pytorch_lightning as pl
 import torch
-import torch.utils.data as data
+# import torch.utils.data as data
 
 
 log = logging.getLogger(__name__)
