@@ -8,7 +8,7 @@ from __future__ import absolute_import, annotations, division, print_function
 import os
 import socket
 import time
-from typing import Any, Callable, Optional, Union
+from typing import Any, Optional
 
 import hydra
 from hydra.utils import instantiate
@@ -18,7 +18,6 @@ import torch
 import torch.distributed as dist
 import torch.nn as nn
 # from torch.distributed.elastic.multiprocessing.errors import record
-import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as DDP
 import torch.utils.data
 import torch.utils.data.distributed
@@ -28,6 +27,8 @@ from mlprof.configs import PROJECT_DIR
 from mlprof.configs import NetworkConfig
 from mlprof.network.pytorch.network import Net
 from mlprof.utils.pylogger import get_pylogger
+from mlprof.utils.dist import cleanup, init_process_group
+
 
 log = get_pylogger(__name__)
 
@@ -35,13 +36,13 @@ log = get_pylogger(__name__)
 try:
     from mpi4py import MPI
     WITH_DDP = True
-    LOCAL_RANK = int(              # ┏━━━━━━━━━━━━━━━━━━━━━━━━━┓
-        os.environ.get(            # ┃ Should be set by torch, ┃
-            'LOCAL_RANK',          # ┃ otherwise we should:    ┃
-            os.environ.get(        # ┃━━━━━━━━━━━━━━━━━━━━━━━━━┃
-                'PMI_LOCAL_RANK',  # ┃   1. check for Polaris  ┃
-                os.environ.get(    # ┃   2. check for ThetaGPU ┃
-                    'OMPI_COMM_WORLD_LOCAL_RANK', # ━━━━━━━━━━━┛
+    LOCAL_RANK = int(              # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+        os.environ.get(            # ┃ Should be set by torch,  ┃
+            'LOCAL_RANK',          # ┃ otherwise we should:     ┃
+            os.environ.get(        # ┃━━━━━━━━━━━━━━━━━━━━━━━━━━┃
+                'PMI_LOCAL_RANK',  # ┃   1. check for Polaris   ┃
+                os.environ.get(    # ┃   2. check for ThetaGPU  ┃
+                    'OMPI_COMM_WORLD_LOCAL_RANK',  # ━━━━━━━━━━━┛
                     '0'
                 )
             )
@@ -76,29 +77,6 @@ except (ImportError, ModuleNotFoundError) as e:
     log.warning(e)
 
 
-def init_process_group(
-    rank: Union[int, str],
-    world_size: Union[int, str],
-    backend: Optional[str] = None,
-) -> None:
-    if WITH_CUDA:
-        backend = 'nccl' if backend is None else str(backend)
-
-    else:
-        backend = 'gloo' if backend is None else str(backend)
-
-    dist.init_process_group(
-        backend,
-        rank=int(rank),
-        world_size=int(world_size),
-        init_method='env://',
-    )
-
-
-def cleanup():
-    dist.destroy_process_group()
-
-
 def metric_average(val: torch.Tensor):
     if (WITH_DDP):
         # Sum everything and divide by the total size
@@ -106,13 +84,6 @@ def metric_average(val: torch.Tensor):
         return val / SIZE
 
     return val
-
-
-def run_demo(demo_fn: Callable, world_size: int | str) -> None:
-    mp.spawn(demo_fn,  # type: ignore
-             args=(world_size,),
-             nprocs=int(world_size),
-             join=True)
 
 
 def build_model(
@@ -141,24 +112,63 @@ def build_model(
     _ = model(x)
 
     return model
-        
+
+
+def setup_wandb(
+    cfg: DictConfig
+) -> dict:
+    wbrun = None
+    # if RANK == 0 and LOCAL_RANK == 0:
+    wbcfg = cfg.get('wandb', None)
+    if wbcfg is not None:
+        import wandb
+        from wandb.util import generate_id
+        run_id = generate_id()
+        wbrun = wandb.init(
+            dir=os.getcwd(),
+            id=run_id,
+            mode='online',
+            resume='allow',
+            save_code=True,
+            project=cfg.wandb.setup.project,
+        )
+        assert wbrun is not None and wbrun is wandb.run
+        wbrun.log_code(cfg.get('work_dir', PROJECT_DIR))
+        wbrun.config.update(OmegaConf.to_container(cfg, resolve=True))
+        wbrun.config['run_id'] = run_id
+        wbrun.config['logdir'] = os.getcwd()
+        ngpus_env = os.environ.get('NGPUS', SIZE)
+        # if ngpus_env != SIZE:
+        #     log.warning('$NGPUS != SIZE')
+        #     log.warning(f'NRANKS: {ngpus_env}')
+        #     log.warning(f'SIZE: {SIZE}')
+        wbrun.config['NRANKS'] = SIZE  # os.environ.get('NRANKS', SIZE)
+        wbrun.config['hostname'] = MASTER_ADDR
+        wbrun.config['device'] = (
+            'gpu' if torch.cuda.is_available() else 'cpu'
+        )
+
+    return {'run': wbrun}
+
+
 def train_mnist(cfg: DictConfig, wbrun: Optional[Any] = None) -> float:
-    # from mlprof.trainer import Trainer
     from mlprof.trainers.DDP.trainer import Trainer
     from mlprof.configs import ExperimentConfig
     start = time.time()
-    config = instantiate(cfg)
+    config: ExperimentConfig = instantiate(cfg)
     assert isinstance(config, ExperimentConfig)
+    # config.update_dist_config(
+    #     size=SIZE,
+    #     rank=RANK,
+    #     local_rank=LOCAL_RANK
+    # )
     # tconfig = instantiate(cfg.get('trainer'))
     # net_config = instantiate(cfg.get('network'))
     # assert isinstance(tconfig, TrainerConfig)
     # assert isinstance(net_config, NetworkConfig)
     # xshape = (tconfig.batch_size, *(1, *[28, 28]))
     # model = build_model(net_config, xshape)
-    trainer = Trainer(
-        config=config,
-        wbrun=wbrun
-    )
+    trainer = Trainer(config=config, wbrun=wbrun)
     epoch_times = []
     for epoch in range(1, config.trainer.epochs + 1):
         t0 = time.time()
@@ -207,43 +217,11 @@ def train_mnist(cfg: DictConfig, wbrun: Optional[Any] = None) -> float:
     return test_acc
 
 
-def setup_wandb(cfg: DictConfig) -> dict:
-    wbrun = None
-    if RANK == 0 and LOCAL_RANK == 0:
-        wbcfg = cfg.get('wandb', None)
-        if wbcfg is not None:
-            import wandb
-            from wandb.util import generate_id
-            run_id = generate_id()
-            wbrun = wandb.init(
-                dir=os.getcwd(),
-                id=run_id,
-                mode='online',
-                resume='allow',
-                save_code=True,
-                project=cfg.wandb.setup.project,
-            )
-            assert wbrun is not None and wbrun is wandb.run
-            wbrun.log_code(cfg.get('work_dir', PROJECT_DIR))
-            wbrun.config.update(OmegaConf.to_container(cfg, resolve=True))
-            wbrun.config['run_id'] = run_id
-            wbrun.config['logdir'] = os.getcwd()
-            ngpus_env = os.environ.get('NGPUS', SIZE)
-            if ngpus_env != SIZE:
-                log.warning(f'$NGPUS != SIZE')
-                log.warning(f'NRANKS: {ngpus_env}')
-                log.warning(f'SIZE: {SIZE}')
-            wbrun.config['NRANKS'] = SIZE  # os.environ.get('NRANKS', SIZE)
-            wbrun.config['hostname'] = MASTER_ADDR
-            wbrun.config['device'] = (
-                'gpu' if torch.cuda.is_available() else 'cpu'
-            )
-
-    return {'run': wbrun}
-
-
 def run(cfg: DictConfig) -> float:
-    wb = setup_wandb(cfg)
+    # from mlprof.common import setup_wandb
+    wb = {'run': None}
+    if RANK == 0 and LOCAL_RANK == 0:
+        wb = setup_wandb(cfg)
     backend = 'NCCL' if torch.cuda.is_available() else 'gloo'
     init_process_group(RANK, world_size=SIZE, backend=backend)
     test_acc = train_mnist(cfg, wb['run'])
