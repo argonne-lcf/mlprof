@@ -60,7 +60,7 @@ NCPU_PER_RANK=$(getconf _NPROCESSORS_ONLN)
 
 if [[ $(hostname) == x* ]]; then
   export ALCF_RESOURCE="polaris"
-  export LD_PRELOAD="/soft/perftools/mpitrace/lib/libmpitrace.so"
+  # export LD_PRELOAD="/soft/perftools/mpitrace/lib/libmpitrace.so"
   export HOSTFILE="${PBS_NODEFILE}"
   export NRANKS=$(wc -l < "${PBS_NODEFILE}")
   export NGPU_PER_RANK=$(nvidia-smi -L | wc -l)
@@ -118,13 +118,10 @@ echo $LOGFILE >> "${DIR}/logs/latest"
 
 # Double check everythings in the right spot
 echo "DIR=${DIR}"
-# echo "EXEC=${EXEC}"
 echo "PARENT=${PARENT}"
 echo "ROOT=${ROOT}"
 echo "LOGDIR=${LOGDIR}"
 echo "LOGFILE=${LOGFILE}"
-
-# conda run python3 -m pip install --upgrade pip
 
 # -----------------------------------------------------------
 # 1. Check if a virtual environment exists in project root: 
@@ -141,25 +138,22 @@ else
   echo "Creating new venv at: ${VENV_DIR}"
   python3 -m venv ${VENV_DIR} --system-site-packages
   source "${VENV_DIR}/bin/activate"
+  python3 -m pip install --upgrade pip setuptools wheel
+  python3 -m pip install -e "${ROOT}"
 fi
 
-# python3 -m pip install --upgrade pip setuptools wheel
-# python3 -m pip install --upgrade wandb
-# python3 -m pip install -e "${ROOT}"
 # ---- Environment settings ------------------------------------------
 # export NCCL_DEBUG=INFO
 # export KMP_SETTINGS=TRUE
 # export OMP_NUM_THREADS=16
 # export TF_ENABLE_AUTO_MIXED_PRECISION=1
-#
-# chmod +x ${AFFINITY_SCRIPT}
-# EXEC="${MPI_COMMAND} ${MPI_FLAGS} ${AFFINITY_SCRIPT} $(which python3) ${MAIN}"
 
+# ---- Define executable -----------------------------------
 EXEC="${MPI_COMMAND} ${MPI_FLAGS} $(which python3) ${MAIN}"
 
-printf '%.s─' $(seq 1 $(tput cols))
 
 # ------ Print job information --------------------------------------+
+printf '%.s─' $(seq 1 $(tput cols))
 echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "┃  STARTING A NEW RUN ON ${NGPUS} GPUs of ${ALCF_RESOURCE}"
 echo "┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -173,8 +167,8 @@ echo "┃  - MPI: ${MPI_COMMAND}"
 echo "┃  - exec: ${EXEC}"
 echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
+echo 'To view output: `tail -f $(tail -1 logs/latest)`'
 echo "Latest logfile: $(tail -1 ./logs/latest)"
-echo "To view output:"
 echo "tail -f $(tail -1 logs/latest)"
 
 ${EXEC} $@ > ${LOGFILE}
