@@ -1,7 +1,10 @@
 # @package _global_
 _target_: mlprof.configs.ExperimentConfig
 
+backend: DDP
+seed: 1234
 ds_config_path: null
+precision: 'float32'
 
 # Specify here default configuration
 # Ordering determines precedence, i.e.

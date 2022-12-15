@@ -27,7 +27,7 @@ from mlprof.configs import PROJECT_DIR
 from mlprof.configs import NetworkConfig
 from mlprof.network.pytorch.network import Net
 from mlprof.utils.pylogger import get_pylogger
-from mlprof.utils.dist import cleanup, init_process_group
+from mlprof.utils.dist import cleanup, init_process_group, setup_torch
 
 
 log = get_pylogger(__name__)
@@ -84,34 +84,6 @@ def metric_average(val: torch.Tensor):
         return val / SIZE
 
     return val
-
-
-def build_model(
-        config: NetworkConfig | DictConfig | dict,
-        xshape: Optional[list[int]] = None,
-        # tconfig: Optional[TrainerConfig] = None,
-) -> nn.Module:
-    """Build and return model."""
-    MNIST_SHAPE = (1, *(28, 28))  # [C, *[H, W]]
-    if not isinstance(config, NetworkConfig):
-        config = instantiate(config)
-    assert isinstance(config, NetworkConfig)
-    model = Net(config)
-    if SIZE > 1:
-        model = DDP(
-            model,
-            device_ids=[LOCAL_RANK],
-            output_device=LOCAL_RANK
-        )
-    xshape = (1, *MNIST_SHAPE) if xshape is None else xshape  # type:ignore
-    assert xshape is not None
-    x = torch.rand(xshape)  # [N, *[C, H, W]]
-    if torch.cuda.is_available():
-        model.cuda()
-        x = x.cuda()
-    _ = model(x)
-
-    return model
 
 
 def setup_wandb(
@@ -222,8 +194,14 @@ def run(cfg: DictConfig) -> float:
     wb = {'run': None}
     if RANK == 0 and LOCAL_RANK == 0:
         wb = setup_wandb(cfg)
-    backend = 'NCCL' if torch.cuda.is_available() else 'gloo'
-    init_process_group(RANK, world_size=SIZE, backend=backend)
+    # backend = 'NCCL' if torch.cuda.is_available() else 'gloo'
+    # init_process_group(RANK, world_size=SIZE, backend=backend)
+    _ = setup_torch(
+        seed=cfg.get('seed', 12345),
+        precision=cfg.get('precision', 'fp32'),
+        backend=cfg.backend,
+        port=cfg.get('port', '2345')
+    )
     test_acc = train_mnist(cfg, wb['run'])
     return test_acc
 

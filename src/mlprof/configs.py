@@ -119,6 +119,8 @@ class ExperimentConfig:
     network: NetworkConfig
     wandb: Any
     backend: str = 'DDP'
+    seed: int = 1234
+    precision: str = 'float32'
     ds_config_path: Optional[str] = None
     compression: Optional[str] = None
     # size: int = 1
