@@ -94,7 +94,6 @@ class DataConfig:
     batch_size: int = 128
     dataset: str = 'MNIST'
 
-
     def __post_init__(self):
         assert self.dataset in ['MNIST', 'FashionMNIST']
 
@@ -119,6 +118,22 @@ class ExperimentConfig:
     trainer: TrainerConfig
     network: NetworkConfig
     wandb: Any
+    backend: str = 'DDP'
+    ds_config_path: Optional[str] = None
+    compression: Optional[str] = None
+    # size: int = 1
+    # rank: int = 0
+    # local_rank: int = 0
+
+    # def update_dist_config(
+    #         self,
+    #         size: int,
+    #         rank: int,
+    #         local_rank: int
+    # ) -> None:
+    #     self.size = size
+    #     self.rank = rank
+    #     self.local_rank = local_rank
 
 
 def get_config(overrides: Optional[list[str]] = None):

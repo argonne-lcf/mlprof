@@ -1,6 +1,8 @@
 # @package _global_
 _target_: mlprof.configs.ExperimentConfig
 
+ds_config_path: null
+
 # Specify here default configuration
 # Ordering determines precedence, i.e.
 # the order determines the order in which options are overridden
