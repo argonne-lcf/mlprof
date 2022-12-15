@@ -266,7 +266,7 @@ def setup_torch(
         backend: str = 'horovod',
         precision: str = 'float32',
         port: str = '2345',
-) -> int:
+) -> dict[str, int]:
     import torch
     from l2hmc.common import seed_everything
     dtypes = {
@@ -305,7 +305,11 @@ def setup_torch(
     log.info(f'Global Rank: {rank} / {size-1}')
     log.info(f'[{rank}]: Local rank: {local_rank}')
     seed_everything(seed * (rank + 1) * (local_rank + 1))
-    return rank
+    return {
+        'size': int(size),
+        'rank': int(rank),
+        'local_rank': int(local_rank)
+    }
 
 
 def cleanup() -> None:
