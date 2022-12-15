@@ -21,6 +21,7 @@ import torch.utils.data
 import torch.utils.data.distributed
 from torchvision import datasets, transforms
 import wandb
+import numpy as np
 
 from mlprof.trainers.trainer import BaseTrainer
 from mlprof.configs import CONF_DIR, DATA_DIR, ExperimentConfig, NetworkConfig
@@ -440,6 +441,55 @@ class Trainer:
             self.wbrun.log({'train/loss': loss_avg, 'train/acc': training_acc})
 
         return {'loss': loss_avg, 'acc': training_acc}
+
+    def train(self) -> list[float]:
+        epoch_times = []
+        start = time.time()
+        for epoch in range(1, self.config.trainer.epochs + 1):
+            t0 = time.time()
+            metrics = self.train_epoch(epoch)
+            epoch_times.append(time.time() - t0)
+
+            if epoch % self.config.trainer.logfreq and self._is_chief:
+                acc = self.test()
+                astr = f'[TEST] Accuracy: {100.0 * acc:.0f}%'
+                sepstr = '-' * len(astr)
+                log.info(sepstr)
+                log.info(astr)
+                log.info(sepstr)
+                summary = '  '.join([
+                    '[TRAIN]',
+                    f'loss={metrics["loss"]:.4f}',
+                    f'acc={metrics["acc"] * 100.0:.0f}%'
+                ])
+                if self.wbrun is not None:
+                    self.wbrun.log(
+                        {
+                            'epoch/epoch': epoch,
+                            **{f'epoch/{k}': v for k, v in metrics.items()}
+                        }
+                    )
+                log.info((sep := '-' * len(summary)))
+                log.info(summary)
+                log.info(sep)
+            if self.wbrun is not None:
+                self.wbrun.log({'time_per_epoch': (time.time() - t0)})
+
+        rstr = f'[{self.rank}] ::'
+        if self.rank == 0:
+            log.info(' '.join([
+                rstr,
+                f'Total training time: {time.time() - start} seconds'
+            ]))
+            avg_over = min(5, (len(epoch_times) - 1))
+            avg_epoch_time = np.mean(epoch_times[-avg_over:])
+            log.info(' '.join([
+                rstr,
+                'Average time per epoch in the last'
+                f' {avg_over}: {avg_epoch_time}'
+            ]))
+
+        return epoch_times
 
     def test(self) -> float:
         total = 0
