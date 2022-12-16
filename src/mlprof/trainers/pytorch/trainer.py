@@ -4,12 +4,13 @@ ddp/trainer.py
 from __future__ import absolute_import, annotations, division, print_function
 import time
 import os
-from typing import Optional, Any
+from typing import Optional
 
 from hydra.utils import instantiate
 from omegaconf import DictConfig
 from rich import print_json
 from pathlib import Path
+from dataclasses import asdict
 import json
 import torch
 from torch import optim
@@ -22,9 +23,16 @@ import torch.utils.data.distributed
 from torchvision import datasets, transforms
 import wandb
 import numpy as np
+# from omegaconf import OmegaConf
 
 from mlprof.trainers.trainer import BaseTrainer
-from mlprof.configs import CONF_DIR, DATA_DIR, ExperimentConfig, NetworkConfig
+from mlprof.configs import (
+    # CONF_DIR,
+    DATA_DIR,
+    HERE,
+    ExperimentConfig,
+    NetworkConfig
+)
 from mlprof.network.pytorch.network import Net
 from mlprof.utils.pylogger import get_pylogger
 from mlprof.utils.dist import setup_torch_distributed
@@ -56,7 +64,7 @@ class Trainer:
     def __init__(
             self,
             config: ExperimentConfig | dict | DictConfig,
-            wbrun: Optional[Any] = None,
+            # wbrun: Optional[Any] = None,
             scaler: Optional[GradScaler] = None,
             model: Optional[torch.nn.Module] = None,
             optimizer: Optional[torch.optim.Optimizer] = None,
@@ -74,7 +82,10 @@ class Trainer:
         self._is_chief = (self.local_rank == 0 and self.rank == 0)
         if torch.cuda.is_available():
             self.local_size = torch.cuda.device_count()
-            self._ngpus = self.world_size * torch.cuda.device_count()
+            self._ngpus = self.world_size
+            # self._ngpus = self.world_size * torch.cuda.device_count()
+
+        self.wbrun = self.setup_wandb()
 
         if scaler is None:
             self.scaler = None
@@ -98,7 +109,7 @@ class Trainer:
         if torch.cuda.is_available():
             self.model.cuda()
 
-        self.wbrun = wbrun
+        # self.wbrun = wbrun
         if self.wbrun is not None:
             log.warning(f'Caught wandb.run from: {self.rank}')
             self.wbrun.watch(
@@ -118,9 +129,10 @@ class Trainer:
 
         elif self.config.backend.lower() in ['ds', 'deepspeed']:
             import deepspeed
-            ds_config_path = Path(CONF_DIR).joinpath('ds_config.json')
-            self.ds_config = load_ds_config(ds_config_path)
-            log.info(f'Loaded DeepSpeed config from: {ds_config_path}')
+            # ds_config_path = Path(CONF_DIR).joinpath('ds_config.json')
+            # self.ds_config = load_ds_config(ds_config_path)
+            # log.info(f'Loaded DeepSpeed config from: {ds_config_path}')
+            self.ds_config = self.config.ds_config
             if self._is_chief:
                 print_json(json.dumps(self.ds_config, indent=4))
 
@@ -142,6 +154,8 @@ class Trainer:
             self.use_fp16 = self.model_engine.fp16_enabled()
             if self.use_fp16:
                 self._dtype = torch.half
+            if self.wbrun is not None:
+                self.wbrun.config['ds_config'] = self.ds_config
 
         elif self.config.backend.lower() in ['hvd', 'horovod']:
             import horovod.torch as hvd
@@ -164,6 +178,34 @@ class Trainer:
             raise ValueError(
                 f'Unexpected value for `config.backend`: {self.config.backend}'
             )
+
+    def setup_wandb(self):
+        wbrun = None
+        wbcfg = self.config.wandb
+        if self._is_chief and wbcfg is not None:
+            import wandb
+            from wandb.util import generate_id
+            run_id = generate_id()
+            wbrun = wandb.init(
+                dir=os.getcwd(),
+                id=run_id,
+                mode='online',
+                resume='allow',
+                save_code=True,
+                project=self.config.wandb.setup.project,
+            )
+            assert wbrun is not None and wbrun is wandb.run
+            wbrun.log_code(HERE.as_posix())
+            wbrun.config.update(
+                # OmegaConf.to_container(self.config, resolve=True)
+                asdict(self.config)
+            )
+            wbrun.config['run_id'] = run_id
+            wbrun.config['logdir'] = os.getcwd()
+            wbrun.config['ngpus'] = self._ngpus
+            wbrun.config['device'] = self._device
+
+        return wbrun
 
     def build_model(self, net_config: NetworkConfig) -> nn.Module:
         assert net_config is not None

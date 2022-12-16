@@ -8,6 +8,7 @@ from dataclasses import dataclass
 import datetime
 import logging
 import os
+import json
 from pathlib import Path
 import random
 from typing import Any, Optional
@@ -110,6 +111,14 @@ class TrainerConfig:
         return self.lr_init * factor
 
 
+def load_ds_config(fpath: os.PathLike) -> dict:
+    ds_config_path = Path(fpath)
+    with ds_config_path.open('r') as f:
+        ds_config = json.load(f)
+
+    return ds_config
+
+
 @dataclass
 class ExperimentConfig:
     data: DataConfig
@@ -121,19 +130,19 @@ class ExperimentConfig:
     precision: str = 'float32'
     ds_config_path: Optional[str] = None
     compression: Optional[str] = None
-    # size: int = 1
-    # rank: int = 0
-    # local_rank: int = 0
 
-    # def update_dist_config(
-    #         self,
-    #         size: int,
-    #         rank: int,
-    #         local_rank: int
-    # ) -> None:
-    #     self.size = size
-    #     self.rank = rank
-    #     self.local_rank = local_rank
+    def __post_init__(self):
+        self.ds_config = {}
+        if self.backend.lower() in ['ds', 'deepspeed']:
+            if self.ds_config_path is None:
+                self.ds_config_path = CONF_DIR.joinpath(
+                    'ds_config.json'
+                ).as_posix()
+            if self.ds_config_path is not None:
+                fpath = Path(self.ds_config_path)
+                if fpath.is_file():
+                    log.warning(f'Loading DeepSpeed config from: {fpath}')
+                    self.ds_config = load_ds_config(fpath)
 
 
 def get_config(overrides: Optional[list[str]] = None):
