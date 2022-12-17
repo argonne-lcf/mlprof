@@ -11,7 +11,7 @@ Profiling tools for performance studies of competing ML frameworks on HPC system
 <details closed><summary><b>TODO</b></summary>
 <p>
 
-- [ ] Write DeepSpeed Trainer that wraps [`src/mlprof/network/pytorch/network.py`](./src/mlprof/network/pytorch/network.py)
+- [x] Write DeepSpeed Trainer that wraps [`src/mlprof/network/pytorch/network.py`](./src/mlprof/network/pytorch/network.py)
     - Reference: [DeepSpeed -- Getting Started](https://www.deepspeed.ai/getting-started/)
 - [ ] MPI Profiling to get all collective comm. ops with same model in DeepSpeed, DDP, and Horovod
    - Reference: [Profiling](https://github.com/argonne-lcf/mlprof#profiling) using `libmpitrace.so` on Polaris
