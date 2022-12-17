@@ -20,41 +20,11 @@ class BaseTrainer(ABC):
     def __init__(
             self,
             cfg: DictConfig | ExperimentConfig | dict,
-            # keep: Optional[str | list[str]] = None,
-            # skip: Optional[str | list[str]] = None
-            # config: ExperimentConfig | DictConfig | dict,
-            # wbrun: Optional[Any] = None,
-            # scaler: Optional[GradScaler] = None,
-            # model: Optional[torch.nn.Module] = None,
-            # optimizer: Optional[torch.optim.Optimizer] = None
     ) -> None:
         self.config: ExperimentConfig = (
             cfg if isinstance(cfg, ExperimentConfig)
             else instantiate(cfg)
         )
-        # if isinstance(config, (dict, DictConfig)):
-        #     config = instantiate(config)
-
-        # assert isinstance(config, ExperimentConfig)
-        # self.config = config
-        # self.scaler = scaler
-        # self._global_step = 0
-        # self.loss_fn = nn.CrossEntropyLoss()
-        # self._device = 'gpu' if torch.cuda.is_available() else 'cpu'
-        # self._rank = 0
-        # self._ngpus = 1
-        # self._world_size = 1
-        # self.data = self.setup_data()
-        # if model is None:
-        #     self.model = self.build_model(self.config.network)
-
-    # @abstractmethod
-    # def eval_step(self, input: Any):
-    #     pass
-
-    # @abstractmethod
-    # def train_step(self, input: Any):
-    #     pass
 
     @abstractmethod
     def train(self):

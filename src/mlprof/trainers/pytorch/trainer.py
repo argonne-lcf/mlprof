@@ -60,11 +60,10 @@ def load_ds_config(fpath: os.PathLike) -> dict:
     return ds_config
 
 
-class Trainer:
+class Trainer(BaseTrainer):
     def __init__(
             self,
             config: ExperimentConfig | dict | DictConfig,
-            # wbrun: Optional[Any] = None,
             scaler: Optional[GradScaler] = None,
             model: Optional[torch.nn.Module] = None,
             optimizer: Optional[torch.optim.Optimizer] = None,
