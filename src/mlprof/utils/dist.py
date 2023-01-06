@@ -1,5 +1,5 @@
 """
-mlprof/utils/dist.py
+l2hmc/utils/dist.py
 
 Contains methods for initializing distributed communication.
 """
@@ -81,14 +81,15 @@ def setup_tensorflow(
     RANK = hvd.rank()
     SIZE = hvd.size()
     LOCAL_RANK = hvd.local_rank()
-    LOCAL_SIZE = hvd.local_size()
+    # LOCAL_SIZE = hvd.local_size()
     os.environ['RANK'] = str(RANK)
     os.environ['WORLD_SIZE'] = str(SIZE)
     os.environ['LOCAL_RANK'] = str(LOCAL_RANK)
 
     log.warning(f'Using: {TF_FLOAT} precision')
-    log.info(f'Global Rank: {RANK} / {SIZE-1}')
-    log.info(f'[{RANK}]: Local rank: {LOCAL_RANK} / {LOCAL_SIZE-1}')
+    log.info(f'RANK: {hvd.rank()}, LOCAL_RANK: {hvd.local_rank()}')
+    # log.info(f'Global Rank: {RANK} / {SIZE-1}')
+    # log.info(f'[{RANK}]: Local rank: {LOCAL_RANK} / {LOCAL_SIZE-1}')
     return RANK
 
 
@@ -123,7 +124,7 @@ def run_ddp(fn: Callable, world_size: int) -> None:
     mp.spawn(  # type:ignore
         fn,
         args=(world_size,),
-        nprocs=int(world_size,),
+        nprocs=world_size,
         join=True
     )
 
@@ -212,6 +213,7 @@ def setup_torch_distributed(
         backend: str,
         port: str = '2345',
 ) -> dict:
+    import torch
     rank = os.environ.get('RANK', None)
     size = os.environ.get('WORLD_SIZE', None)
     local_rank = os.environ.get(
@@ -245,6 +247,9 @@ def setup_torch_distributed(
         rank = hvd.rank()
         size = hvd.size()
         local_rank = hvd.local_rank()
+        if torch.cuda.is_available():
+            torch.cuda.set_device(hvd.local_rank())
+
     else:
         raise ValueError
         # log.warning(f'Unexpected backend specified: {backend}')
@@ -265,7 +270,7 @@ def setup_torch(
         backend: str = 'horovod',
         precision: str = 'float32',
         port: str = '2345',
-) -> dict[str, int]:
+) -> int:
     import torch
     from mlprof.common import seed_everything
     dtypes = {
@@ -274,8 +279,10 @@ def setup_torch(
         'float64': torch.float64,
     }
     os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
-    torch.backends.cudnn.deterministic = True   # type:ignore
-    torch.backends.cudnn.benchmark = True       # type:ignore
+    torch.backends.cudnn.deterministic = True     # type:ignore
+    torch.backends.cudnn.benchmark = True         # type:ignore
+    torch.backends.cudnn.allow_tf32 = True        # type:ignore
+    torch.backends.cuda.matmul.allow_tf32 = True  # type:ignore
     torch.use_deterministic_algorithms(True)
     dsetup = setup_torch_distributed(backend=backend, port=port)
     rank = dsetup['rank']
@@ -304,11 +311,7 @@ def setup_torch(
     log.info(f'Global Rank: {rank} / {size-1}')
     log.info(f'[{rank}]: Local rank: {local_rank}')
     seed_everything(seed * (rank + 1) * (local_rank + 1))
-    return {
-        'size': int(size),
-        'rank': int(rank),
-        'local_rank': int(local_rank)
-    }
+    return rank
 
 
 def cleanup() -> None:
