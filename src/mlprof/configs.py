@@ -16,7 +16,7 @@ from typing import Any, Optional
 # from ConfigSpace.api.distributions import Distribution
 from hydra.core.config_store import ConfigStore
 import numpy as np
-import pytorch_lightning as pl
+# import pytorch_lightning as pl
 import torch
 # import torch.utils.data as data
 
@@ -48,7 +48,7 @@ def add_to_outdirs_file(outdir: os.PathLike):
 
 
 def seed_everything(seed: int):
-    pl.seed_everything(seed)
+    # pl.seed_everything(seed)
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
