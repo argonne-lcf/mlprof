@@ -43,7 +43,8 @@ def run(cfg: DictConfig) -> float:
 @hydra.main(version_base=None, config_path='./conf', config_name='config')
 def main(cfg: DictConfig) -> None:
     run(cfg)
-    cleanup()
+    if str(cfg.get('backend', '')).lower() == 'ddp':
+        cleanup()
 
 
 if __name__ == '__main__':
