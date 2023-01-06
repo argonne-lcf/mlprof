@@ -9,6 +9,18 @@ from mlprof.configs import PROJECT_DIR
 from omegaconf import DictConfig, OmegaConf
 
 
+def seed_everything(seed: int):
+    import torch
+    import random
+    import numpy as np
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+
+
+
 def setup_wandb(
     cfg: DictConfig
 ) -> dict:

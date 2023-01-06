@@ -10,7 +10,6 @@ import os
 from typing import Optional, Callable
 from mpi4py import MPI
 
-# from l2hmc.utils.logger import get_pylogger
 import logging
 
 log = logging.getLogger(__name__)
@@ -268,7 +267,7 @@ def setup_torch(
         port: str = '2345',
 ) -> dict[str, int]:
     import torch
-    from l2hmc.common import seed_everything
+    from mlprof.common import seed_everything
     dtypes = {
         'float16': torch.float16,
         'float32': torch.float32,
