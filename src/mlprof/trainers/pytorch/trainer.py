@@ -24,6 +24,10 @@ from torchvision import datasets, transforms
 import wandb
 import numpy as np
 # from omegaconf import OmegaConf
+try:
+    import horovod.torch as hvd
+except (ImportError, ModuleNotFoundError):
+    hvd = None
 
 from mlprof.trainers.trainer import BaseTrainer
 from mlprof.configs import (
@@ -416,6 +420,15 @@ class Trainer(BaseTrainer):
             and self.wbrun is wandb.run
         )
 
+    def metric_average(self, x: torch.Tensor) -> torch.Tensor:
+        if self.config.backend.lower() == 'ddp':
+            dist.all_reduce(x, op=dist.ReduceOp.SUM)
+        elif self.config.backend.lower() in ['hvd', 'horovod']:
+            if hvd is not None:
+                hvd.allreduce_(x)
+
+        return x / self.world_size
+
     def train_epoch(
             self,
             epoch: int,
@@ -472,8 +485,8 @@ class Trainer(BaseTrainer):
 
         running_loss = running_loss / len(train_sampler)
         running_acc = running_acc / len(train_sampler)
-        training_acc = metric_average(running_acc, size=self._ngpus)
-        loss_avg = metric_average(running_loss, size=self._ngpus)
+        training_acc = self.metric_average(running_acc)
+        loss_avg = self.metric_average(running_loss)
         if self.rank == 0:
             assert (
                 self.wbrun is not None
