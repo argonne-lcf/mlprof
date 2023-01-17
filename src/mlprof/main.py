@@ -15,6 +15,8 @@ import wandb
 from mlprof.utils.pylogger import get_pylogger
 from mlprof.utils.dist import cleanup, setup_torch
 
+import deepspeed.comm as dist
+
 
 log = get_pylogger(__name__)
 
@@ -50,3 +52,4 @@ def main(cfg: DictConfig) -> None:
 if __name__ == '__main__':
     wandb.require('service')
     main()
+    dist.log_summary()

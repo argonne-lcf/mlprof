@@ -172,3 +172,4 @@ echo "Latest logfile: $(tail -1 ./logs/latest)"
 echo "tail -f $(tail -1 logs/latest)"
 
 ${EXEC} $@ > ${LOGFILE}
+#LD_PRELOAD=/soft/perftools/mpitrace/lib/libmpitrace.so ${EXEC} $@ > ${LOGFILE}

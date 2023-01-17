@@ -44,9 +44,9 @@
       "cpu_offload": false
   },
   "comms_logger": {
-    "enabled": false,
+    "enabled": true,
     "verbose": false,
-    "prof_all": false,
+    "prof_all": true,
     "debug": false
   }
 }
