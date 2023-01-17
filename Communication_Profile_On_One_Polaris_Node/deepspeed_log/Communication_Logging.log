@@ -1,0 +1,472 @@
+[2023-01-17 23:17:09,844] [INFO] [comm.py:617:init_distributed] Not using the DeepSpeed or dist launchers, attempting to detect MPI environment...
+[2023-01-17 23:17:09,844] [INFO] [comm.py:617:init_distributed] Not using the DeepSpeed or dist launchers, attempting to detect MPI environment...
+[2023-01-17 23:17:09,844] [INFO] [comm.py:617:init_distributed] Not using the DeepSpeed or dist launchers, attempting to detect MPI environment...
+[2023-01-17 23:17:09,844] [INFO] [comm.py:617:init_distributed] Not using the DeepSpeed or dist launchers, attempting to detect MPI environment...
+[2023-01-17 23:17:10,995] [INFO] [comm.py:669:mpi_discovery] Discovered MPI settings of world_rank=1, local_rank=1, world_size=4, master_addr=10.201.1.171, master_port=29500
+[2023-01-17 23:17:10,995] [INFO] [comm.py:669:mpi_discovery] Discovered MPI settings of world_rank=2, local_rank=2, world_size=4, master_addr=10.201.1.171, master_port=29500
+[2023-01-17 23:17:10,995] [INFO] [comm.py:669:mpi_discovery] Discovered MPI settings of world_rank=3, local_rank=3, world_size=4, master_addr=10.201.1.171, master_port=29500
+[2023-01-17 23:17:10,995] [INFO] [comm.py:669:mpi_discovery] Discovered MPI settings of world_rank=0, local_rank=0, world_size=4, master_addr=10.201.1.171, master_port=29500
+[2023-01-17 23:17:10,995] [INFO] [comm.py:633:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[[36m2023-01-17 23:17:12,009[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 0[0m
+[[36m2023-01-17 23:17:12,094[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 2[0m
+[[36m2023-01-17 23:17:12,096[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 3[0m
+[[36m2023-01-17 23:17:12,097[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 1[0m
+[[36m2023-01-17 23:17:12,097[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.[0m
+[[36m2023-01-17 23:17:12,102[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.[0m
+[[36m2023-01-17 23:17:12,112[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.[0m
+[[36m2023-01-17 23:17:12,112[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.[0m
+[[36m2023-01-17 23:17:14,254[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 0 / 3[0m
+[[36m2023-01-17 23:17:14,254[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - [0]: Local rank: 0[0m
+[[36m2023-01-17 23:17:14,264[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 2 / 3[0m
+[[36m2023-01-17 23:17:14,264[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - [2]: Local rank: 2[0m
+[[36m2023-01-17 23:17:14,266[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 1 / 3[0m
+[[36m2023-01-17 23:17:14,266[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - [1]: Local rank: 1[0m
+[[36m2023-01-17 23:17:14,270[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 3 / 3[0m
+[[36m2023-01-17 23:17:14,270[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - [3]: Local rank: 3[0m
+[[36m2023-01-17 23:17:14,426[0m][[34mmlprof.configs[0m][[33mWARNING[0m] - Loading DeepSpeed config from: /lus/grand/projects/datascience/zhen/mlprof/src/mlprof/conf/ds_config.json[0m
+[[36m2023-01-17 23:17:14,426[0m][[34mmlprof.configs[0m][[33mWARNING[0m] - Loading DeepSpeed config from: /lus/grand/projects/datascience/zhen/mlprof/src/mlprof/conf/ds_config.json[0m
+[[36m2023-01-17 23:17:14,426[0m][[34mmlprof.configs[0m][[33mWARNING[0m] - Loading DeepSpeed config from: /lus/grand/projects/datascience/zhen/mlprof/src/mlprof/conf/ds_config.json[0m
+[[36m2023-01-17 23:17:14,426[0m][[34mmlprof.configs[0m][[33mWARNING[0m] - Loading DeepSpeed config from: /lus/grand/projects/datascience/zhen/mlprof/src/mlprof/conf/ds_config.json[0m
+[2023-01-17 23:17:17,746] [WARNING] [config_utils.py:63:_process_deprecated_field] Config parameter cpu_offload is deprecated use offload_optimizer instead
+[2023-01-17 23:17:17,746] [WARNING] [config_utils.py:63:_process_deprecated_field] Config parameter cpu_offload is deprecated use offload_optimizer instead
+[[36m2023-01-17 23:17:17,747[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:2 to store for rank: 1[0m
+[[36m2023-01-17 23:17:17,747[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:2 to store for rank: 2[0m
+[2023-01-17 23:17:17,765] [WARNING] [config_utils.py:63:_process_deprecated_field] Config parameter cpu_offload is deprecated use offload_optimizer instead
+[[36m2023-01-17 23:17:17,766[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:2 to store for rank: 3[0m
+[[36m2023-01-17 23:17:19,920[0m][[34mmlprof.trainers.pytorch.trainer[0m][[33mWARNING[0m] - Caught wandb.run from: 0[0m
+{
+  "train_batch_size": 256,
+  "steps_per_print": 5,
+  "optimizer": {
+    "type": "Adam",
+    "params": {
+      "lr": 0.001,
+      "betas": [
+        0.8,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 3e-07
+    }
+  },
+  "scheduler": {
+    "type": "WarmupLR",
+    "params": {
+      "warmup_min_lr": 0,
+      "warmup_max_lr": 0.001,
+      "warmup_num_steps": 1000
+    }
+  },
+  "gradient_clipping": 1.0,
+  "prescale_gradients": false,
+  "fp16": {
+    "enabled": false,
+    "fp16_master_weights_and_grads": false,
+    "loss_scale": 0,
+    "loss_scale_window": 500,
+    "hysteresis": 2,
+    "min_loss_scale": 1,
+    "initial_scale_power": 15
+  },
+  "wall_clock_breakdown": false,
+  "zero_optimization": {
+    "stage": 0,
+    "allgather_partitions": true,
+    "reduce_scatter": true,
+    "allgather_bucket_size": 50000000,
+    "reduce_bucket_size": 50000000,
+    "overlap_comm": true,
+    "contiguous_gradients": true,
+    "cpu_offload": false
+  },
+  "comms_logger": {
+    "enabled": true,
+    "verbose": false,
+    "prof_all": true,
+    "debug": false
+  }
+}
+[2023-01-17 23:17:19,927] [INFO] [logging.py:68:log_dist] [Rank 0] DeepSpeed info: version=0.7.3, git-hash=unknown, git-branch=unknown
+[2023-01-17 23:17:19,928] [WARNING] [config_utils.py:63:_process_deprecated_field] Config parameter cpu_offload is deprecated use offload_optimizer instead
+[[36m2023-01-17 23:17:19,929[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:2 to store for rank: 0[0m
+[[36m2023-01-17 23:17:19,929[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:2 with 4 nodes.[0m
+[[36m2023-01-17 23:17:19,932[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 2: Completed store-based barrier for key:store_based_barrier_key:2 with 4 nodes.[0m
+[[36m2023-01-17 23:17:19,932[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 3: Completed store-based barrier for key:store_based_barrier_key:2 with 4 nodes.[0m
+[[36m2023-01-17 23:17:19,932[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:2 with 4 nodes.[0m
+[2023-01-17 23:17:20,986] [INFO] [logging.py:68:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+Using /home/zhen/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/zhen/.cache/torch_extensions/py38_cu116/fused_adam/build.ninja...
+Building extension module fused_adam...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Using /home/zhen/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Loading extension module fused_adam...
+Time to load fused_adam op: 0.20366883277893066 seconds
+[2023-01-17 23:17:22,053] [INFO] [logging.py:68:log_dist] [Rank 0] Using DeepSpeed Optimizer param name adam as basic optimizer
+[2023-01-17 23:17:22,053] [INFO] [logging.py:68:log_dist] [Rank 0] DeepSpeed Basic Optimizer = {basic_optimizer.__class__.__name__}
+[2023-01-17 23:17:22,053] [INFO] [logging.py:68:log_dist] [Rank 0] DeepSpeed Final Optimizer = adam
+[2023-01-17 23:17:22,054] [INFO] [logging.py:68:log_dist] [Rank 0] DeepSpeed using configured LR scheduler = WarmupLR
+[2023-01-17 23:17:22,054] [INFO] [logging.py:68:log_dist] [Rank 0] DeepSpeed LR Scheduler = <deepspeed.runtime.lr_schedules.WarmupLR object at 0x148a4abc1670>
+[2023-01-17 23:17:22,054] [INFO] [logging.py:68:log_dist] [Rank 0] step=0, skipped=0, lr=[0.001], mom=[[0.8, 0.999]]
+[2023-01-17 23:17:22,054] [INFO] [config.py:987:print] DeepSpeedEngine configuration:
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True}
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   amp_enabled .................. False
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   amp_params ................... False
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": null, 
+    "exps_dir": null, 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   bfloat16_enabled ............. False
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   checkpoint_tag_validation_enabled  True
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   checkpoint_tag_validation_fail  False
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x148a4ac01940>
+[2023-01-17 23:17:22,055] [INFO] [config.py:991:print]   communication_data_type ...... None
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   curriculum_enabled ........... False
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   curriculum_params ............ False
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   dataloader_drop_last ......... False
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   disable_allgather ............ False
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   dump_state ................... False
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   dynamic_loss_scale_args ...... None
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   eigenvalue_enabled ........... False
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   eigenvalue_gas_boundary_resolution  1
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2023-01-17 23:17:22,056] [INFO] [config.py:991:print]   eigenvalue_layer_num ......... 0
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   eigenvalue_max_iter .......... 100
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   eigenvalue_stability ......... 1e-06
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   eigenvalue_tol ............... 0.01
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   eigenvalue_verbose ........... False
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   elasticity_enabled ........... False
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   fp16_auto_cast ............... None
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   fp16_enabled ................. False
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   fp16_master_weights_and_gradients  False
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   global_rank .................. 0
+[2023-01-17 23:17:22,059] [INFO] [config.py:991:print]   gradient_accumulation_steps .. 1
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   gradient_clipping ............ 1.0
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   gradient_predivide_factor .... 1.0
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   initial_dynamic_scale ........ 4294967296
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   load_universal_checkpoint .... False
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   loss_scale ................... 0
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   memory_breakdown ............. False
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   monitor_config ............... <deepspeed.monitor.config.DeepSpeedMonitorConfig object at 0x148a4ab8e250>
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   optimizer_legacy_fusion ...... False
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   optimizer_name ............... adam
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   optimizer_params ............. {'lr': 0.001, 'betas': [0.8, 0.999], 'eps': 1e-08, 'weight_decay': 3e-07}
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0}
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   pld_enabled .................. False
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   pld_params ................... False
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   prescale_gradients ........... False
+[2023-01-17 23:17:22,060] [INFO] [config.py:991:print]   scheduler_name ............... WarmupLR
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   scheduler_params ............. {'warmup_min_lr': 0, 'warmup_max_lr': 0.001, 'warmup_num_steps': 1000}
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   sparse_attention ............. None
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   sparse_gradients_enabled ..... False
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   steps_per_print .............. 5
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   train_batch_size ............. 256
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   train_micro_batch_size_per_gpu  64
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   wall_clock_breakdown ......... False
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   world_size ................... 4
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   zero_allow_untested_optimizer  False
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   zero_config .................. stage=0 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=50000000 allgather_partitions=True allgather_bucket_size=50000000 overlap_comm=True load_from_fp32_weights=True elastic_checkpoint=False offload_param=None offload_optimizer=None sub_group_size=1000000000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=False prefetch_bucket_size=50000000 param_persistence_threshold=100000 model_persistence_threshold=9223372036854775807 max_live_parameters=1000000000 max_reuse_distance=1000000000 gather_16bit_weights_on_model_save=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   zero_enabled ................. False
+[2023-01-17 23:17:22,061] [INFO] [config.py:991:print]   zero_optimization_stage ...... 0
+[2023-01-17 23:17:22,061] [INFO] [config.py:976:print_user_config]   json = {
+    "train_batch_size": 256, 
+    "steps_per_print": 5, 
+    "optimizer": {
+        "type": "Adam", 
+        "params": {
+            "lr": 0.001, 
+            "betas": [0.8, 0.999], 
+            "eps": 1e-08, 
+            "weight_decay": 3e-07
+        }
+    }, 
+    "scheduler": {
+        "type": "WarmupLR", 
+        "params": {
+            "warmup_min_lr": 0, 
+            "warmup_max_lr": 0.001, 
+            "warmup_num_steps": 1000
+        }
+    }, 
+    "gradient_clipping": 1.0, 
+    "prescale_gradients": false, 
+    "fp16": {
+        "enabled": false, 
+        "fp16_master_weights_and_grads": false, 
+        "loss_scale": 0, 
+        "loss_scale_window": 500, 
+        "hysteresis": 2, 
+        "min_loss_scale": 1, 
+        "initial_scale_power": 15
+    }, 
+    "wall_clock_breakdown": false, 
+    "zero_optimization": {
+        "stage": 0, 
+        "allgather_partitions": true, 
+        "reduce_scatter": true, 
+        "allgather_bucket_size": 5.000000e+07, 
+        "reduce_bucket_size": 5.000000e+07, 
+        "overlap_comm": true, 
+        "contiguous_gradients": true, 
+        "cpu_offload": false
+    }, 
+    "comms_logger": {
+        "enabled": true, 
+        "verbose": false, 
+        "prof_all": true, 
+        "debug": false
+    }
+}
+Loading extension module fused_adam...
+Time to load fused_adam op: 0.22911810874938965 seconds
+Using /home/zhen/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/zhen/.cache/torch_extensions/py38_cu116/utils/build.ninja...
+Building extension module utils...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Using /home/zhen/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.2032032012939453 seconds
+[[36m2023-01-17 23:17:27,702[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 0/15000 (0%)] epoch=1.0000 step=1.0000 dt=4.7884 batch_acc=0.1250 batch_loss=0.0089 acc=0.0021 running_loss=0.0002[0m
+[[36m2023-01-17 23:17:32,233[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 1280/15000 (8%)] epoch=1.0000 step=6.0000 dt=0.0320 batch_acc=0.6250 batch_loss=0.0049 acc=0.0427 running_loss=0.0007[0m
+[[36m2023-01-17 23:17:35,656[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 2560/15000 (17%)] epoch=1.0000 step=11.0000 dt=0.0117 batch_acc=0.6914 batch_loss=0.0038 acc=0.1014 running_loss=0.0010[0m
+[[36m2023-01-17 23:17:38,919[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 3840/15000 (25%)] epoch=1.0000 step=16.0000 dt=0.0498 batch_acc=0.7969 batch_loss=0.0028 acc=0.1659 running_loss=0.0013[0m
+[[36m2023-01-17 23:17:42,172[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 5120/15000 (34%)] epoch=1.0000 step=21.0000 dt=0.0454 batch_acc=0.8242 batch_loss=0.0021 acc=0.2353 running_loss=0.0015[0m
+[[36m2023-01-17 23:17:45,408[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 6400/15000 (42%)] epoch=1.0000 step=26.0000 dt=0.0464 batch_acc=0.8672 batch_loss=0.0018 acc=0.3081 running_loss=0.0017[0m
+[[36m2023-01-17 23:17:48,654[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 7680/15000 (51%)] epoch=1.0000 step=31.0000 dt=0.0442 batch_acc=0.8867 batch_loss=0.0015 acc=0.3827 running_loss=0.0018[0m
+[[36m2023-01-17 23:17:52,416[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 8960/15000 (59%)] epoch=1.0000 step=36.0000 dt=0.0023 batch_acc=0.9062 batch_loss=0.0013 acc=0.4577 running_loss=0.0019[0m
+[[36m2023-01-17 23:17:56,599[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 10240/15000 (68%)] epoch=1.0000 step=41.0000 dt=0.0320 batch_acc=0.9336 batch_loss=0.0010 acc=0.5339 running_loss=0.0021[0m
+[[36m2023-01-17 23:17:59,998[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 11520/15000 (76%)] epoch=1.0000 step=46.0000 dt=0.0307 batch_acc=0.9414 batch_loss=0.0010 acc=0.6119 running_loss=0.0022[0m
+[[36m2023-01-17 23:18:03,870[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 12800/15000 (85%)] epoch=1.0000 step=51.0000 dt=0.0313 batch_acc=0.9102 batch_loss=0.0012 acc=0.6899 running_loss=0.0023[0m
+[[36m2023-01-17 23:18:07,273[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 14080/15000 (93%)] epoch=1.0000 step=56.0000 dt=0.0150 batch_acc=0.9141 batch_loss=0.0011 acc=0.7683 running_loss=0.0023[0m
+[[36m2023-01-17 23:18:18,705[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:18:18,705[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 96%[0m
+[[36m2023-01-17 23:18:18,706[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:18:18,709[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:18:18,710[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  loss=0.0006  acc=20%[0m
+[[36m2023-01-17 23:18:18,710[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:18:20,610[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 0/15000 (0%)] epoch=2.0000 step=60.0000 dt=1.0867 batch_acc=0.9102 batch_loss=0.0011 acc=0.0155 running_loss=0.0000[0m
+[[36m2023-01-17 23:18:23,868[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 1280/15000 (8%)] epoch=2.0000 step=65.0000 dt=1.0380 batch_acc=0.9531 batch_loss=0.0008 acc=0.0945 running_loss=0.0001[0m
+[[36m2023-01-17 23:18:28,261[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 2560/15000 (17%)] epoch=2.0000 step=70.0000 dt=1.0509 batch_acc=0.9414 batch_loss=0.0007 acc=0.1744 running_loss=0.0002[0m
+[[36m2023-01-17 23:18:31,541[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 3840/15000 (25%)] epoch=2.0000 step=75.0000 dt=1.0543 batch_acc=0.9531 batch_loss=0.0005 acc=0.2542 running_loss=0.0002[0m
+[[36m2023-01-17 23:18:34,866[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 5120/15000 (34%)] epoch=2.0000 step=80.0000 dt=1.0613 batch_acc=0.9297 batch_loss=0.0008 acc=0.3335 running_loss=0.0003[0m
+[[36m2023-01-17 23:18:38,241[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 6400/15000 (42%)] epoch=2.0000 step=85.0000 dt=1.0467 batch_acc=0.9414 batch_loss=0.0007 acc=0.4125 running_loss=0.0004[0m
+[[36m2023-01-17 23:18:41,686[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 7680/15000 (51%)] epoch=2.0000 step=90.0000 dt=1.0291 batch_acc=0.9375 batch_loss=0.0008 acc=0.4927 running_loss=0.0005[0m
+[[36m2023-01-17 23:18:44,925[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 8960/15000 (59%)] epoch=2.0000 step=95.0000 dt=1.0290 batch_acc=0.9531 batch_loss=0.0005 acc=0.5744 running_loss=0.0005[0m
+[[36m2023-01-17 23:18:48,198[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 10240/15000 (68%)] epoch=2.0000 step=100.0000 dt=1.0500 batch_acc=0.9492 batch_loss=0.0007 acc=0.6541 running_loss=0.0006[0m
+[[36m2023-01-17 23:18:51,438[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 11520/15000 (76%)] epoch=2.0000 step=105.0000 dt=1.0337 batch_acc=0.9609 batch_loss=0.0006 acc=0.7354 running_loss=0.0006[0m
+[[36m2023-01-17 23:18:54,695[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 12800/15000 (85%)] epoch=2.0000 step=110.0000 dt=1.0478 batch_acc=0.9531 batch_loss=0.0007 acc=0.8155 running_loss=0.0007[0m
+[[36m2023-01-17 23:18:57,907[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 14080/15000 (93%)] epoch=2.0000 step=115.0000 dt=1.0206 batch_acc=0.9258 batch_loss=0.0010 acc=0.8952 running_loss=0.0008[0m
+[[36m2023-01-17 23:19:08,995[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:19:08,996[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 96%[0m
+[[36m2023-01-17 23:19:08,996[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:19:08,998[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:19:08,998[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  loss=0.0002  acc=23%[0m
+[[36m2023-01-17 23:19:08,998[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:19:09,832[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 0/15000 (0%)] epoch=3.0000 step=119.0000 dt=0.0323 batch_acc=0.9570 batch_loss=0.0007 acc=0.0163 running_loss=0.0000[0m
+[[36m2023-01-17 23:19:13,243[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 1280/15000 (8%)] epoch=3.0000 step=124.0000 dt=0.0275 batch_acc=0.9453 batch_loss=0.0006 acc=0.0967 running_loss=0.0001[0m
+[[36m2023-01-17 23:19:16,483[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 2560/15000 (17%)] epoch=3.0000 step=129.0000 dt=0.0276 batch_acc=0.9609 batch_loss=0.0005 acc=0.1781 running_loss=0.0001[0m
+[[36m2023-01-17 23:19:19,725[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 3840/15000 (25%)] epoch=3.0000 step=134.0000 dt=0.0274 batch_acc=0.9531 batch_loss=0.0006 acc=0.2595 running_loss=0.0002[0m
+[[36m2023-01-17 23:19:22,980[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 5120/15000 (34%)] epoch=3.0000 step=139.0000 dt=0.0267 batch_acc=0.9414 batch_loss=0.0007 acc=0.3406 running_loss=0.0002[0m
+[[36m2023-01-17 23:19:26,489[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 6400/15000 (42%)] epoch=3.0000 step=144.0000 dt=0.0278 batch_acc=0.9453 batch_loss=0.0007 acc=0.4211 running_loss=0.0003[0m
+[[36m2023-01-17 23:19:29,891[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 7680/15000 (51%)] epoch=3.0000 step=149.0000 dt=0.0276 batch_acc=0.9766 batch_loss=0.0004 acc=0.5024 running_loss=0.0003[0m
+[[36m2023-01-17 23:19:33,130[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 8960/15000 (59%)] epoch=3.0000 step=154.0000 dt=0.0283 batch_acc=0.9297 batch_loss=0.0008 acc=0.5833 running_loss=0.0004[0m
+[[36m2023-01-17 23:19:36,377[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 10240/15000 (68%)] epoch=3.0000 step=159.0000 dt=0.0269 batch_acc=0.9492 batch_loss=0.0006 acc=0.6651 running_loss=0.0004[0m
+[[36m2023-01-17 23:19:39,842[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 11520/15000 (76%)] epoch=3.0000 step=164.0000 dt=0.0267 batch_acc=0.9297 batch_loss=0.0007 acc=0.7461 running_loss=0.0005[0m
+[[36m2023-01-17 23:19:43,103[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 12800/15000 (85%)] epoch=3.0000 step=169.0000 dt=0.0305 batch_acc=0.9570 batch_loss=0.0005 acc=0.8277 running_loss=0.0005[0m
+[[36m2023-01-17 23:19:46,319[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 14080/15000 (93%)] epoch=3.0000 step=174.0000 dt=0.0276 batch_acc=0.9727 batch_loss=0.0003 acc=0.9101 running_loss=0.0006[0m
+[[36m2023-01-17 23:19:59,040[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:19:59,041[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
+[[36m2023-01-17 23:19:59,041[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:19:59,044[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:19:59,045[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  loss=0.0002  acc=24%[0m
+[[36m2023-01-17 23:19:59,045[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:19:59,748[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 0/15000 (0%)] epoch=4.0000 step=178.0000 dt=0.0343 batch_acc=0.9648 batch_loss=0.0004 acc=0.0165 running_loss=0.0000[0m
+[[36m2023-01-17 23:20:02,972[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 1280/15000 (8%)] epoch=4.0000 step=183.0000 dt=0.0287 batch_acc=0.9492 batch_loss=0.0005 acc=0.0973 running_loss=0.0001[0m
+[[36m2023-01-17 23:20:06,413[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 2560/15000 (17%)] epoch=4.0000 step=188.0000 dt=0.0284 batch_acc=0.9570 batch_loss=0.0008 acc=0.1799 running_loss=0.0001[0m
+[[36m2023-01-17 23:20:09,898[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 3840/15000 (25%)] epoch=4.0000 step=193.0000 dt=0.0276 batch_acc=0.9492 batch_loss=0.0006 acc=0.2617 running_loss=0.0001[0m
+[[36m2023-01-17 23:20:13,132[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 5120/15000 (34%)] epoch=4.0000 step=198.0000 dt=0.0291 batch_acc=0.9805 batch_loss=0.0004 acc=0.3441 running_loss=0.0002[0m
+[[36m2023-01-17 23:20:16,369[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 6400/15000 (42%)] epoch=4.0000 step=203.0000 dt=0.0289 batch_acc=0.9492 batch_loss=0.0007 acc=0.4255 running_loss=0.0002[0m
+[[36m2023-01-17 23:20:19,609[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 7680/15000 (51%)] epoch=4.0000 step=208.0000 dt=0.0288 batch_acc=0.9648 batch_loss=0.0005 acc=0.5068 running_loss=0.0003[0m
+[[36m2023-01-17 23:20:22,905[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 8960/15000 (59%)] epoch=4.0000 step=213.0000 dt=0.0274 batch_acc=0.9688 batch_loss=0.0005 acc=0.5893 running_loss=0.0003[0m
+[[36m2023-01-17 23:20:26,958[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 10240/15000 (68%)] epoch=4.0000 step=218.0000 dt=0.0021 batch_acc=0.9609 batch_loss=0.0005 acc=0.6713 running_loss=0.0004[0m
+[[36m2023-01-17 23:20:30,833[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 11520/15000 (76%)] epoch=4.0000 step=223.0000 dt=0.0308 batch_acc=0.9727 batch_loss=0.0004 acc=0.7541 running_loss=0.0004[0m
+[[36m2023-01-17 23:20:34,230[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 12800/15000 (85%)] epoch=4.0000 step=228.0000 dt=0.0275 batch_acc=0.9766 batch_loss=0.0005 acc=0.8369 running_loss=0.0004[0m
+[[36m2023-01-17 23:20:37,483[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 14080/15000 (93%)] epoch=4.0000 step=233.0000 dt=0.0293 batch_acc=0.9570 batch_loss=0.0005 acc=0.9187 running_loss=0.0005[0m
+[[36m2023-01-17 23:20:49,332[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:20:49,332[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
+[[36m2023-01-17 23:20:49,332[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:20:49,332[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:20:49,333[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  loss=0.0001  acc=24%[0m
+[[36m2023-01-17 23:20:49,333[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:20:49,856[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 0/15000 (0%)] epoch=5.0000 step=237.0000 dt=0.0345 batch_acc=0.9570 batch_loss=0.0004 acc=0.0163 running_loss=0.0000[0m
+[[36m2023-01-17 23:20:53,951[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 1280/15000 (8%)] epoch=5.0000 step=242.0000 dt=0.0079 batch_acc=0.9688 batch_loss=0.0003 acc=0.0990 running_loss=0.0000[0m
+[[36m2023-01-17 23:20:58,116[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 2560/15000 (17%)] epoch=5.0000 step=247.0000 dt=0.0039 batch_acc=0.9922 batch_loss=0.0002 acc=0.1817 running_loss=0.0001[0m
+[[36m2023-01-17 23:21:02,233[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 3840/15000 (25%)] epoch=5.0000 step=252.0000 dt=0.0280 batch_acc=0.9688 batch_loss=0.0004 acc=0.2646 running_loss=0.0001[0m
+[[36m2023-01-17 23:21:05,605[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 5120/15000 (34%)] epoch=5.0000 step=257.0000 dt=0.0278 batch_acc=0.9648 batch_loss=0.0004 acc=0.3471 running_loss=0.0001[0m
+[[36m2023-01-17 23:21:09,328[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 6400/15000 (42%)] epoch=5.0000 step=262.0000 dt=0.0267 batch_acc=0.9688 batch_loss=0.0005 acc=0.4297 running_loss=0.0002[0m
+[[36m2023-01-17 23:21:12,734[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 7680/15000 (51%)] epoch=5.0000 step=267.0000 dt=0.0281 batch_acc=0.9648 batch_loss=0.0004 acc=0.5127 running_loss=0.0002[0m
+[[36m2023-01-17 23:21:16,214[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 8960/15000 (59%)] epoch=5.0000 step=272.0000 dt=0.0318 batch_acc=0.9648 batch_loss=0.0004 acc=0.5954 running_loss=0.0002[0m
+[[36m2023-01-17 23:21:19,318[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 10240/15000 (68%)] epoch=5.0000 step=277.0000 dt=0.0427 batch_acc=0.9766 batch_loss=0.0004 acc=0.6786 running_loss=0.0003[0m
+[[36m2023-01-17 23:21:22,615[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 11520/15000 (76%)] epoch=5.0000 step=282.0000 dt=0.0058 batch_acc=0.9805 batch_loss=0.0003 acc=0.7615 running_loss=0.0003[0m
+[[36m2023-01-17 23:21:26,612[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 12800/15000 (85%)] epoch=5.0000 step=287.0000 dt=0.0038 batch_acc=0.9688 batch_loss=0.0004 acc=0.8439 running_loss=0.0004[0m
+[[36m2023-01-17 23:21:30,685[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 14080/15000 (93%)] epoch=5.0000 step=292.0000 dt=0.0271 batch_acc=0.9609 batch_loss=0.0004 acc=0.9269 running_loss=0.0004[0m
+[[36m2023-01-17 23:21:33,752[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 0/15000 (0%)] epoch=6.0000 step=296.0000 dt=0.0340 batch_acc=0.9688 batch_loss=0.0005 acc=0.0165 running_loss=0.0000[0m
+[[36m2023-01-17 23:21:37,005[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 1280/15000 (8%)] epoch=6.0000 step=301.0000 dt=0.0472 batch_acc=0.9727 batch_loss=0.0003 acc=0.0989 running_loss=0.0000[0m
+[[36m2023-01-17 23:21:40,287[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 2560/15000 (17%)] epoch=6.0000 step=306.0000 dt=0.0477 batch_acc=0.9609 batch_loss=0.0004 acc=0.1815 running_loss=0.0001[0m
+[[36m2023-01-17 23:21:43,480[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 3840/15000 (25%)] epoch=6.0000 step=311.0000 dt=0.0441 batch_acc=0.9805 batch_loss=0.0002 acc=0.2646 running_loss=0.0001[0m
+[[36m2023-01-17 23:21:46,719[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 5120/15000 (34%)] epoch=6.0000 step=316.0000 dt=0.0463 batch_acc=0.9688 batch_loss=0.0005 acc=0.3472 running_loss=0.0001[0m
+[[36m2023-01-17 23:21:49,976[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 6400/15000 (42%)] epoch=6.0000 step=321.0000 dt=0.0706 batch_acc=0.9922 batch_loss=0.0002 acc=0.4306 running_loss=0.0002[0m
+[[36m2023-01-17 23:21:53,424[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 7680/15000 (51%)] epoch=6.0000 step=326.0000 dt=0.0038 batch_acc=0.9648 batch_loss=0.0005 acc=0.5131 running_loss=0.0002[0m
+[[36m2023-01-17 23:21:56,704[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 8960/15000 (59%)] epoch=6.0000 step=331.0000 dt=0.0378 batch_acc=0.9648 batch_loss=0.0004 acc=0.5964 running_loss=0.0002[0m
+[[36m2023-01-17 23:22:00,044[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 10240/15000 (68%)] epoch=6.0000 step=336.0000 dt=0.0274 batch_acc=0.9727 batch_loss=0.0004 acc=0.6784 running_loss=0.0003[0m
+[[36m2023-01-17 23:22:03,444[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 11520/15000 (76%)] epoch=6.0000 step=341.0000 dt=0.0380 batch_acc=0.9648 batch_loss=0.0005 acc=0.7607 running_loss=0.0003[0m
+[[36m2023-01-17 23:22:06,696[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 12800/15000 (85%)] epoch=6.0000 step=346.0000 dt=0.0423 batch_acc=0.9883 batch_loss=0.0002 acc=0.8439 running_loss=0.0003[0m
+[[36m2023-01-17 23:22:09,931[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 14080/15000 (93%)] epoch=6.0000 step=351.0000 dt=0.0434 batch_acc=0.9688 batch_loss=0.0004 acc=0.9271 running_loss=0.0004[0m
+[[36m2023-01-17 23:22:21,052[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:22:21,052[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
+[[36m2023-01-17 23:22:21,053[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:22:21,056[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:22:21,056[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  loss=0.0001  acc=24%[0m
+[[36m2023-01-17 23:22:21,057[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:22:22,876[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 0/15000 (0%)] epoch=7.0000 step=355.0000 dt=1.0212 batch_acc=0.9883 batch_loss=0.0002 acc=0.0169 running_loss=0.0000[0m
+[[36m2023-01-17 23:22:26,137[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 1280/15000 (8%)] epoch=7.0000 step=360.0000 dt=1.0494 batch_acc=0.9883 batch_loss=0.0002 acc=0.0999 running_loss=0.0000[0m
+[[36m2023-01-17 23:22:29,385[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 2560/15000 (17%)] epoch=7.0000 step=365.0000 dt=1.0440 batch_acc=0.9570 batch_loss=0.0006 acc=0.1826 running_loss=0.0001[0m
+[[36m2023-01-17 23:22:32,781[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 3840/15000 (25%)] epoch=7.0000 step=370.0000 dt=1.0310 batch_acc=0.9570 batch_loss=0.0004 acc=0.2659 running_loss=0.0001[0m
+[[36m2023-01-17 23:22:36,166[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 5120/15000 (34%)] epoch=7.0000 step=375.0000 dt=1.0370 batch_acc=0.9883 batch_loss=0.0003 acc=0.3491 running_loss=0.0001[0m
+[[36m2023-01-17 23:22:39,413[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 6400/15000 (42%)] epoch=7.0000 step=380.0000 dt=1.0469 batch_acc=0.9844 batch_loss=0.0003 acc=0.4325 running_loss=0.0001[0m
+Using /home/zhen/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Loading extension module fused_adam...
+Time to load fused_adam op: 0.30654478073120117 seconds
+Using /home/zhen/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.20244455337524414 seconds
+[[36m2023-01-17 23:22:42,859[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 7680/15000 (51%)] epoch=7.0000 step=385.0000 dt=1.0422 batch_acc=0.9805 batch_loss=0.0002 acc=0.5157 running_loss=0.0002[0m
+Using /home/zhen/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Loading extension module fused_adam...
+Time to load fused_adam op: 0.30654406547546387 seconds
+Using /home/zhen/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.2026360034942627 seconds
+Loading extension module utils...
+Time to load utils op: 0.2158823013305664 seconds
+[[36m2023-01-17 23:22:46,108[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 8960/15000 (59%)] epoch=7.0000 step=390.0000 dt=1.0518 batch_acc=0.9648 batch_loss=0.0003 acc=0.5988 running_loss=0.0002[0m
+[[36m2023-01-17 23:22:49,330[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 10240/15000 (68%)] epoch=7.0000 step=395.0000 dt=1.0245 batch_acc=0.9492 batch_loss=0.0005 acc=0.6815 running_loss=0.0002[0m
+[[36m2023-01-17 23:22:54,095[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 11520/15000 (76%)] epoch=7.0000 step=400.0000 dt=1.0501 batch_acc=0.9688 batch_loss=0.0003 acc=0.7644 running_loss=0.0003[0m
+[[36m2023-01-17 23:22:57,830[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 12800/15000 (85%)] epoch=7.0000 step=405.0000 dt=1.1597 batch_acc=0.9766 batch_loss=0.0003 acc=0.8474 running_loss=0.0003[0m
+[[36m2023-01-17 23:23:01,087[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 14080/15000 (93%)] epoch=7.0000 step=410.0000 dt=1.0308 batch_acc=0.9883 batch_loss=0.0002 acc=0.9304 running_loss=0.0003[0m
+[[36m2023-01-17 23:23:12,109[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:23:12,109[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
+[[36m2023-01-17 23:23:12,110[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:23:12,113[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:23:12,113[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  loss=0.0001  acc=24%[0m
+[[36m2023-01-17 23:23:12,114[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:23:12,955[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 0/15000 (0%)] epoch=8.0000 step=414.0000 dt=0.0318 batch_acc=0.9805 batch_loss=0.0004 acc=0.0167 running_loss=0.0000[0m
+[[36m2023-01-17 23:23:16,320[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 1280/15000 (8%)] epoch=8.0000 step=419.0000 dt=0.0256 batch_acc=0.9688 batch_loss=0.0003 acc=0.1001 running_loss=0.0000[0m
+[[36m2023-01-17 23:23:19,982[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 2560/15000 (17%)] epoch=8.0000 step=424.0000 dt=0.0255 batch_acc=0.9844 batch_loss=0.0002 acc=0.1835 running_loss=0.0001[0m
+[[36m2023-01-17 23:23:23,718[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 3840/15000 (25%)] epoch=8.0000 step=429.0000 dt=0.0257 batch_acc=0.9805 batch_loss=0.0003 acc=0.2666 running_loss=0.0001[0m
+[[36m2023-01-17 23:23:27,600[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 5120/15000 (34%)] epoch=8.0000 step=434.0000 dt=0.0255 batch_acc=0.9648 batch_loss=0.0004 acc=0.3493 running_loss=0.0001[0m
+[[36m2023-01-17 23:23:30,990[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 6400/15000 (42%)] epoch=8.0000 step=439.0000 dt=0.0254 batch_acc=0.9688 batch_loss=0.0005 acc=0.4327 running_loss=0.0001[0m
+[[36m2023-01-17 23:23:34,377[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 7680/15000 (51%)] epoch=8.0000 step=444.0000 dt=0.0281 batch_acc=0.9844 batch_loss=0.0004 acc=0.5162 running_loss=0.0002[0m
+[[36m2023-01-17 23:23:37,761[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 8960/15000 (59%)] epoch=8.0000 step=449.0000 dt=0.0257 batch_acc=0.9922 batch_loss=0.0002 acc=0.5993 running_loss=0.0002[0m
+[[36m2023-01-17 23:23:41,148[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 10240/15000 (68%)] epoch=8.0000 step=454.0000 dt=0.0252 batch_acc=0.9805 batch_loss=0.0003 acc=0.6826 running_loss=0.0002[0m
+[[36m2023-01-17 23:23:44,659[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 11520/15000 (76%)] epoch=8.0000 step=459.0000 dt=0.0254 batch_acc=0.9805 batch_loss=0.0003 acc=0.7655 running_loss=0.0003[0m
+[[36m2023-01-17 23:23:48,897[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 12800/15000 (85%)] epoch=8.0000 step=464.0000 dt=0.0021 batch_acc=0.9883 batch_loss=0.0003 acc=0.8485 running_loss=0.0003[0m
+[[36m2023-01-17 23:23:52,697[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 14080/15000 (93%)] epoch=8.0000 step=469.0000 dt=0.0263 batch_acc=0.9727 batch_loss=0.0003 acc=0.9315 running_loss=0.0003[0m
+[[36m2023-01-17 23:24:05,224[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:24:05,225[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
+[[36m2023-01-17 23:24:05,225[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:24:05,229[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:24:05,229[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  loss=0.0001  acc=24%[0m
+[[36m2023-01-17 23:24:05,229[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:24:06,892[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 0/15000 (0%)] epoch=9.0000 step=473.0000 dt=0.0023 batch_acc=0.9531 batch_loss=0.0005 acc=0.0163 running_loss=0.0000[0m
+[[36m2023-01-17 23:24:10,675[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 1280/15000 (8%)] epoch=9.0000 step=478.0000 dt=0.0258 batch_acc=0.9844 batch_loss=0.0002 acc=0.0996 running_loss=0.0000[0m
+[[36m2023-01-17 23:24:14,119[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 2560/15000 (17%)] epoch=9.0000 step=483.0000 dt=0.0493 batch_acc=0.9805 batch_loss=0.0003 acc=0.1827 running_loss=0.0001[0m
+[[36m2023-01-17 23:24:17,356[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 3840/15000 (25%)] epoch=9.0000 step=488.0000 dt=0.0261 batch_acc=0.9609 batch_loss=0.0004 acc=0.2653 running_loss=0.0001[0m
+[[36m2023-01-17 23:24:20,581[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 5120/15000 (34%)] epoch=9.0000 step=493.0000 dt=0.0265 batch_acc=0.9844 batch_loss=0.0002 acc=0.3492 running_loss=0.0001[0m
+[[36m2023-01-17 23:24:23,818[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 6400/15000 (42%)] epoch=9.0000 step=498.0000 dt=0.0266 batch_acc=0.9609 batch_loss=0.0003 acc=0.4319 running_loss=0.0001[0m
+[[36m2023-01-17 23:24:27,258[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 7680/15000 (51%)] epoch=9.0000 step=503.0000 dt=0.0265 batch_acc=0.9688 batch_loss=0.0003 acc=0.5148 running_loss=0.0002[0m
+[[36m2023-01-17 23:24:31,648[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 8960/15000 (59%)] epoch=9.0000 step=508.0000 dt=0.0021 batch_acc=0.9922 batch_loss=0.0002 acc=0.5989 running_loss=0.0002[0m
+[[36m2023-01-17 23:24:35,311[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 10240/15000 (68%)] epoch=9.0000 step=513.0000 dt=0.0255 batch_acc=0.9805 batch_loss=0.0003 acc=0.6823 running_loss=0.0002[0m
+[[36m2023-01-17 23:24:39,184[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 11520/15000 (76%)] epoch=9.0000 step=518.0000 dt=0.0262 batch_acc=0.9844 batch_loss=0.0002 acc=0.7657 running_loss=0.0002[0m
+[[36m2023-01-17 23:24:42,408[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 12800/15000 (85%)] epoch=9.0000 step=523.0000 dt=0.0274 batch_acc=0.9688 batch_loss=0.0003 acc=0.8493 running_loss=0.0003[0m
+[[36m2023-01-17 23:24:45,635[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 14080/15000 (93%)] epoch=9.0000 step=528.0000 dt=0.0280 batch_acc=0.9727 batch_loss=0.0004 acc=0.9326 running_loss=0.0003[0m
+[[36m2023-01-17 23:24:57,803[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:24:57,804[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
+[[36m2023-01-17 23:24:57,804[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
+[[36m2023-01-17 23:24:57,804[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:24:57,804[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  loss=0.0001  acc=24%[0m
+[[36m2023-01-17 23:24:57,805[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - -----------------------------[0m
+[[36m2023-01-17 23:24:58,387[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 0/15000 (0%)] epoch=10.0000 step=532.0000 dt=0.0369 batch_acc=0.9922 batch_loss=0.0002 acc=0.0169 running_loss=0.0000[0m
+[[36m2023-01-17 23:25:01,647[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 1280/15000 (8%)] epoch=10.0000 step=537.0000 dt=0.0277 batch_acc=0.9844 batch_loss=0.0003 acc=0.1005 running_loss=0.0000[0m
+[[36m2023-01-17 23:25:04,875[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 2560/15000 (17%)] epoch=10.0000 step=542.0000 dt=0.0265 batch_acc=0.9727 batch_loss=0.0003 acc=0.1843 running_loss=0.0000[0m
+[[36m2023-01-17 23:25:08,101[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 3840/15000 (25%)] epoch=10.0000 step=547.0000 dt=0.0266 batch_acc=0.9805 batch_loss=0.0002 acc=0.2678 running_loss=0.0001[0m
+[[36m2023-01-17 23:25:11,327[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 5120/15000 (34%)] epoch=10.0000 step=552.0000 dt=0.0259 batch_acc=0.9766 batch_loss=0.0003 acc=0.3510 running_loss=0.0001[0m
+[[36m2023-01-17 23:25:14,560[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 6400/15000 (42%)] epoch=10.0000 step=557.0000 dt=0.0271 batch_acc=0.9883 batch_loss=0.0002 acc=0.4347 running_loss=0.0001[0m
+[[36m2023-01-17 23:25:17,937[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 7680/15000 (51%)] epoch=10.0000 step=562.0000 dt=0.0268 batch_acc=0.9727 batch_loss=0.0003 acc=0.5183 running_loss=0.0001[0m
+[[36m2023-01-17 23:25:21,344[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 8960/15000 (59%)] epoch=10.0000 step=567.0000 dt=0.0262 batch_acc=0.9844 batch_loss=0.0003 acc=0.6011 running_loss=0.0002[0m
+[[36m2023-01-17 23:25:24,499[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 10240/15000 (68%)] epoch=10.0000 step=572.0000 dt=0.0288 batch_acc=0.9688 batch_loss=0.0004 acc=0.6843 running_loss=0.0002[0m
+[[36m2023-01-17 23:25:28,907[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 11520/15000 (76%)] epoch=10.0000 step=577.0000 dt=0.0266 batch_acc=0.9609 batch_loss=0.0004 acc=0.7670 running_loss=0.0002[0m
+[[36m2023-01-17 23:25:32,135[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 12800/15000 (85%)] epoch=10.0000 step=582.0000 dt=0.0274 batch_acc=0.9805 batch_loss=0.0003 acc=0.8503 running_loss=0.0003[0m
+[[36m2023-01-17 23:25:35,357[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 14080/15000 (93%)] epoch=10.0000 step=587.0000 dt=0.0264 batch_acc=0.9922 batch_loss=0.0002 acc=0.9342 running_loss=0.0003[0m
+[[36m2023-01-17 23:25:37,831[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] :: Total training time: 495.56582379341125 seconds[0m
+[[36m2023-01-17 23:25:37,833[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] :: Average time per epoch in the last 5: 41.147888040542604[0m
+Comm. Op            Message Size        Count               Total Latency(ms)   Avg Latency(ms)     tput_avg (Gbps)     busbw_avg (Gbps)    
+broadcast
+                    40.0 B              1                   0.07                0.07                0.00                0.00                
+                    64.0 B              1                   0.07                0.07                0.01                0.01                
+                    128.0 B             1                   0.08                0.08                0.01                0.01                
+                    256.0 B             1                   0.07                0.07                0.03                0.03                
+                    640.0 B             1                   0.06                0.06                0.08                0.08                
+                    1.12 KB             1                   1054.13             1054.13             0.00                0.00                
+                    72.0 KB             1                   0.07                0.07                8.73                8.73                
+                    576.0 KB            1                   0.10                0.10                49.02               49.02               
+log_summary_barrier
+                    0B                  1                   1104.30             1104.30             0.00                0.00                
