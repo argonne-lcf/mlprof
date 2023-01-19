@@ -10,9 +10,10 @@ import os
 from typing import Optional, Callable
 from mpi4py import MPI
 
-import logging
+# import logging
+from mlprof.utils.pylogger import get_pylogger
 
-log = logging.getLogger(__name__)
+log = get_pylogger(__name__)
 
 
 BACKENDS = [
@@ -214,15 +215,15 @@ def setup_torch_distributed(
         port: str = '2345',
 ) -> dict:
     import torch
-    rank = os.environ.get('RANK', None)
-    size = os.environ.get('WORLD_SIZE', None)
-    local_rank = os.environ.get(
-        'PMI_LOCAL_RANK',
-        os.environ.get(
-            'OMPI_COMM_WORLD_LOCAL_RANK',
-            None
-        )
-    )
+    rank = os.environ.get('RANK', get_rank())
+    size = os.environ.get('WORLD_SIZE', get_size())
+    local_rank = os.environ.get('LOCAL_RANK', get_local_rank())
+    #     'PMI_LOCAL_RANK',
+    #     os.environ.get(
+    #         'OMPI_COMM_WORLD_LOCAL_RANK',
+    #         None
+    #     )
+    # )
     be = backend.lower()
     assert be in BACKENDS
 
@@ -309,7 +310,7 @@ def setup_torch(
         torch.cuda.set_device(local_rank)
 
     log.info(f'Global Rank: {rank} / {size-1}')
-    log.info(f'[{rank}]: Local rank: {local_rank}')
+    # log.info(f'[{rank}]: Local rank: {local_rank}')
     seed_everything(seed * (rank + 1) * (local_rank + 1))
     return rank
 
