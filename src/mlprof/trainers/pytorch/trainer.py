@@ -8,7 +8,8 @@ from typing import Optional
 
 from hydra.utils import instantiate
 from omegaconf import DictConfig
-from rich import print_json
+from contextlib import nullcontext
+# from rich import print_json
 from pathlib import Path
 from dataclasses import asdict
 import json
@@ -35,7 +36,8 @@ from mlprof.configs import (
     DATA_DIR,
     HERE,
     ExperimentConfig,
-    NetworkConfig
+    ConvNetworkConfig,
+    SYNONYMS
 )
 from mlprof.network.pytorch.network import Net
 from mlprof.utils.pylogger import get_pylogger
@@ -77,8 +79,7 @@ class Trainer(BaseTrainer):
             else instantiate(config)
         )
         dsetup = setup_torch_distributed(self.config.backend)
-        self._dtype = torch.get_default_dtype()
-        self._device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.world_size = dsetup['size']
         self.rank = dsetup['rank']
         self.local_rank = dsetup['local_rank']
@@ -90,8 +91,15 @@ class Trainer(BaseTrainer):
 
         self.wbrun = self.setup_wandb()
 
-        if scaler is None:
-            self.scaler = None
+        # if scaler is None:
+        #     self.scaler = None
+        self.scaler = None
+        # if (
+        #         scaler is None
+        #         # and self.config.backend == 'DDP'
+        #         and self.config.backend.lower() not in ['ds', 'deepspeed']
+        # ):
+        #     self.scaler = torch.cuda.amp.grad_scaler.GradScaler()
 
         assert isinstance(self.config, ExperimentConfig)
         self._global_step = 0
@@ -109,8 +117,13 @@ class Trainer(BaseTrainer):
                 lr_init=self.config.trainer.lr_init
             )
 
+        self.dtype = torch.get_default_dtype()
         if torch.cuda.is_available():
             self.model.cuda()
+            # if self.config.autocast:
+            #     self.dtype = torch.get_autocast_gpu_dtype()
+            #     self.model.to(self.dtype)
+            # self.loss_fn = self.loss_fn.to(self.dtype)
 
         # self.wbrun = wbrun
         if self.wbrun is not None:
@@ -123,25 +136,16 @@ class Trainer(BaseTrainer):
                 log_freq=self.config.trainer.logfreq,
             )
 
-        self.model_engine = None
         self.use_fp16 = False
         self.ds_config = None
+        self.model_engine = self.model
         if self.config.backend == 'DDP':
             self.model_engine = DDP(self.model)
-            self.optimizer = self._optimizer
+            self.optimizer: torch.optim.Optimizer = self._optimizer
 
         elif self.config.backend.lower() in ['ds', 'deepspeed']:
             import deepspeed
-            # ds_config_path = Path(CONF_DIR).joinpath('ds_config.json')
-            # self.ds_config = load_ds_config(ds_config_path)
-            # log.info(f'Loaded DeepSpeed config from: {ds_config_path}')
-            self.ds_config = self.config.ds_config
-            if self._is_chief:
-                print_json(json.dumps(self.ds_config, indent=4))
-
-            if self.ds_config['fp16']['enabled']:
-                self.model = self.model.to(torch.half)
-
+            self.ds_config = self.prepare_ds_config()
             params = filter(
                 lambda p: p.requires_grad,
                 self.model.parameters()
@@ -153,15 +157,17 @@ class Trainer(BaseTrainer):
                 config=self.ds_config
             )
             self.model_engine = engine
-            self.optimizer = optimizer
+            assert optimizer is not None
+            self.optimizer: Optimizer = optimizer
             self.use_fp16 = self.model_engine.fp16_enabled()
             if self.use_fp16:
-                self._dtype = torch.half
+                self.dtype = torch.half
             if self.wbrun is not None:
                 self.wbrun.config['ds_config'] = self.ds_config
 
         elif self.config.backend.lower() in ['hvd', 'horovod']:
             import horovod.torch as hvd
+            # self.model_engine = self.model
             compression = (
                 hvd.Compression.fp16
                 if self.config.compression == 'fp16'
@@ -174,21 +180,69 @@ class Trainer(BaseTrainer):
             )
             hvd.broadcast_parameters(self.model.state_dict(), root_rank=0)
             hvd.broadcast_optimizer_state(self.optimizer, root_rank=0)
+            self.world_size = hvd.size()
+            self._ngpus = self.world_size
 
         else:
-            self.model_engine = None
-            self.optimizer = self._optimizer
+            # self.model_engine = None
+            # self.optimizer = self._optimizer
             raise ValueError(
                 f'Unexpected value for `config.backend`: {self.config.backend}'
             )
+
+    def prepare_ds_config(self) -> dict:
+        if self.config.backend.lower() not in ['ds', 'deepspeed']:
+            return {}
+
+        ds_config = self.config.load_ds_config(self.config.ds_config_path)
+        pname = 'mlprof'
+        ds_config['wandb'].update({
+            "project": pname,
+            "group": f'{self.config.framework}/{self.config.backend}',
+        })
+        # self.ds_config.update({
+        #     'tensorboard': {
+        #         'enabled': True,
+        #         'output_path': Path(os.getcwd()),
+        #     },
+        #     'csv_monitor': {
+        #         'enabled': True,
+        #         'output_path': Path(os.getcwd()).joinpath('csv_monitor'),
+        #     }
+        # })
+
+        ds_config.update({
+            'gradient_accumulation_steps': 1,
+            'train_micro_batch_size_per_gpu': 1,
+        })
+        ds_config['train_batch_size'] = (
+            self._ngpus
+            * ds_config['gradient_accumulation_steps']
+            * ds_config['train_micro_batch_size_per_gpu']
+        )
+        # if ds_config['scheduler'].get('params', None) is not None:
+        #     ds_config['scheduler']['params'].update({
+        #         'warmup_num_steps': self.config.steps.nepoch,
+        #         'total_num_steps': (
+        #             self.config.steps.nera * self.config.steps.nepoch
+        #         )
+        #     })
+        return ds_config
 
     def setup_wandb(self):
         wbrun = None
         wbcfg = self.config.wandb
         if self._is_chief and wbcfg is not None:
             import wandb
-            from wandb.util import generate_id
-            run_id = generate_id()
+            try:
+                from wandb.util import generate_id  # type:ignore
+                run_id = generate_id()
+            except (ImportError, ModuleNotFoundError) as e:
+                log.exception(e)
+                import uuid
+                run_id = str(uuid.uuid1())
+                
+            wandb.tensorboard.patch(root_logdir=os.getcwd())
             wbrun = wandb.init(
                 dir=os.getcwd(),
                 id=run_id,
@@ -196,21 +250,46 @@ class Trainer(BaseTrainer):
                 resume='allow',
                 save_code=True,
                 project=self.config.wandb.setup.project,
+                config_exclude_keys=['_target_'],
             )
             assert wbrun is not None and wbrun is wandb.run
             wbrun.log_code(HERE.as_posix())
+            # cfg = asdict(self.config)
             wbrun.config.update(
-                # OmegaConf.to_container(self.config, resolve=True)
+                # OmegaConf.to_container(cfg, resolve=True)
                 asdict(self.config)
+                # self.config.asdict()
             )
+            # wbrun.config['backend'] = sel
+            wbrun.config['backend'] = SYNONYMS[self.config.backend]
+            wbrun.config['framework'] = SYNONYMS[self.config.framework]
+            wbrun.config['world_size'] = self.world_size
             wbrun.config['run_id'] = run_id
+            wbrun.config['run_name'] = wbrun.name
             wbrun.config['logdir'] = os.getcwd()
             wbrun.config['ngpus'] = self._ngpus
-            wbrun.config['device'] = self._device
+            wbrun.config['device'] = self.device
+            LOGFILE = os.environ.get('LOGFILE', None)
+            NGPUS = os.environ.get('NGPUS', None)
+            NRANKS = os.environ.get('NRANKS', None)
+            NGPU_PER_RANK = os.environ.get('NGPU_PER_RANK', None)
+            if LOGFILE is not None:
+                wbrun.config['logfile'] = LOGFILE
+                wbrun.save(LOGFILE, policy='end')
+            if NRANKS is not None:
+                wbrun.config['NRANKS'] = NRANKS
+                # log.info(f'NRANKS: {NRANKS}')
+            if NGPU_PER_RANK is not None:
+                wbrun.config['NGPU_PER_RANK'] = NGPU_PER_RANK
+                # log.info(f'NGPU_PER_RANK: {NGPU_PER_RANK}')
+            if NGPUS is not None:
+                log.info(f'world_size: {self.world_size}')
+                log.info(f'NGPUS: {NGPUS}')
+                wbrun.config['NGPUS'] = NGPUS
 
         return wbrun
 
-    def build_model(self, net_config: NetworkConfig) -> nn.Module:
+    def build_model(self, net_config: ConvNetworkConfig) -> nn.Module:
         assert net_config is not None
         model = Net(net_config)
         xshape = (1, *self._xshape)
@@ -301,10 +380,7 @@ class Trainer(BaseTrainer):
             )
         )
         self._xshape = [28, 28]
-        return {
-            'train': train_dataset,
-            'test': test_dataset,
-        }
+        return {'train': train_dataset, 'test': test_dataset}
 
     def get_datasets(self, dset: str) -> dict[str, torch.utils.data.Dataset]:
         assert dset in datasets.__all__
@@ -337,7 +413,7 @@ class Trainer(BaseTrainer):
     ):
         kwargs = {}
 
-        if self._device == 'cuda':
+        if self.device == 'cuda':
             kwargs = {'num_workers': 0, 'pin_memory': True}
 
         if datasets is None:
@@ -391,20 +467,53 @@ class Trainer(BaseTrainer):
         target: torch.Tensor,
     ) -> tuple[torch.Tensor, torch.Tensor]:
         if torch.cuda.is_available():
-            data, target = data.cuda(), target.cuda()
+            data = data.to(self.dtype).cuda()
+            target = target.to(torch.long).cuda()
+            # target = target.to(self.dtype)
+            # data, target = data.cuda(), target.cuda()
 
-        assert self.optimizer is not None
         self.optimizer.zero_grad()
-        probs = self.model(data)
+        # with torch.cuda.amp.autocast():  # type:ignore
+        # with torch.autocast(self._device):
+        # if self.model_engine is not None:
+            # assert self.config.backend.lower() in [
+            #     'ds',
+            #     'deepspeed',
+            #     'DDP',
+            # ]
+            # i.e. using either DDP or DeepSpeed backends
+        probs = self.model_engine(data)
         loss = self.loss_fn(probs, target)
-
-        if self.scaler is not None and isinstance(self.scaler, GradScaler):
-            self.scaler.scale(loss).backward()
-            self.scaler.step(self.optimizer)
-            self.scaler.update()
+        if self.config.backend.lower() in ['ds', 'deepspeed']:
+            self.model_engine.backward(loss)  # type: ignore
+            self.model_engine.step()          # type: ignore
         else:
-            loss.backward()
-            self.optimizer.step()
+            # if: 
+            # ctx = torch.autocast(  # type:ignore
+            #         device_type=self.device,
+            #         dtype=self.dtype
+            # )
+            # else:
+            ctx = nullcontext()
+
+            with ctx:
+                probs = self.model(data)
+                loss = self.loss_fn(probs, target)
+            if self.scaler is not None and isinstance(self.scaler, GradScaler):
+                self.scaler.scale(loss).backward()  # type:ignore
+                self.scaler.step(self.optimizer)
+                self.scaler.update()
+            else:
+                loss.backward()
+                self.optimizer.step()
+
+        # if self.scaler is not None and isinstance(self.scaler, GradScaler):
+        #     self.scaler.scale(loss).backward()  # type:ignore
+        #     self.scaler.step(self.optimizer)
+        #     self.scaler.update()
+        # else:
+        # loss.backward()
+        # self.optimizer.step()
 
         _, pred = probs.data.max(1)
         acc = (pred == target).sum()
@@ -435,8 +544,8 @@ class Trainer(BaseTrainer):
     ) -> dict:
         self.model.train()
         # start = time.time()
-        running_acc = torch.tensor(0.)
-        running_loss = torch.tensor(0.)
+        running_acc = torch.tensor(0., dtype=self.dtype)
+        running_loss = torch.tensor(0., dtype=self.dtype)
         if torch.cuda.is_available():
             running_acc = running_acc.cuda()
             running_loss = running_loss.cuda()
@@ -499,7 +608,20 @@ class Trainer(BaseTrainer):
     def train(self) -> list[float]:
         epoch_times = []
         start = time.time()
-        for epoch in range(1, self.config.trainer.epochs + 1):
+        from tqdm.auto import trange
+        if self._is_chief:
+            log.info(', '.join([
+                f'self.device: {self.device}',
+                f'self.dtype: {self.dtype}',
+            ]))
+        for epoch in trange(
+                1,
+                self.config.trainer.epochs + 1,
+                disable=(not self._is_chief),
+                dynamic_ncols=True,
+                leave=True,
+                desc='Training',
+        ):
             t0 = time.time()
             metrics = self.train_epoch(epoch)
             epoch_times.append(time.time() - t0)
@@ -513,7 +635,8 @@ class Trainer(BaseTrainer):
                 log.info(sepstr)
                 summary = '  '.join([
                     '[TRAIN]',
-                    f'loss={metrics["loss"]:.4f}',
+                    f'epoch {epoch} took: {epoch_times[-1]:.4f}s',
+                    f'loss={metrics["loss"]:.8f}',
                     f'acc={metrics["acc"] * 100.0:.0f}%'
                 ])
                 if self.wbrun is not None:
@@ -542,7 +665,6 @@ class Trainer(BaseTrainer):
                 'Average time per epoch in the last'
                 f' {avg_over}: {avg_epoch_time}'
             ]))
-
         return epoch_times
 
     def test(self) -> float:
@@ -551,10 +673,12 @@ class Trainer(BaseTrainer):
         self.model.eval()
         with torch.no_grad():
             for data, target in self.data['test']['loader']:
-                if self._device == 'cuda':
-                    data, target = data.cuda(), target.cuda()
+                if torch.cuda.is_available():
+                    data = data.to(self.dtype).cuda()
+                    target = target.to(self.dtype).cuda()
 
                 probs = self.model(data)
+                probs = probs.to(self.device).to(self.dtype)
                 _, predicted = probs.data.max(1)
                 total += target.size(0)
                 correct += (predicted == target).sum().item()
