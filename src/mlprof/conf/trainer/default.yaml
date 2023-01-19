@@ -2,6 +2,6 @@ _target_: mlprof.configs.TrainerConfig
 
 lr_init: 0.001
 logfreq: 5
-epochs: 10
+epochs: 50
 seed: 1234
 # optional num_threads: null
