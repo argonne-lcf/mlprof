@@ -7,6 +7,7 @@ distributed data parallel training.
 from __future__ import absolute_import, annotations, division, print_function
 
 import hydra
+import sys
 # from hydra.utils import instantiate
 # import numpy as np
 from omegaconf import DictConfig
@@ -16,6 +17,10 @@ from mlprof.utils.pylogger import get_pylogger
 from mlprof.utils.dist import cleanup, setup_torch
 
 import deepspeed.comm as dist
+import warnings
+
+
+warnings.filterwarnings('ignore')
 
 
 log = get_pylogger(__name__)
@@ -52,4 +57,5 @@ def main(cfg: DictConfig) -> None:
 if __name__ == '__main__':
     wandb.require('service')
     main()
-    dist.log_summary()
+    sys.exit(0)
+    # dist.log_summary()

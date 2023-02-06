@@ -65,8 +65,10 @@ if [[ $(hostname) == x* ]]; then
   export NRANKS=$(wc -l < "${PBS_NODEFILE}")
   export NGPU_PER_RANK=$(nvidia-smi -L | wc -l)
   export NGPUS="$((${NRANKS}*${NGPU_PER_RANK}))"
-  module load conda/2022-09-08-hvd-nccl; conda activate base
-  VENV_PREFIX="2022-09-08-hvd-nccl"
+  # module load conda/2022-09-08-hvd-nccl; conda activate base
+  # VENV_PREFIX="2022-09-08-hvd-nccl"
+  module load conda/2023-01-10 ; conda activate base
+  VENV_PREFIX="2023-01-10"
   MPI_COMMAND=$(which mpiexec)
   # --depth=${NCPU_PER_RANK} \
   MPI_FLAGS="--envall \
@@ -153,7 +155,7 @@ EXEC="${MPI_COMMAND} ${MPI_FLAGS} $(which python3) ${MAIN}"
 
 
 # ------ Print job information --------------------------------------+
-printf '%.s─' $(seq 1 $(tput cols))
+# printf '%.s─' $(seq 1 $(tput cols))
 echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "┃  STARTING A NEW RUN ON ${NGPUS} GPUs of ${ALCF_RESOURCE}"
 echo "┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -164,12 +166,12 @@ echo "┃  - NGPUS PER RANK: ${NGPU_PER_RANK}"
 echo "┃  - NGPUS TOTAL: ${NGPUS}"
 echo "┃  - python3: $(which python3)"
 echo "┃  - MPI: ${MPI_COMMAND}"
-echo "┃  - exec: ${EXEC}"
+echo "┃  - exec: ${EXEC} $@"
 echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 echo 'To view output: `tail -f $(tail -1 logs/latest)`'
 echo "Latest logfile: $(tail -1 ./logs/latest)"
 echo "tail -f $(tail -1 logs/latest)"
 
-${EXEC} $@ > ${LOGFILE}
+${EXEC} $@ > ${LOGFILE} &
 #LD_PRELOAD=/soft/perftools/mpitrace/lib/libmpitrace.so ${EXEC} $@ > ${LOGFILE}
