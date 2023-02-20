@@ -1,8 +1,6 @@
 # mlprof 
 
-[<img src="https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28.svg" alt="Weights & Biases monitoring" height=20 style="padding: 0% 0%;">](https://wandb.ai/alcf-mlops/mlprof)
-
-<a href="https://pytorch.org/get-started/locally/"><img alt="pyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white" style="padding: 0% 0% 0% 0%;" height=20></a> <a href="https://www.tensorflow.org"><img alt="tensorflow" src="https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?&logo=TensorFlow&logoColor=white" style="padding: 0% 0%;" height=20></a> 
+[<img src="https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28.svg" alt="Weights & Biases monitoring" height=20 style="padding: 0% 0%;">](https://wandb.ai/l2hmc-qcd/mlprof?workspace=user-saforem2) <a href="https://pytorch.org/get-started/locally/"><img alt="pyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white" style="padding: 0% 0% 0% 0%;" height=20></a> <a href="https://www.tensorflow.org"><img alt="tensorflow" src="https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?&logo=TensorFlow&logoColor=white" style="padding: 0% 0%;" height=20></a> 
 
 Profiling tools for performance studies of competing ML frameworks on HPC systems
 
