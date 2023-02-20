@@ -1,0 +1,45 @@
+Data for MPI rank 0 of 8:
+Times from MPI_Init() to MPI_Finalize().
+-----------------------------------------------------------------------
+MPI Routine                        #calls     avg. bytes      time(sec)
+-----------------------------------------------------------------------
+MPI_Comm_rank                           7            0.0          0.000
+MPI_Comm_size                           3            0.0          0.000
+MPI_Bcast                               6           16.5          0.000
+-----------------------------------------------------------------------
+MPI task 0 of 8 had the minimum communication time.
+total communication time = 0.000 seconds.
+total elapsed time       = 31.819 seconds.
+user cpu time            = 10.527 seconds.
+system time              = 1.743 seconds.
+max resident set size    = 4847.137 MiB.
+
+-----------------------------------------------------------------
+Message size distributions:
+
+MPI_Bcast                 #calls    avg. bytes      time(sec)
+                               3           4.0          0.000
+                               3          29.0          0.000
+
+-----------------------------------------------------------------
+
+Summary for all tasks:
+
+  Rank 0 reported the largest memory utilization : 4847.14 MiB
+  Rank 0 reported the largest elapsed time : 31.82 sec
+
+  minimum communication time = 0.000 sec for task 0
+  median  communication time = 11.198 sec for task 5
+  maximum communication time = 11.704 sec for task 3
+
+
+MPI timing summary for all ranks:
+taskid             host    cpu    comm(s)  elapsed(s)     user(s)   system(s)   size(MiB)    switches
+     0   x3209c0s37b1n0      0       0.00       31.82       10.53        1.74     4847.14        2783
+     1   x3209c0s37b1n0      1      11.70       25.84       17.89        5.26     4790.96        1751
+     2   x3209c0s37b1n0      2      11.70       25.88       18.48        4.76     4750.47        1462
+     3   x3209c0s37b1n0      3      11.70       25.84       17.61        5.58     4789.50        1605
+     4    x3209c0s7b0n0      0      10.92       25.93       14.79        7.73     4829.35        1816
+     5    x3209c0s7b0n0      1      11.20       25.88       17.85        5.07     4786.68        1646
+     6    x3209c0s7b0n0      2      11.20       25.86       18.30        4.61     4751.10        1497
+     7    x3209c0s7b0n0      3      11.20       25.86       17.68        5.32     4792.68        1650

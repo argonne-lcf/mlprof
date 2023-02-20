@@ -1,0 +1,31 @@
+Data for MPI rank 3 of 8:
+Times from MPI_Init() to MPI_Finalize().
+-----------------------------------------------------------------------
+MPI Routine                        #calls     avg. bytes      time(sec)
+-----------------------------------------------------------------------
+MPI_Comm_rank                           7            0.0          0.000
+MPI_Comm_size                           5            0.0          0.000
+MPI_Bcast                               4           15.8         12.419
+MPI_Allgather                           1            4.0          0.000
+MPI_Allgatherv                          1           29.0          0.000
+-----------------------------------------------------------------------
+MPI task 3 of 8 had the median communication time.
+total communication time = 12.419 seconds.
+total elapsed time       = 21.558 seconds.
+user cpu time            = 14.063 seconds.
+system time              = 4.976 seconds.
+max resident set size    = 4583.887 MiB.
+
+-----------------------------------------------------------------
+Message size distributions:
+
+MPI_Bcast                 #calls    avg. bytes      time(sec)
+                               2           4.0         12.419
+                               2          27.5          0.000
+
+MPI_Allgather             #calls    avg. bytes      time(sec)
+                               1           4.0          0.000
+
+MPI_Allgatherv            #calls    avg. bytes      time(sec)
+                               1          29.0          0.000
+

@@ -1,0 +1,53 @@
+Data for MPI rank 0 of 8:
+Times from MPI_Init() to MPI_Finalize().
+-----------------------------------------------------------------------
+MPI Routine                        #calls     avg. bytes      time(sec)
+-----------------------------------------------------------------------
+MPI_Comm_rank                           7            0.0          0.000
+MPI_Comm_size                           5            0.0          0.000
+MPI_Bcast                               4           15.8          0.000
+MPI_Allgather                           1            4.0          0.000
+MPI_Allgatherv                          1           29.0          0.000
+-----------------------------------------------------------------------
+MPI task 0 of 8 had the minimum communication time.
+total communication time = 0.000 seconds.
+total elapsed time       = 26.545 seconds.
+user cpu time            = 4.489 seconds.
+system time              = 1.676 seconds.
+max resident set size    = 4595.605 MiB.
+
+-----------------------------------------------------------------
+Message size distributions:
+
+MPI_Bcast                 #calls    avg. bytes      time(sec)
+                               2           4.0          0.000
+                               2          27.5          0.000
+
+MPI_Allgather             #calls    avg. bytes      time(sec)
+                               1           4.0          0.000
+
+MPI_Allgatherv            #calls    avg. bytes      time(sec)
+                               1          29.0          0.000
+
+-----------------------------------------------------------------
+
+Summary for all tasks:
+
+  Rank 0 reported the largest memory utilization : 4595.61 MiB
+  Rank 0 reported the largest elapsed time : 26.54 sec
+
+  minimum communication time = 0.000 sec for task 0
+  median  communication time = 12.419 sec for task 3
+  maximum communication time = 12.620 sec for task 5
+
+
+MPI timing summary for all ranks:
+taskid             host    cpu    comm(s)  elapsed(s)     user(s)   system(s)   size(MiB)    switches
+     0   x3209c0s37b1n0      0       0.00       26.54        4.49        1.68     4595.61         453
+     1   x3209c0s37b1n0      1      12.41       21.58       13.88        5.11     4587.95          96
+     2   x3209c0s37b1n0      2      12.42       21.58       14.01        5.01     4591.93          89
+     3   x3209c0s37b1n0      3      12.42       21.56       14.06        4.98     4583.89          93
+     4    x3209c0s7b0n0      0      12.62       20.73       10.19        8.20     4579.17         321
+     5    x3209c0s7b0n0      1      12.62       21.48       14.24        4.93     4588.88          94
+     6    x3209c0s7b0n0      2      12.62       21.52       13.99        5.20     4582.57          92
+     7    x3209c0s7b0n0      3      12.62       21.53       13.86        5.36     4582.23          91
