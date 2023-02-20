@@ -9,6 +9,8 @@ Profiling tools for performance studies of competing ML frameworks on HPC system
 <details closed><summary><b>TODO</b></summary>
 <p>
 
+## TODO
+    
 - [x] Write DeepSpeed Trainer that wraps [`src/mlprof/network/pytorch/network.py`](./src/mlprof/network/pytorch/network.py)
     - Reference: [DeepSpeed -- Getting Started](https://www.deepspeed.ai/getting-started/)
 - [ ] MPI Profiling to get all collective comm. ops with same model in DeepSpeed, DDP, and Horovod
@@ -18,6 +20,16 @@ Profiling tools for performance studies of competing ML frameworks on HPC system
 - [ ] Identify what parameters can impact performance such as NCCL environment variables and framework-specific parameters
 - [ ] Do the analysis for standard models and large language models (LLMs)
 - [ ] Develop auto-tuning methods to set these parameters for optimal performance
+    
+### 2023-02-20
+
+- [ ] Associate `mpiprofile`'s with backend + attach logs to keep everything together
+
+- [ ] Scale up message sizes in mpiprofiles
+- [ ] Aggregate into table, grouped by backend 
+- [ ] Test `fp16` support w/ all backends
+- [ ] Ensure all GPUs being utilized 
+	- w/ `conda/2022-09-08-hvd-nccl` all processes get mapped to GPU0 for some reason     
 
 </p>
 </details>
