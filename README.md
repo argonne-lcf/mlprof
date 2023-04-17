@@ -6,11 +6,16 @@ Profiling tools for performance studies of competing ML frameworks on HPC system
 
 </div>
 
+
 <details closed><summary><b>TODO</b></summary>
 <p>
 
 ## TODO
-    
+### 04/17/2023
+- [ ] Work on repeating MPI profile experiments with larger batch size / network size using `module load conda/2023-01-10-unstable` on Polaris
+- [ ] Try with single + multiple nodes to measure performance impact
+
+### Older
 - [x] Write DeepSpeed Trainer that wraps [`src/mlprof/network/pytorch/network.py`](./src/mlprof/network/pytorch/network.py)
     - Reference: [DeepSpeed -- Getting Started](https://www.deepspeed.ai/getting-started/)
 - [ ] MPI Profiling to get all collective comm. ops with same model in DeepSpeed, DDP, and Horovod
@@ -21,7 +26,7 @@ Profiling tools for performance studies of competing ML frameworks on HPC system
 - [ ] Do the analysis for standard models and large language models (LLMs)
 - [ ] Develop auto-tuning methods to set these parameters for optimal performance
     
-### 2023-02-20
+#### 2023-02-20
 
 - [ ] Associate `mpiprofile`'s with backend + attach logs to keep everything together
 
