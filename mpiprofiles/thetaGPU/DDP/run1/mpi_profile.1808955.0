@@ -1,0 +1,52 @@
+Data for MPI rank 0 of 16:
+Times and statistics from MPI_Init() to MPI_Finalize().
+-----------------------------------------------------------------------
+MPI Routine                        #calls     avg. bytes      time(sec)
+-----------------------------------------------------------------------
+MPI_Comm_rank                           7            0.0          0.000
+MPI_Comm_size                           4            0.0          0.000
+MPI_Bcast                               4           14.5          0.000
+-----------------------------------------------------------------
+total communication time = 0.000 seconds.
+total elapsed time       = 41.701 seconds.
+user cpu time            = 25.015 seconds.
+system time              = 2.394 seconds.
+max resident set size    = 4597.719 MBytes.
+
+Rank 0 reported the largest memory utilization : 4597.72 MBytes
+Rank 0 reported the largest elapsed time : 41.70 sec
+
+-----------------------------------------------------------------
+Message size distributions:
+
+MPI_Bcast                 #calls    avg. bytes      time(sec)
+                               2           4.0          0.000
+                               2          25.0          0.000
+
+-----------------------------------------------------------------
+
+Communication summary for all tasks:
+
+  minimum communication time = 0.000 sec for task 9
+  median  communication time = 0.000 sec for task 12
+  maximum communication time = 0.154 sec for task 5
+
+
+MPI timing summary for all ranks:
+taskid       hostname     comm(s)  elapsed(s)     user(s)   system(s)    size(MB)    switches
+     0     thetagpu18       0.00       41.70       25.02        2.39     4597.72        9870
+     1     thetagpu18       0.00       29.55       28.87        8.92     4579.43       10524
+     2     thetagpu18       0.00       29.56       28.60        9.22     4579.13       10812
+     3     thetagpu18       0.00       29.48       28.79        8.98     4579.30       10288
+     4     thetagpu18       0.00       29.56       28.46        9.49     4591.71       10747
+     5     thetagpu18       0.15       29.53       29.08        8.87     4589.73       10755
+     6     thetagpu18       0.13       29.56       28.93        9.02     4582.99       10789
+     7     thetagpu18       0.03       29.52       28.70        9.22     4578.20       10718
+     8     thetagpu19       0.02       29.55       29.97        7.96     4579.46       10769
+     9     thetagpu19       0.00       29.55       29.24        8.58     4597.17       10624
+    10     thetagpu19       0.00       29.56       29.45        8.45     4592.13       10731
+    11     thetagpu19       0.00       29.58       29.57        8.21     4596.58       10779
+    12     thetagpu19       0.00       29.52       29.29        8.61     4581.02       10975
+    13     thetagpu19       0.06       29.50       29.76        8.28     4584.79       10726
+    14     thetagpu19       0.08       29.55       29.47        8.59     4596.30       10850
+    15     thetagpu19       0.00       29.52       29.64        8.32     4589.69       10551

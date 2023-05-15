@@ -1,0 +1,46 @@
+Data for MPI rank 0 of 16:
+Times and statistics from MPI_Init() to MPI_Finalize().
+-----------------------------------------------------------------------
+MPI Routine                        #calls     avg. bytes      time(sec)
+-----------------------------------------------------------------------
+MPI_Comm_rank                           1            0.0          0.000
+-----------------------------------------------------------------
+total communication time = 0.000 seconds.
+total elapsed time       = 0.922 seconds.
+user cpu time            = 0.885 seconds.
+system time              = 0.029 seconds.
+max resident set size    = 955.395 MBytes.
+
+Rank 0 reported the largest memory utilization : 955.39 MBytes
+Rank 11 reported the largest elapsed time : 0.96 sec
+
+-----------------------------------------------------------------
+Message size distributions:
+
+-----------------------------------------------------------------
+
+Communication summary for all tasks:
+
+  minimum communication time = 0.000 sec for task 10
+  median  communication time = 0.000 sec for task 6
+  maximum communication time = 0.000 sec for task 15
+
+
+MPI timing summary for all ranks:
+taskid       hostname     comm(s)  elapsed(s)     user(s)   system(s)    size(MB)    switches
+     0     thetagpu18       0.00        0.92        0.89        0.03      955.39         122
+     1     thetagpu18       0.00        0.93        0.87        0.04      936.81         115
+     2     thetagpu18       0.00        0.91        0.86        0.04      937.06          78
+     3     thetagpu18       0.00        0.90        0.86        0.03      937.23          87
+     4     thetagpu18       0.00        0.90        0.87        0.03      946.29          79
+     5     thetagpu18       0.00        0.91        0.88        0.03      946.35          87
+     6     thetagpu18       0.00        0.91        0.88        0.02      946.47          81
+     7     thetagpu18       0.00        0.90        0.86        0.04      936.32          85
+     8     thetagpu19       0.00        0.94        0.86        0.04      936.63          98
+     9     thetagpu19       0.00        0.93        0.88        0.02      946.53          90
+    10     thetagpu19       0.00        0.93        0.88        0.03      946.87         109
+    11     thetagpu19       0.00        0.96        0.90        0.03      946.71          82
+    12     thetagpu19       0.00        0.93        0.86        0.05      936.44         100
+    13     thetagpu19       0.00        0.94        0.89        0.03      935.95         108
+    14     thetagpu19       0.00        0.94        0.88        0.03      936.28          99
+    15     thetagpu19       0.00        0.93        0.89        0.02      946.56          92
