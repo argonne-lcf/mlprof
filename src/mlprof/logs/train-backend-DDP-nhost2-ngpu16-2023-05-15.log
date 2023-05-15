@@ -1,244 +1,163 @@
-2023-05-15 13:23:35.339362: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.351843: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.352669: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.361740: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.363241: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.365260: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.369468: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.371216: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.382201: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.382323: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.382451: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.383552: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.383614: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.383614: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.385515: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-05-15 13:23:35.411062: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-[[36m2023-05-15 13:23:51,433[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Using DDP for distributed training[0m
-[[36m2023-05-15 13:23:51,574[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 10[0m
-[[36m2023-05-15 13:23:51,574[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 14[0m
-[[36m2023-05-15 13:23:51,575[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 15[0m
-[[36m2023-05-15 13:23:51,575[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 9[0m
-[[36m2023-05-15 13:23:51,575[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 11[0m
-[[36m2023-05-15 13:23:51,575[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 5[0m
-[[36m2023-05-15 13:23:51,575[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 13[0m
-[[36m2023-05-15 13:23:51,575[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 8[0m
-[[36m2023-05-15 13:23:51,575[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 12[0m
-[[36m2023-05-15 13:23:51,577[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 4[0m
-[[36m2023-05-15 13:23:51,577[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 7[0m
-[[36m2023-05-15 13:23:51,577[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 2[0m
-[[36m2023-05-15 13:23:51,577[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 1[0m
-[[36m2023-05-15 13:23:51,577[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 3[0m
-[[36m2023-05-15 13:23:51,577[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 6[0m
-[[36m2023-05-15 13:23:51,578[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Added key: store_based_barrier_key:1 to store for rank: 0[0m
-[[36m2023-05-15 13:23:51,623[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 10: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,624[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 5: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,626[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 14: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,627[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 4: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,628[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 15: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,629[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 7: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,631[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 11: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,632[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,634[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 9: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,635[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,636[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 13: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,638[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,639[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 8: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,640[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 6: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,642[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 12: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,643[0m][[34mtorch.distributed.distributed_c10d[0m][[32mINFO[0m] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.[0m
-[[36m2023-05-15 13:23:51,885[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 0 / 15[0m
-[[36m2023-05-15 13:23:51,893[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,920[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 5 / 15[0m
-[[36m2023-05-15 13:23:51,926[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 4 / 15[0m
-[[36m2023-05-15 13:23:51,929[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 15 / 15[0m
-[[36m2023-05-15 13:23:51,929[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 14 / 15[0m
-[[36m2023-05-15 13:23:51,934[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,934[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,935[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 10 / 15[0m
-[[36m2023-05-15 13:23:51,948[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 11 / 15[0m
-[[36m2023-05-15 13:23:51,948[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 3 / 15[0m
-[[36m2023-05-15 13:23:51,952[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 2 / 15[0m
-[[36m2023-05-15 13:23:51,952[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 7 / 15[0m
-[[36m2023-05-15 13:23:51,954[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 1 / 15[0m
-[[36m2023-05-15 13:23:51,954[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 6 / 15[0m
-[[36m2023-05-15 13:23:51,959[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,960[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,960[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,961[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,961[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,967[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 9 / 15[0m
-[[36m2023-05-15 13:23:51,969[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 8 / 15[0m
-[[36m2023-05-15 13:23:51,969[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 13 / 15[0m
-[[36m2023-05-15 13:23:51,969[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Global Rank: 12 / 15[0m
-[[36m2023-05-15 13:23:51,977[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,977[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,977[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,977[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,977[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,977[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,977[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-[[36m2023-05-15 13:23:51,977[0m][[34mmlprof.utils.dist[0m][[32mINFO[0m] - Caught MASTER_PORT:2345 from environment![0m
-wandb: Currently logged in as: saforem2 (l2hmc-qcd). Use `wandb login --relogin` to force relogin
-wandb: WARNING `config_exclude_keys` is deprecated. Use `config=wandb.helper.parse_config(config_object, exclude=('key',))` instead.
-wandb: wandb version 0.15.2 is available!  To upgrade, please run:
-wandb:  $ pip install wandb --upgrade
-wandb: Tracking run with wandb version 0.13.10
-wandb: Run data is saved locally in /lus/eagle/projects/datascience/foremans/projects/argonne-lcf/mlprof/src/mlprof/outputs/2023-05-15/13-23-51/wandb/run-20230515_132353-iyf315ds
-wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run treasured-sun-424
-wandb: ⭐️ View project at https://wandb.ai/l2hmc-qcd/mlprof
-wandb: 🚀 View run at https://wandb.ai/l2hmc-qcd/mlprof/runs/iyf315ds
-[[36m2023-05-15 13:23:57,727[0m][[34mmlprof.trainers.pytorch.trainer[0m][[33mWARNING[0m] - Caught wandb.run from: 0[0m
-wandb: logging graph, to disable use `wandb.watch(log_graph=False)`
-[[36m2023-05-15 13:24:01,838[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - self.device: cuda, self.dtype: torch.float32[0m
-Training:   0%|          | 0/10 [00:00<?, ?it/s][[36m2023-05-15 13:24:02,239[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 0/3750 (0%)] epoch=1.0000 step=1.0000 dt=0.3652 batch_acc=0.0977 batch_loss=0.0090 acc=0.0067 running_loss=0.0006[0m
-[[36m2023-05-15 13:24:02,274[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,274[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,274[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,274[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,274[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,274[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,275[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,275[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,275[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,275[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,275[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,275[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,275[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,276[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,276[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,275[0m][[34mtorch.nn.parallel.distributed[0m][[32mINFO[0m] - Reducer buckets have been rebuilt in this iteration.[0m
-[[36m2023-05-15 13:24:02,526[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 1280/3750 (33%)] epoch=1.0000 step=6.0000 dt=0.0074 batch_acc=0.6602 batch_loss=0.0040 acc=0.1771 running_loss=0.0026[0m
-[[36m2023-05-15 13:24:02,719[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [1/10: 2560/3750 (67%)] epoch=1.0000 step=11.0000 dt=0.0038 batch_acc=0.7930 batch_loss=0.0026 acc=0.4275 running_loss=0.0038[0m
-[[36m2023-05-15 13:24:04,268[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:04,268[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 89%[0m
-[[36m2023-05-15 13:24:04,268[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:04,269[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-[[36m2023-05-15 13:24:04,269[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  epoch 1 took: 1.0601s  loss=0.00439735  acc=63%[0m
-[[36m2023-05-15 13:24:04,269[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-Training:  10%|█         | 1/10 [00:02<00:21,  2.43s/it][[36m2023-05-15 13:24:04,311[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 0/3750 (0%)] epoch=2.0000 step=16.0000 dt=0.0086 batch_acc=0.8086 batch_loss=0.0025 acc=0.0552 running_loss=0.0002[0m
-[[36m2023-05-15 13:24:04,502[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 1280/3750 (33%)] epoch=2.0000 step=21.0000 dt=0.0035 batch_acc=0.8906 batch_loss=0.0015 acc=0.3480 running_loss=0.0008[0m
-[[36m2023-05-15 13:24:04,691[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [2/10: 2560/3750 (67%)] epoch=2.0000 step=26.0000 dt=0.0034 batch_acc=0.8984 batch_loss=0.0015 acc=0.6461 running_loss=0.0014[0m
-[[36m2023-05-15 13:24:06,103[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:06,103[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 94%[0m
-[[36m2023-05-15 13:24:06,103[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:06,103[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-[[36m2023-05-15 13:24:06,104[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  epoch 2 took: 0.5672s  loss=0.00171219  acc=87%[0m
-[[36m2023-05-15 13:24:06,104[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-Training:  20%|██        | 2/10 [00:04<00:16,  2.08s/it][[36m2023-05-15 13:24:06,141[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 0/3750 (0%)] epoch=3.0000 step=31.0000 dt=0.0043 batch_acc=0.9023 batch_loss=0.0013 acc=0.0616 running_loss=0.0001[0m
-[[36m2023-05-15 13:24:06,332[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 1280/3750 (33%)] epoch=3.0000 step=36.0000 dt=0.0034 batch_acc=0.9023 batch_loss=0.0012 acc=0.3744 running_loss=0.0005[0m
-[[36m2023-05-15 13:24:06,524[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [3/10: 2560/3750 (67%)] epoch=3.0000 step=41.0000 dt=0.0034 batch_acc=0.9297 batch_loss=0.0009 acc=0.6939 running_loss=0.0008[0m
-[[36m2023-05-15 13:24:07,933[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:07,933[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 96%[0m
-[[36m2023-05-15 13:24:07,933[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:07,934[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-[[36m2023-05-15 13:24:07,934[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  epoch 3 took: 0.5642s  loss=0.00109018  acc=92%[0m
-[[36m2023-05-15 13:24:07,934[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-Training:  30%|███       | 3/10 [00:06<00:13,  1.97s/it][[36m2023-05-15 13:24:07,972[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 0/3750 (0%)] epoch=4.0000 step=46.0000 dt=0.0045 batch_acc=0.9219 batch_loss=0.0010 acc=0.0629 running_loss=0.0001[0m
-[[36m2023-05-15 13:24:08,286[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 1280/3750 (33%)] epoch=4.0000 step=51.0000 dt=0.0516 batch_acc=0.9375 batch_loss=0.0008 acc=0.3835 running_loss=0.0003[0m
-[[36m2023-05-15 13:24:08,507[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [4/10: 2560/3750 (67%)] epoch=4.0000 step=56.0000 dt=0.0055 batch_acc=0.9453 batch_loss=0.0007 acc=0.7051 running_loss=0.0006[0m
-[[36m2023-05-15 13:24:09,911[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:09,911[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 97%[0m
-[[36m2023-05-15 13:24:09,912[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:09,912[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-[[36m2023-05-15 13:24:09,912[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  epoch 4 took: 0.7168s  loss=0.00078955  acc=94%[0m
-[[36m2023-05-15 13:24:09,912[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-Training:  40%|████      | 4/10 [00:08<00:11,  1.97s/it][[36m2023-05-15 13:24:09,950[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 0/3750 (0%)] epoch=5.0000 step=61.0000 dt=0.0044 batch_acc=0.9453 batch_loss=0.0006 acc=0.0645 running_loss=0.0000[0m
-[[36m2023-05-15 13:24:10,139[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 1280/3750 (33%)] epoch=5.0000 step=66.0000 dt=0.0034 batch_acc=0.9609 batch_loss=0.0006 acc=0.3904 running_loss=0.0002[0m
-[[36m2023-05-15 13:24:10,330[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [5/10: 2560/3750 (67%)] epoch=5.0000 step=71.0000 dt=0.0034 batch_acc=0.9727 batch_loss=0.0005 acc=0.7179 running_loss=0.0004[0m
-Training:  50%|█████     | 5/10 [00:08<00:07,  1.46s/it][[36m2023-05-15 13:24:10,515[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 0/3750 (0%)] epoch=6.0000 step=76.0000 dt=0.0038 batch_acc=0.9805 batch_loss=0.0004 acc=0.0669 running_loss=0.0000[0m
-[[36m2023-05-15 13:24:10,705[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 1280/3750 (33%)] epoch=6.0000 step=81.0000 dt=0.0034 batch_acc=0.9492 batch_loss=0.0005 acc=0.3939 running_loss=0.0002[0m
-[[36m2023-05-15 13:24:10,895[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [6/10: 2560/3750 (67%)] epoch=6.0000 step=86.0000 dt=0.0034 batch_acc=0.9648 batch_loss=0.0005 acc=0.7224 running_loss=0.0004[0m
-[[36m2023-05-15 13:24:12,306[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:12,307[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
-[[36m2023-05-15 13:24:12,307[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:12,307[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-[[36m2023-05-15 13:24:12,307[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  epoch 6 took: 0.5633s  loss=0.00053961  acc=96%[0m
-[[36m2023-05-15 13:24:12,307[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-Training:  60%|██████    | 6/10 [00:10<00:06,  1.59s/it][[36m2023-05-15 13:24:12,345[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 0/3750 (0%)] epoch=7.0000 step=91.0000 dt=0.0045 batch_acc=0.9609 batch_loss=0.0004 acc=0.0656 running_loss=0.0000[0m
-[[36m2023-05-15 13:24:12,536[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 1280/3750 (33%)] epoch=7.0000 step=96.0000 dt=0.0034 batch_acc=0.9727 batch_loss=0.0003 acc=0.3931 running_loss=0.0002[0m
-[[36m2023-05-15 13:24:12,727[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [7/10: 2560/3750 (67%)] epoch=7.0000 step=101.0000 dt=0.0036 batch_acc=0.9414 batch_loss=0.0008 acc=0.7216 running_loss=0.0004[0m
-[[36m2023-05-15 13:24:14,138[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:14,138[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
-[[36m2023-05-15 13:24:14,138[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:14,139[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-[[36m2023-05-15 13:24:14,139[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  epoch 7 took: 0.5649s  loss=0.00048060  acc=96%[0m
-[[36m2023-05-15 13:24:14,139[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-Training:  70%|███████   | 7/10 [00:12<00:05,  1.67s/it][[36m2023-05-15 13:24:14,177[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 0/3750 (0%)] epoch=8.0000 step=106.0000 dt=0.0043 batch_acc=0.9648 batch_loss=0.0005 acc=0.0659 running_loss=0.0000[0m
-[[36m2023-05-15 13:24:14,371[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 1280/3750 (33%)] epoch=8.0000 step=111.0000 dt=0.0054 batch_acc=0.9375 batch_loss=0.0007 acc=0.3936 running_loss=0.0002[0m
-[[36m2023-05-15 13:24:14,562[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [8/10: 2560/3750 (67%)] epoch=8.0000 step=116.0000 dt=0.0034 batch_acc=0.9570 batch_loss=0.0004 acc=0.7245 running_loss=0.0003[0m
-[[36m2023-05-15 13:24:15,970[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:15,970[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
-[[36m2023-05-15 13:24:15,970[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:15,971[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-[[36m2023-05-15 13:24:15,971[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  epoch 8 took: 0.5670s  loss=0.00042081  acc=97%[0m
-[[36m2023-05-15 13:24:15,971[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-Training:  80%|████████  | 8/10 [00:14<00:03,  1.72s/it][[36m2023-05-15 13:24:16,009[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 0/3750 (0%)] epoch=9.0000 step=121.0000 dt=0.0045 batch_acc=0.9922 batch_loss=0.0001 acc=0.0677 running_loss=0.0000[0m
-[[36m2023-05-15 13:24:16,199[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 1280/3750 (33%)] epoch=9.0000 step=126.0000 dt=0.0034 batch_acc=0.9883 batch_loss=0.0002 acc=0.4013 running_loss=0.0001[0m
-[[36m2023-05-15 13:24:16,401[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [9/10: 2560/3750 (67%)] epoch=9.0000 step=131.0000 dt=0.0034 batch_acc=0.9648 batch_loss=0.0005 acc=0.7349 running_loss=0.0002[0m
-[[36m2023-05-15 13:24:17,810[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:17,810[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TEST] Accuracy: 98%[0m
-[[36m2023-05-15 13:24:17,810[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------[0m
-[[36m2023-05-15 13:24:17,810[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-[[36m2023-05-15 13:24:17,811[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [TRAIN]  epoch 9 took: 0.5752s  loss=0.00039107  acc=97%[0m
-[[36m2023-05-15 13:24:17,811[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - --------------------------------------------------------[0m
-Training:  90%|█████████ | 9/10 [00:15<00:01,  1.76s/it][[36m2023-05-15 13:24:17,848[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 0/3750 (0%)] epoch=10.0000 step=136.0000 dt=0.0040 batch_acc=0.9688 batch_loss=0.0004 acc=0.0661 running_loss=0.0000[0m
-[[36m2023-05-15 13:24:18,039[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 1280/3750 (33%)] epoch=10.0000 step=141.0000 dt=0.0034 batch_acc=0.9922 batch_loss=0.0002 acc=0.4005 running_loss=0.0001[0m
-[[36m2023-05-15 13:24:18,230[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] [10/10: 2560/3750 (67%)] epoch=10.0000 step=146.0000 dt=0.0042 batch_acc=0.9453 batch_loss=0.0007 acc=0.7307 running_loss=0.0003[0m
-Training: 100%|██████████| 10/10 [00:16<00:00,  1.39s/it]Training: 100%|██████████| 10/10 [00:16<00:00,  1.65s/it]
-[[36m2023-05-15 13:24:18,375[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] :: Total training time: 16.537423372268677 seconds[0m
-[[36m2023-05-15 13:24:18,376[0m][[34mmlprof.trainers.pytorch.trainer[0m][[32mINFO[0m] - [0] :: Average time per epoch in the last 5: 0.5668130397796631[0m
-wandb: Waiting for W&B process to finish... (success).
-wandb: 
-wandb: Run history:
-wandb:          batch/acc ▁▃▅▁▄▇▂▅█▂▅█▂▅█▂▅█▂▅█▂▅█▂▅█▂▅█
-wandb:    batch/batch_acc ▁▅▆▇▇▇▇▇█▇████████████████████
-wandb:   batch/batch_loss █▄▃▃▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-wandb:           batch/dt █▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-wandb:        batch/epoch ▁▁▁▂▂▂▃▃▃▃▃▃▄▄▄▅▅▅▆▆▆▆▆▆▇▇▇███
-wandb: batch/running_loss ▂▆█▁▃▄▁▂▂▁▂▂▁▁▂▁▁▂▁▁▂▁▁▂▁▁▁▁▁▂
-wandb:         batch/step ▁▁▁▂▂▂▂▃▃▃▃▄▄▄▄▅▅▅▅▆▆▆▆▇▇▇▇███
-wandb:          epoch/acc ▁▆▇▇████
-wandb:        epoch/epoch ▁▂▃▄▅▆▇█
-wandb:         epoch/loss █▃▂▂▁▁▁▁
-wandb:           test/acc ▁▅▆▇█████
-wandb:     time_per_epoch █▆▆▆▁▆▆▆▆▁
-wandb:          train/acc ▁▆▇▇██████
-wandb:         train/loss █▃▂▂▁▁▁▁▁▁
-wandb: 
-wandb: Run summary:
-wandb:          batch/acc 0.73067
-wandb:    batch/batch_acc 0.94531
-wandb:   batch/batch_loss 0.00072
-wandb:           batch/dt 0.00424
-wandb:        batch/epoch 10
-wandb: batch/running_loss 0.0003
-wandb:         batch/step 146
-wandb:          epoch/acc 0.97162
-wandb:        epoch/epoch 9
-wandb:         epoch/loss 0.00039
-wandb:           test/acc 0.9846
-wandb:     time_per_epoch 0.56369
-wandb:          train/acc 0.97292
-wandb:         train/loss 0.00036
-wandb: 
-wandb: 🚀 View run treasured-sun-424 at: https://wandb.ai/l2hmc-qcd/mlprof/runs/iyf315ds
-wandb: Synced 6 W&B file(s), 1 media file(s), 3 artifact file(s) and 1 other file(s)
-wandb: Find logs at: ./wandb/run-20230515_132353-iyf315ds/logs
+[2023-05-15 14:14:38,305][mlprof.utils.dist][INFO] - Using DDP for distributed training
+[2023-05-15 14:14:38,350][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 8
+[2023-05-15 14:14:38,403][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2023-05-15 14:14:38,419][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 9
+[2023-05-15 14:14:38,422][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 10
+[2023-05-15 14:14:38,424][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 7
+[2023-05-15 14:14:38,424][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 4
+[2023-05-15 14:14:38,426][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 6
+[2023-05-15 14:14:38,430][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 3
+[2023-05-15 14:14:38,430][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 11
+[2023-05-15 14:14:38,432][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 2
+[2023-05-15 14:14:38,433][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 13
+[2023-05-15 14:14:38,433][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 14
+[2023-05-15 14:14:38,433][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 12
+[2023-05-15 14:14:38,435][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 5
+[2023-05-15 14:14:38,436][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 15
+[2023-05-15 14:14:38,444][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2023-05-15 14:14:38,444][torch.distributed.distributed_c10d][INFO] - Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,445][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,445][torch.distributed.distributed_c10d][INFO] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,445][torch.distributed.distributed_c10d][INFO] - Rank 13: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,445][torch.distributed.distributed_c10d][INFO] - Rank 14: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,445][torch.distributed.distributed_c10d][INFO] - Rank 12: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,446][torch.distributed.distributed_c10d][INFO] - Rank 7: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,446][torch.distributed.distributed_c10d][INFO] - Rank 4: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,446][torch.distributed.distributed_c10d][INFO] - Rank 5: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,447][torch.distributed.distributed_c10d][INFO] - Rank 6: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,448][torch.distributed.distributed_c10d][INFO] - Rank 15: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,450][torch.distributed.distributed_c10d][INFO] - Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,452][torch.distributed.distributed_c10d][INFO] - Rank 9: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,453][torch.distributed.distributed_c10d][INFO] - Rank 10: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,453][torch.distributed.distributed_c10d][INFO] - Rank 11: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,453][torch.distributed.distributed_c10d][INFO] - Rank 8: Completed store-based barrier for key:store_based_barrier_key:1 with 16 nodes.
+[2023-05-15 14:14:38,641][mlprof.utils.dist][INFO] - Global Rank: 0 / 15
+[2023-05-15 14:14:38,650][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,765][mlprof.utils.dist][INFO] - Global Rank: 6 / 15
+[2023-05-15 14:14:38,771][mlprof.utils.dist][INFO] - Global Rank: 14 / 15
+[2023-05-15 14:14:38,774][mlprof.utils.dist][INFO] - Global Rank: 13 / 15
+[2023-05-15 14:14:38,775][mlprof.utils.dist][INFO] - Global Rank: 12 / 15
+[2023-05-15 14:14:38,776][mlprof.utils.dist][INFO] - Global Rank: 1 / 15
+[2023-05-15 14:14:38,776][mlprof.utils.dist][INFO] - Global Rank: 15 / 15
+[2023-05-15 14:14:38,777][mlprof.utils.dist][INFO] - Global Rank: 4 / 15
+[2023-05-15 14:14:38,778][mlprof.utils.dist][INFO] - Global Rank: 5 / 15
+[2023-05-15 14:14:38,782][mlprof.utils.dist][INFO] - Global Rank: 7 / 15
+[2023-05-15 14:14:38,782][mlprof.utils.dist][INFO] - Global Rank: 2 / 15
+[2023-05-15 14:14:38,782][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,782][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,782][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,783][mlprof.utils.dist][INFO] - Global Rank: 3 / 15
+[2023-05-15 14:14:38,785][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,785][mlprof.utils.dist][INFO] - Global Rank: 8 / 15
+[2023-05-15 14:14:38,785][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,787][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,787][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,787][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,789][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,789][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,792][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,798][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,798][mlprof.utils.dist][INFO] - Global Rank: 9 / 15
+[2023-05-15 14:14:38,799][mlprof.utils.dist][INFO] - Global Rank: 11 / 15
+[2023-05-15 14:14:38,799][mlprof.utils.dist][INFO] - Global Rank: 10 / 15
+[2023-05-15 14:14:38,806][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,806][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:38,807][mlprof.utils.dist][INFO] - Caught MASTER_PORT:2345 from environment!
+[2023-05-15 14:14:44,411][mlprof.trainers.pytorch.trainer][WARNING] - Caught wandb.run from: 0
+[2023-05-15 14:14:49,973][mlprof.trainers.pytorch.trainer][INFO] - self.device: cuda, self.dtype: torch.float32
+[2023-05-15 14:14:50,363][mlprof.trainers.pytorch.trainer][INFO] - [0] [1/10: 0/3750 (0%)] epoch=1.0000 step=1.0000 dt=0.3544 batch_acc=0.1172 batch_loss=0.0091 acc=0.0080 running_loss=0.0006
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,398][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,399][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,399][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,399][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,399][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,399][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,400][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,400][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-15 14:14:50,642][mlprof.trainers.pytorch.trainer][INFO] - [0] [1/10: 1280/3750 (33%)] epoch=1.0000 step=6.0000 dt=0.0037 batch_acc=0.6641 batch_loss=0.0042 acc=0.1888 running_loss=0.0027
+[2023-05-15 14:14:50,835][mlprof.trainers.pytorch.trainer][INFO] - [0] [1/10: 2560/3750 (67%)] epoch=1.0000 step=11.0000 dt=0.0035 batch_acc=0.7812 batch_loss=0.0026 acc=0.4421 running_loss=0.0038
+[2023-05-15 14:14:52,354][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:14:52,354][mlprof.trainers.pytorch.trainer][INFO] - [TEST] Accuracy: 89%
+[2023-05-15 14:14:52,354][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:14:52,355][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:14:52,355][mlprof.trainers.pytorch.trainer][INFO] - [TRAIN]  epoch 1 took: 1.1131s  loss=0.00442443  acc=64%
+[2023-05-15 14:14:52,355][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:14:52,396][mlprof.trainers.pytorch.trainer][INFO] - [0] [2/10: 0/3750 (0%)] epoch=2.0000 step=16.0000 dt=0.0082 batch_acc=0.8008 batch_loss=0.0029 acc=0.0547 running_loss=0.0002
+[2023-05-15 14:14:52,588][mlprof.trainers.pytorch.trainer][INFO] - [0] [2/10: 1280/3750 (33%)] epoch=2.0000 step=21.0000 dt=0.0034 batch_acc=0.8711 batch_loss=0.0016 acc=0.3456 running_loss=0.0008
+[2023-05-15 14:14:52,778][mlprof.trainers.pytorch.trainer][INFO] - [0] [2/10: 2560/3750 (67%)] epoch=2.0000 step=26.0000 dt=0.0034 batch_acc=0.8945 batch_loss=0.0014 acc=0.6403 running_loss=0.0014
+[2023-05-15 14:14:54,187][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:14:54,188][mlprof.trainers.pytorch.trainer][INFO] - [TEST] Accuracy: 94%
+[2023-05-15 14:14:54,188][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:14:54,188][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:14:54,188][mlprof.trainers.pytorch.trainer][INFO] - [TRAIN]  epoch 2 took: 0.5684s  loss=0.00185311  acc=86%
+[2023-05-15 14:14:54,188][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:14:54,226][mlprof.trainers.pytorch.trainer][INFO] - [0] [3/10: 0/3750 (0%)] epoch=3.0000 step=31.0000 dt=0.0044 batch_acc=0.9062 batch_loss=0.0014 acc=0.0619 running_loss=0.0001
+[2023-05-15 14:14:54,417][mlprof.trainers.pytorch.trainer][INFO] - [0] [3/10: 1280/3750 (33%)] epoch=3.0000 step=36.0000 dt=0.0034 batch_acc=0.8945 batch_loss=0.0013 acc=0.3699 running_loss=0.0005
+[2023-05-15 14:14:54,613][mlprof.trainers.pytorch.trainer][INFO] - [0] [3/10: 2560/3750 (67%)] epoch=3.0000 step=41.0000 dt=0.0052 batch_acc=0.8945 batch_loss=0.0011 acc=0.6837 running_loss=0.0009
+[2023-05-15 14:14:56,214][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:14:56,214][mlprof.trainers.pytorch.trainer][INFO] - [TEST] Accuracy: 96%
+[2023-05-15 14:14:56,214][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:14:56,215][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:14:56,215][mlprof.trainers.pytorch.trainer][INFO] - [TRAIN]  epoch 3 took: 0.5704s  loss=0.00120192  acc=91%
+[2023-05-15 14:14:56,215][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:14:56,253][mlprof.trainers.pytorch.trainer][INFO] - [0] [4/10: 0/3750 (0%)] epoch=4.0000 step=46.0000 dt=0.0049 batch_acc=0.9258 batch_loss=0.0009 acc=0.0632 running_loss=0.0001
+[2023-05-15 14:14:56,445][mlprof.trainers.pytorch.trainer][INFO] - [0] [4/10: 1280/3750 (33%)] epoch=4.0000 step=51.0000 dt=0.0034 batch_acc=0.9297 batch_loss=0.0010 acc=0.3795 running_loss=0.0004
+[2023-05-15 14:14:56,636][mlprof.trainers.pytorch.trainer][INFO] - [0] [4/10: 2560/3750 (67%)] epoch=4.0000 step=56.0000 dt=0.0034 batch_acc=0.9219 batch_loss=0.0009 acc=0.6979 running_loss=0.0007
+[2023-05-15 14:14:58,045][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:14:58,046][mlprof.trainers.pytorch.trainer][INFO] - [TEST] Accuracy: 97%
+[2023-05-15 14:14:58,046][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:14:58,046][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:14:58,046][mlprof.trainers.pytorch.trainer][INFO] - [TRAIN]  epoch 4 took: 0.5662s  loss=0.00086516  acc=94%
+[2023-05-15 14:14:58,046][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:14:58,084][mlprof.trainers.pytorch.trainer][INFO] - [0] [5/10: 0/3750 (0%)] epoch=5.0000 step=61.0000 dt=0.0041 batch_acc=0.9609 batch_loss=0.0006 acc=0.0656 running_loss=0.0000
+[2023-05-15 14:14:58,277][mlprof.trainers.pytorch.trainer][INFO] - [0] [5/10: 1280/3750 (33%)] epoch=5.0000 step=66.0000 dt=0.0034 batch_acc=0.9336 batch_loss=0.0008 acc=0.3888 running_loss=0.0003
+[2023-05-15 14:14:58,468][mlprof.trainers.pytorch.trainer][INFO] - [0] [5/10: 2560/3750 (67%)] epoch=5.0000 step=71.0000 dt=0.0034 batch_acc=0.9648 batch_loss=0.0005 acc=0.7123 running_loss=0.0005
+[2023-05-15 14:14:58,652][mlprof.trainers.pytorch.trainer][INFO] - [0] [6/10: 0/3750 (0%)] epoch=6.0000 step=76.0000 dt=0.0038 batch_acc=0.9609 batch_loss=0.0005 acc=0.0656 running_loss=0.0000
+[2023-05-15 14:14:58,843][mlprof.trainers.pytorch.trainer][INFO] - [0] [6/10: 1280/3750 (33%)] epoch=6.0000 step=81.0000 dt=0.0034 batch_acc=0.9414 batch_loss=0.0007 acc=0.3909 running_loss=0.0003
+[2023-05-15 14:14:59,035][mlprof.trainers.pytorch.trainer][INFO] - [0] [6/10: 2560/3750 (67%)] epoch=6.0000 step=86.0000 dt=0.0036 batch_acc=0.9648 batch_loss=0.0005 acc=0.7197 running_loss=0.0005
+[2023-05-15 14:15:00,463][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:15:00,463][mlprof.trainers.pytorch.trainer][INFO] - [TEST] Accuracy: 98%
+[2023-05-15 14:15:00,463][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:15:00,464][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:15:00,464][mlprof.trainers.pytorch.trainer][INFO] - [TRAIN]  epoch 6 took: 0.5659s  loss=0.00058246  acc=96%
+[2023-05-15 14:15:00,464][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:15:00,502][mlprof.trainers.pytorch.trainer][INFO] - [0] [7/10: 0/3750 (0%)] epoch=7.0000 step=91.0000 dt=0.0044 batch_acc=0.9648 batch_loss=0.0006 acc=0.0659 running_loss=0.0000
+[2023-05-15 14:15:00,694][mlprof.trainers.pytorch.trainer][INFO] - [0] [7/10: 1280/3750 (33%)] epoch=7.0000 step=96.0000 dt=0.0034 batch_acc=0.9570 batch_loss=0.0004 acc=0.3928 running_loss=0.0002
+[2023-05-15 14:15:00,885][mlprof.trainers.pytorch.trainer][INFO] - [0] [7/10: 2560/3750 (67%)] epoch=7.0000 step=101.0000 dt=0.0034 batch_acc=0.9727 batch_loss=0.0005 acc=0.7240 running_loss=0.0004
+[2023-05-15 14:15:02,300][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:15:02,301][mlprof.trainers.pytorch.trainer][INFO] - [TEST] Accuracy: 98%
+[2023-05-15 14:15:02,301][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:15:02,301][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:15:02,301][mlprof.trainers.pytorch.trainer][INFO] - [TRAIN]  epoch 7 took: 0.5677s  loss=0.00050215  acc=96%
+[2023-05-15 14:15:02,301][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:15:02,339][mlprof.trainers.pytorch.trainer][INFO] - [0] [8/10: 0/3750 (0%)] epoch=8.0000 step=106.0000 dt=0.0040 batch_acc=0.9688 batch_loss=0.0004 acc=0.0661 running_loss=0.0000
+[2023-05-15 14:15:02,534][mlprof.trainers.pytorch.trainer][INFO] - [0] [8/10: 1280/3750 (33%)] epoch=8.0000 step=111.0000 dt=0.0038 batch_acc=0.9648 batch_loss=0.0006 acc=0.3971 running_loss=0.0002
+[2023-05-15 14:15:02,728][mlprof.trainers.pytorch.trainer][INFO] - [0] [8/10: 2560/3750 (67%)] epoch=8.0000 step=116.0000 dt=0.0039 batch_acc=0.9805 batch_loss=0.0004 acc=0.7301 running_loss=0.0003
+[2023-05-15 14:15:04,137][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:15:04,137][mlprof.trainers.pytorch.trainer][INFO] - [TEST] Accuracy: 98%
+[2023-05-15 14:15:04,137][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:15:04,138][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:15:04,138][mlprof.trainers.pytorch.trainer][INFO] - [TRAIN]  epoch 8 took: 0.5723s  loss=0.00043914  acc=97%
+[2023-05-15 14:15:04,138][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:15:04,175][mlprof.trainers.pytorch.trainer][INFO] - [0] [9/10: 0/3750 (0%)] epoch=9.0000 step=121.0000 dt=0.0038 batch_acc=0.9844 batch_loss=0.0002 acc=0.0672 running_loss=0.0000
+[2023-05-15 14:15:04,367][mlprof.trainers.pytorch.trainer][INFO] - [0] [9/10: 1280/3750 (33%)] epoch=9.0000 step=126.0000 dt=0.0033 batch_acc=0.9727 batch_loss=0.0004 acc=0.3989 running_loss=0.0001
+[2023-05-15 14:15:04,556][mlprof.trainers.pytorch.trainer][INFO] - [0] [9/10: 2560/3750 (67%)] epoch=9.0000 step=131.0000 dt=0.0034 batch_acc=0.9727 batch_loss=0.0004 acc=0.7320 running_loss=0.0003
+[2023-05-15 14:15:05,969][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:15:05,969][mlprof.trainers.pytorch.trainer][INFO] - [TEST] Accuracy: 98%
+[2023-05-15 14:15:05,969][mlprof.trainers.pytorch.trainer][INFO] - --------------------
+[2023-05-15 14:15:05,970][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:15:05,970][mlprof.trainers.pytorch.trainer][INFO] - [TRAIN]  epoch 9 took: 0.5638s  loss=0.00040239  acc=97%
+[2023-05-15 14:15:05,970][mlprof.trainers.pytorch.trainer][INFO] - --------------------------------------------------------
+[2023-05-15 14:15:06,008][mlprof.trainers.pytorch.trainer][INFO] - [0] [10/10: 0/3750 (0%)] epoch=10.0000 step=136.0000 dt=0.0039 batch_acc=0.9648 batch_loss=0.0004 acc=0.0659 running_loss=0.0000
+[2023-05-15 14:15:06,199][mlprof.trainers.pytorch.trainer][INFO] - [0] [10/10: 1280/3750 (33%)] epoch=10.0000 step=141.0000 dt=0.0033 batch_acc=0.9805 batch_loss=0.0002 acc=0.3989 running_loss=0.0001
+[2023-05-15 14:15:06,389][mlprof.trainers.pytorch.trainer][INFO] - [0] [10/10: 2560/3750 (67%)] epoch=10.0000 step=146.0000 dt=0.0034 batch_acc=0.9648 batch_loss=0.0005 acc=0.7277 running_loss=0.0003
+[2023-05-15 14:15:06,535][mlprof.trainers.pytorch.trainer][INFO] - [0] :: Total training time: 16.56176257133484 seconds
+[2023-05-15 14:15:06,535][mlprof.trainers.pytorch.trainer][INFO] - [0] :: Average time per epoch in the last 5: 0.566696310043335
