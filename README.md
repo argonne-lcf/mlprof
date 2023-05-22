@@ -99,13 +99,13 @@ $ qsub \
     -l select=2 \
     -l walltime=12:00:00,filesystem=eagle:home:grand \
     -I
-$ module load conda/2022-09-08-hvd-nccl
+$ module load conda/2023-01-10-unstable
 $ conda activate base
 $ git clone https://www.github.com/argonne-lcf/mlprof
 $ cd mlprof
-$ mkdir -p venvs/polaris/2022-09-08-hvd-nccl
-$ python3 -m venv venvs/polaris/2022-09-08-hvd-nccl --system-site-packages
-$ source venvs/polaris/2022-09-08-hvd-nccl
+$ mkdir -p venvs/polaris/2023-01-10
+$ python3 -m venv venvs/polaris/2023-01-10 --system-site-packages
+$ source venvs/polaris/2023-01-10
 $ python3 -m pip install --upgrade pip setuptools wheel
 $ python3 -m pip install -e .
 $ cd src/mlprof
