@@ -11,6 +11,14 @@ Profiling tools for performance studies of competing ML frameworks on HPC system
 <p>
 
 ## TODO
+
+### 06/05/2023
+- [ ] Add check to determine if running on Intel GPUs, if so: load `intel_extension_for_{pytorch,deepspeed}`
+  - [ ] Modify implementation to add support for Intel GPUs, test on ALCF systems
+- [ ] Add support for additional (transformer based) model architectures in [`src/mlprof/network/pytorch/*`](./src/mlprof/network/pytorch/)
+  - [ ] _ideally_, support for pulling in arbitrary models from HuggingFace, `torchvision`, etc.
+
+	
 ### 04/17/2023
 - [ ] Work on repeating MPI profile experiments with larger batch size / network size using `module load conda/2023-01-10-unstable` on Polaris
 - [ ] Try with single + multiple nodes to measure performance impact
