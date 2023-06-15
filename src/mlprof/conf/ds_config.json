@@ -1,5 +1,5 @@
 {
-  "dump_state": true,
+  "dump_state": false,
   "wall_clock_breakdown": true,
   "zero_allow_untested_optimizer": true,
   "flops_profiler": {
@@ -33,7 +33,7 @@
     "enabled": false
   },
   "comms_logger": {
-    "enabled": false,
+    "enabled": true,
     "verbose": true,
     "prof_all": true,
     "debug": false
@@ -57,8 +57,8 @@
     "overlap_comm": true,
     "contiguous_gradients": true,
     "offload_param": {
-      "device": "cpu",
-      "nvme_path": "/raid/scratch"
+      "device": "nvme",
+      "nvme_path": "/raid/scratch/"
     },
     "offload_optimizer": {
       "device": "cpu",
