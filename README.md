@@ -59,6 +59,9 @@ existing environment, and allows it to access previously installed libraries.
 To install:
 
 ```bash
+# for ALCF systems, first:
+module load conda ; conda activate base
+# otherwise, start here:
 python3 -m venv venv --system-site-packages
 source venv/bin/activate
 python3 -m pip install --upgrade pip setuptools wheel
@@ -101,41 +104,52 @@ Configuration options can be overridden on the command line, e.g.
 <p>
 
 ```bash
-$ qsub \
-    -A <project-name> \
-    -q debug-scaling \
-    -l select=2 \
-    -l walltime=12:00:00,filesystem=eagle:home:grand \
-    -I
-$ module load conda/2023-01-10-unstable
-$ conda activate base
-$ git clone https://www.github.com/argonne-lcf/mlprof
-$ cd mlprof
-$ mkdir -p venvs/polaris/2023-01-10
-$ python3 -m venv venvs/polaris/2023-01-10 --system-site-packages
-$ source venvs/polaris/2023-01-10
-$ python3 -m pip install --upgrade pip setuptools wheel
-$ python3 -m pip install -e .
-$ cd src/mlprof
-$ # -------------------------------------------------------------
-$ # the following are necessary when using the DeepSpeed backend
-$ export CFLAGS="-I${CONDA_PREFIX}/include/"
-$ export LDFLAGS="-L${CONDA_PREFIX}/lib/" 
-$ echo "PATH=${PATH}" > .deepspeed_env 
-$ echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}" >> .deepspeed_env
-$ echo "https_proxy=${https_proxy}" >> .deepspeed_env
-$ echo "http_proxy=${http_proxy}" >> .deepspeed_env 
-$ echo "CFLAGS=${CFLAGS}" >> .deepspeed_env
-$ echo "LDFLAGS=${LDFLAGS}" >> .deepspeed_env
-$ # -------------------------------------------------------------
-$ # TO TRAIN:
-$ ./train.sh backend=deepspeed > train.log 2>&1 &
-$ # TO VIEW OUTPUT:
-$ tail -f train.log $(tail -1 logs/latest)
+qsub \
+  -A <project-name> \
+  -q debug-scaling \
+  -l select=2 \
+  -l walltime=12:00:00,filesystem=eagle:home:grand \
+  -I
+module load conda/2023-01-10-unstable
+conda activate base
+git clone https://www.github.com/argonne-lcf/mlprof
+cd mlprof
+mkdir -p venvs/polaris/2023-01-10
+python3 -m venv venvs/polaris/2023-01-10 --system-site-packages
+source venvs/polaris/2023-01-10
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -e .
+cd src/mlprof
+# TO TRAIN:
+./train.sh backend=deepspeed > train.log 2>&1 &
+# TO VIEW OUTPUT:
+tail -f train.log $(tail -1 logs/latest)
 ```
-
 </p>
+
+> **Warning**
+> <br>_Running with DeepSpeed_  
+>
+> If you're using DeepSpeed directly to launch the multi-node training, you will need to ensure the following environment variables are defined in your `.deepspeed_env` file.  
+>  
+> The contents of this file should be one environment variable per line, formatted as `KEY=VALUE`.  
+> Each of these environment variables will be explicitly set on every worker node using DeepSpeed.
+> ```bash
+> # -------------------------------------------------------------
+> # the following are necessary when using the DeepSpeed backend
+> export CFLAGS="-I${CONDA_PREFIX}/include/"
+> export LDFLAGS="-L${CONDA_PREFIX}/lib/" 
+> echo "PATH=${PATH}" > .deepspeed_env 
+> echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}" >> .deepspeed_env
+> echo "https_proxy=${https_proxy}" >> .deepspeed_env
+> echo "http_proxy=${http_proxy}" >> .deepspeed_env 
+> echo "CFLAGS=${CFLAGS}" >> .deepspeed_env
+> echo "LDFLAGS=${LDFLAGS}" >> .deepspeed_env
+> # -------------------------------------------------------------
+> ```
+
 </details>
+
 
 
 ### Profiling
