@@ -195,11 +195,16 @@ class Trainer(BaseTrainer):
             return {}
 
         ds_config = self.config.load_ds_config(self.config.ds_config_path)
-        pname = 'mlprof'
-        ds_config['wandb'].update({
-            "project": pname,
-            "group": f'{self.config.framework}/{self.config.backend}',
-        })
+        ds_config |= {
+            'wandb': {
+                'project': 'mlprof',
+                # 'group': f'{self.config.framework}/{self.config.backend}',
+            }
+        }
+        # ds_config['wandb'].update({
+        #     "project": pname,
+        #     "group": f'{self.config.framework}/{self.config.backend}',
+        # })
         # self.ds_config.update({
         #     'tensorboard': {
         #         'enabled': True,
@@ -210,11 +215,10 @@ class Trainer(BaseTrainer):
         #         'output_path': Path(os.getcwd()).joinpath('csv_monitor'),
         #     }
         # })
-
-        ds_config.update({
+        ds_config |= {
             'gradient_accumulation_steps': 1,
             'train_micro_batch_size_per_gpu': 1,
-        })
+        }
         ds_config['train_batch_size'] = (
             self._ngpus
             * ds_config['gradient_accumulation_steps']
