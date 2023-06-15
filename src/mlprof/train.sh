@@ -1,73 +1,44 @@
 #!/bin/bash --login
-# COBALT -n 1
-#COBALT -q single-gpu
-#COBALT -A datascience
-#COBALT --attrs filesystems=home,theta-fs0,grand,eagle
-# -------------------------------------------------------
-# UG Section 2.5, page UG-24 Job Submission Options
-# Add another # at the beginning of the line to comment out a line
-# NOTE: adding a switch to the command line will override values in this file.
+#
+#┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#┃ Make sure we're not already running; if so, exit here ┃
+#┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+PIDS=$(ps aux | grep -E "$USER.+mpi.+main.py" | grep -v grep | awk '{print $2}')
+if [ -n "${PIDS}" ]; then
+  echo "Already running! Exiting!"
+  exit 1
+fi
 
-# These options are MANDATORY at ALCF; Your qsub will fail if you don't provide them.
-##PBS -A <short project name>
-##PBS -l walltime=HH:MM:SS
+# DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -LP)
+SOURCE=${BASH_SOURCE[0]}
+while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+  SOURCE=$(readlink "$SOURCE")
+  [[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 
-# Highly recommended 
-# The first 15 characters of the job name are displayed in the qstat output:
-##PBS -N <name>
-
-# If you need a queue other than the default (uncomment to use)
-##PBS -q <queue name>
-# Controlling the output of your application
-# UG Sec 3.3 page UG-40 Managing Output and Error Files
-# By default, PBS spools your output on the compute node and then uses scp to move it the
-# destination directory after the job finishes.  Since we have globally mounted file systems
-# it is highly recommended that you use the -k option to write directly to the destination
-# the doe stands for direct, output, error
-##PBS -o <path for stdout>
-##PBS -k doe
-##PBS -e <path for stderr>
-# Setting job dependencies
-# UG Section 6.2, page UG-107 Using Job Dependencies
-# There are many options for how to set up dependancies;  afterok will give behavior similar
-# to Cobalt (uncomment to use)
-##PBS depend=afterok:<jobid>:<jobid>
-
-# Environment variables (uncomment to use)
-# Section 6.12, page UG-126 Using Environment Variables
-# Sect 2.59.7, page RG-231 Enviornment variables PBS puts in the job environment
-##PBS -v <variable list>
-## -v a=10, "var2='A,B'", c=20, HOME=/home/zzz
-##PBS -V exports all the environment variables in your environnment to the compute node
-# The rest is an example of how an MPI job might be set up
-#echo Working directory is $PBS_O_WORKDIR
-##cd $PBS_O_WORKDIR
-
-DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -LP)
 PARENT=$(dirname "${DIR}")
 ROOT=$(dirname "${PARENT}")
 echo "cwd: $DIR"
 echo "parent: $PARENT"
 echo "ROOT: $ROOT"
-printf '%.s─' $(seq 1 $(tput cols))
+# printf '%.s─' $(seq 1 $(tput cols))
 
 HOST=$(hostname)
-
 TSTAMP=$(date "+%Y-%m-%d-%H%M%S")
-echo "Job started at: ${TSTAMP}"
+echo "Job started at: ${TSTAMP} on ${HOST}"
 
 NCPU_PER_RANK=$(getconf _NPROCESSORS_ONLN)
 
 if [[ $(hostname) == x* ]]; then
-  export ALCF_RESOURCE="polaris"
   # export LD_PRELOAD="/soft/perftools/mpitrace/lib/libmpitrace.so"
-  export HOSTFILE="${PBS_NODEFILE}"
-  export NRANKS=$(wc -l < "${PBS_NODEFILE}")
-  export NGPU_PER_RANK=$(nvidia-smi -L | wc -l)
-  export NGPUS="$((${NRANKS}*${NGPU_PER_RANK}))"
-  # module load conda/2022-09-08-hvd-nccl; conda activate base
-  # VENV_PREFIX="2022-09-08-hvd-nccl"
-  module load conda/2023-01-10 ; conda activate base
+  ALCF_RESOURCE="polaris"
+  HOSTFILE="${PBS_NODEFILE}"
+  NRANKS=$(wc -l < "${PBS_NODEFILE}")
+  NGPU_PER_RANK=$(nvidia-smi -L | wc -l)
+  NGPUS="$((NRANKS * NGPU_PER_RANK))"
+  module load conda/2023-01-10-unstable ; conda activate base
   VENV_PREFIX="2023-01-10"
   MPI_COMMAND=$(which mpiexec)
   # --depth=${NCPU_PER_RANK} \
@@ -76,14 +47,13 @@ if [[ $(hostname) == x* ]]; then
     --ppn ${NGPU_PER_RANK} \
     --hostfile ${PBS_NODEFILE}"
 elif [[ $(hostname) == theta* ]]; then
-  export ALCF_RESOURCE="thetaGPU"
-  export HOSTFILE="${COBALT_NODEFILE}"
-  export NRANKS=$(wc -l < "${COBALT_NODEFILE}")
-  export NGPU_PER_RANK=$(nvidia-smi -L | wc -l)
-  # export NGPUS=$(("${NRANKS}"*"${NGPU_PER_RANK}"))
-  export NGPUS=$((${NRANKS}*${NGPU_PER_RANK}))
-  module load conda; conda activate base
-  VENV_PREFIX="2022-07-01"
+  ALCF_RESOURCE="thetaGPU"
+  HOSTFILE="${COBALT_NODEFILE}"
+  NRANKS=$(wc -l < "${COBALT_NODEFILE}")
+  NGPU_PER_RANK=$(nvidia-smi -L | wc -l)
+  NGPUS=$((${NRANKS}*${NGPU_PER_RANK}))
+  module load conda/2023-01-11; conda activate base
+  VENV_PREFIX="2023-01-11"
   MPI_COMMAND=$(which mpirun)
   MPI_FLAGS="-x LD_LIBRARY_PATH \
     -x PATH \
@@ -91,10 +61,20 @@ elif [[ $(hostname) == theta* ]]; then
     -npernode ${NGPU_PER_RANK} \
     --hostfile ${HOSTFILE}"
 else
-  export ALCF_RESOURCE="NONE"
+  ALCF_RESOURCE="NONE"
+  HOSTFILE=/etc/hostname
+  NRANKS=1
+  NGPU_PER_RANK=0
+  NGPUS=0
   echo "HOSTNAME: $(hostname)"
 fi
 
+
+export ALCF_RESOURCE="${ALCF_RESOURCE}"
+export HOSTFILE="$HOSTFILE"
+export NRANKS="${NRANKS}"
+export NGPU_PER_RANK="${NGPU_PER_RANK}"
+export NGPUS="${NGPUS}"
 echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "┃  RUNNING ON ${ALCF_RESOURCE}: ${NGPUS} GPUs"
 echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -108,15 +88,14 @@ export NCPUS=$(("${NRANKS}"*"${NCPU_PER_RANK}"))
 
 # ---- Specify directories and executable for experiment ------------------
 MAIN="${DIR}/main.py"
-AFFINITY_SCRIPT="${DIR}/affinity.sh"
 LOGDIR="${DIR}/logs"
 LOGFILE="${LOGDIR}/${TSTAMP}-${HOST}_ngpu${NGPUS}.log"
 if [ ! -d "${LOGDIR}" ]; then
-  mkdir -p ${LOGDIR}
+  mkdir -p "${LOGDIR}"
 fi
 
 # Keep track of latest logfile for easy access
-echo $LOGFILE >> "${DIR}/logs/latest"
+echo "$LOGFILE" >> "${DIR}/logs/latest"
 
 # Double check everythings in the right spot
 echo "DIR=${DIR}"
@@ -133,7 +112,7 @@ echo "LOGFILE=${LOGFILE}"
 #    editable install
 # -----------------------------------------------------------
 VENV_DIR="${ROOT}/venvs/${ALCF_RESOURCE}/${VENV_PREFIX}"
-if [ -d ${VENV_DIR} ]; then
+if [ -d "${VENV_DIR}" ]; then
   echo "Found venv at: ${VENV_DIR}"
   source "${VENV_DIR}/bin/activate"
 else
@@ -173,5 +152,5 @@ echo 'To view output: `tail -f $(tail -1 logs/latest)`'
 echo "Latest logfile: $(tail -1 ./logs/latest)"
 echo "tail -f $(tail -1 logs/latest)"
 
-${EXEC} $@ > ${LOGFILE} &
+${EXEC} "$@" > "${LOGFILE}" &
 #LD_PRELOAD=/soft/perftools/mpitrace/lib/libmpitrace.so ${EXEC} $@ > ${LOGFILE}
