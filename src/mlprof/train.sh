@@ -94,6 +94,7 @@ if [ ! -d "${LOGDIR}" ]; then
   mkdir -p "${LOGDIR}"
 fi
 
+export LOGFILE="$LOGFILE"
 # Keep track of latest logfile for easy access
 echo "$LOGFILE" >> "${DIR}/logs/latest"
 
@@ -103,6 +104,7 @@ echo "PARENT=${PARENT}"
 echo "ROOT=${ROOT}"
 echo "LOGDIR=${LOGDIR}"
 echo "LOGFILE=${LOGFILE}"
+
 
 # -----------------------------------------------------------
 # 1. Check if a virtual environment exists in project root: 
@@ -131,6 +133,7 @@ fi
 
 # ---- Define executable -----------------------------------
 EXEC="${MPI_COMMAND} ${MPI_FLAGS} $(which python3) ${MAIN}"
+export EXEC="${EXEC}"
 
 
 # ------ Print job information --------------------------------------+
