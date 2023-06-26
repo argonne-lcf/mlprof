@@ -11,7 +11,7 @@ from omegaconf import DictConfig
 from contextlib import nullcontext
 # from rich import print_json
 from pathlib import Path
-from dataclasses import asdict
+# from dataclasses import asdict
 import json
 import torch
 from torch import optim
@@ -24,7 +24,7 @@ import torch.utils.data.distributed
 from torchvision import datasets, transforms
 import wandb
 import numpy as np
-# from omegaconf import OmegaConf
+
 try:
     import horovod.torch as hvd
 except (ImportError, ModuleNotFoundError):
@@ -32,20 +32,19 @@ except (ImportError, ModuleNotFoundError):
 
 from mlprof.trainers.trainer import BaseTrainer
 from mlprof.configs import (
-    # CONF_DIR,
     DATA_DIR,
-    HERE,
+    # HERE,
     ExperimentConfig,
     ConvNetworkConfig,
-    SYNONYMS
+    # SYNONYMS
 )
 from mlprof.network.pytorch.network import Net
-from mlprof.utils.pylogger import get_pylogger
+# from mlprof.utils.pylogger import get_pylogger
 from mlprof.utils.dist import setup_torch_distributed
 
-log = get_pylogger(__name__)
-
-Optimizer = torch.optim.Optimizer
+# log = get_pylogger(__name__)
+from mlprof import get_logger
+log = get_logger(__name__)
 
 
 def metric_average(val: torch.Tensor, size: int = 1):
@@ -53,7 +52,6 @@ def metric_average(val: torch.Tensor, size: int = 1):
         dist.all_reduce(val, op=dist.ReduceOp.SUM)
     except Exception as exc:
         log.exception(exc)
-        pass
 
     return val / size
 
@@ -69,27 +67,28 @@ def load_ds_config(fpath: os.PathLike) -> dict:
 class Trainer(BaseTrainer):
     def __init__(
             self,
-            config: ExperimentConfig | dict | DictConfig,
-            scaler: Optional[GradScaler] = None,
+            config: DictConfig,
             model: Optional[torch.nn.Module] = None,
             optimizer: Optional[torch.optim.Optimizer] = None,
     ):
+        self.cfg = config
         self.config: ExperimentConfig = (
-            config if isinstance(config, ExperimentConfig)
-            else instantiate(config)
+            # config if isinstance(config, ExperimentConfig)
+            instantiate(config)
         )
         dsetup = setup_torch_distributed(self.config.backend)
         self.device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.world_size = dsetup['size']
         self.rank = dsetup['rank']
         self.local_rank = dsetup['local_rank']
-        self._is_chief = (self.local_rank == 0 and self.rank == 0)
+        self._is_rank_0 = (self.local_rank == 0 and self.rank == 0)
         if torch.cuda.is_available():
             self.local_size = torch.cuda.device_count()
             self._ngpus = self.world_size
             # self._ngpus = self.world_size * torch.cuda.device_count()
 
-        self.wbrun = self.setup_wandb()
+        # self.wbrun = self.setup_wandb()
+        self.wbrun = wandb.run
 
         # if scaler is None:
         #     self.scaler = None
@@ -126,6 +125,7 @@ class Trainer(BaseTrainer):
             # self.loss_fn = self.loss_fn.to(self.dtype)
 
         # self.wbrun = wbrun
+        self.num_parameters = self.count_parameters(self.model)
         if self.wbrun is not None:
             log.warning(f'Caught wandb.run from: {self.rank}')
             self.wbrun.watch(
@@ -158,7 +158,7 @@ class Trainer(BaseTrainer):
             )
             self.model_engine = engine
             assert optimizer is not None
-            self.optimizer: Optimizer = optimizer
+            self.optimizer: torch.optim.Optimizer = optimizer
             self.use_fp16 = self.model_engine.fp16_enabled()
             if self.use_fp16:
                 self.dtype = torch.half
@@ -189,6 +189,17 @@ class Trainer(BaseTrainer):
             raise ValueError(
                 f'Unexpected value for `config.backend`: {self.config.backend}'
             )
+
+    def count_parameters(self, model: Optional[nn.Module] = None) -> int:
+        """Count the total number of parameters in `model`."""
+        model = self.model if model is None else model
+        num_params = sum(
+            p.numel() for p in model.parameters() if p.requires_grad
+        )
+        log.info(f'num_params in model: {num_params}')
+        if wandb.run is not None:
+            wandb.run.config['NUM_PARAMS'] = num_params
+        return num_params
 
     def prepare_ds_config(self) -> dict:
         if self.config.backend.lower() not in ['ds', 'deepspeed']:
@@ -236,43 +247,50 @@ class Trainer(BaseTrainer):
     def setup_wandb(self):
         wbrun = None
         wbcfg = self.config.wandb
-        if self._is_chief and wbcfg is not None:
-            import wandb
-            try:
-                from wandb.util import generate_id  # type:ignore
-                run_id = generate_id()
-            except (ImportError, ModuleNotFoundError) as e:
-                log.exception(e)
-                import uuid
-                run_id = str(uuid.uuid1())
-                
-            wandb.tensorboard.patch(root_logdir=os.getcwd())
-            wbrun = wandb.init(
-                dir=os.getcwd(),
-                id=run_id,
-                mode='online',
-                resume='allow',
-                save_code=True,
-                project=self.config.wandb.setup.project,
-                config_exclude_keys=['_target_'],
-            )
-            assert wbrun is not None and wbrun is wandb.run
-            wbrun.log_code(HERE.as_posix())
-            # cfg = asdict(self.config)
-            wbrun.config.update(
-                # OmegaConf.to_container(cfg, resolve=True)
-                asdict(self.config)
-                # self.config.asdict()
-            )
-            # wbrun.config['backend'] = sel
-            wbrun.config['backend'] = SYNONYMS[self.config.backend]
-            wbrun.config['framework'] = SYNONYMS[self.config.framework]
-            wbrun.config['world_size'] = self.world_size
-            wbrun.config['run_id'] = run_id
-            wbrun.config['run_name'] = wbrun.name
-            wbrun.config['logdir'] = os.getcwd()
-            wbrun.config['ngpus'] = self._ngpus
-            wbrun.config['device'] = self.device
+        if self._is_rank_0 and wbcfg is not None:
+            from mlprof.common import setup_wandb
+            setup_wandb(self.cfg)
+            wbrun = wandb.run
+            assert wbrun is not None
+            # import wandb
+            # try:
+            #     from wandb.util import generate_id  # type:ignore
+            #     run_id = generate_id()
+            # except (ImportError, ModuleNotFoundError) as e:
+            #     log.exception(e)
+            #     import uuid
+            #     run_id = str(uuid.uuid1())
+            # # wandb.tensorboard.patch(root_logdir=os.getcwd())
+            # wbrun = wandb.init(
+            #     dir=os.getcwd(),
+            #     id=run_id,
+            #     mode='online',
+            #     resume='allow',
+            #     save_code=True,
+            #     project=self.config.wandb.setup.project,
+            #     # config_exclude_keys=['_target_'],
+            # )
+            # assert wbrun is not None
+            # log.info(f'wandb.name: {wbrun.name}')
+            # log.info(f'wandb.url: {wbrun.url}')
+            # log.info(f'directory: {os.getcwd()}')
+            # assert wbrun is not None and wbrun is wandb.run
+            # wbrun.log_code(HERE.as_posix())
+            # # cfg = asdict(self.config)
+            # wbrun.config.update(
+            #     # OmegaConf.to_container(cfg, resolve=True)
+            #     asdict(self.config)
+            #     # self.config.asdict()
+            # )
+            # # wbrun.config['backend'] = sel
+            # wbrun.config['backend'] = SYNONYMS[self.config.backend]
+            # wbrun.config['framework'] = SYNONYMS[self.config.framework]
+            # wbrun.config['world_size'] = self.world_size
+            # wbrun.config['run_id'] = run_id
+            # wbrun.config['run_name'] = wbrun.name
+            # wbrun.config['logdir'] = os.getcwd()
+            # wbrun.config['ngpus'] = self._ngpus
+            # wbrun.config['device'] = self.device
             LOGFILE = os.environ.get('LOGFILE', None)
             NGPUS = os.environ.get('NGPUS', None)
             NRANKS = os.environ.get('NRANKS', None)
@@ -290,6 +308,21 @@ class Trainer(BaseTrainer):
                 log.info(f'world_size: {self.world_size}')
                 log.info(f'NGPUS: {NGPUS}')
                 wbrun.config['NGPUS'] = NGPUS
+            import mlprof.utils.dist as dist
+            from mlprof.common import ENV_FILTERS
+            wbrun.config['MACHINE'] = dist.get_machine()
+            distenv = dist.query_environment()
+            wbrun.config['WORLD_SIZE'] = distenv['world_size']
+            wbrun.config['RANK'] = distenv['rank']
+            environ = {
+                k: v for k, v in dict(os.environ).items()
+                if (
+                    k not in ENV_FILTERS
+                    and not k.startswith('_ModuleTable')
+                    and not k.startswith('BASH_FUNC_')
+                )
+            }
+            wbrun.config['env'] = environ
 
         return wbrun
 
@@ -314,13 +347,12 @@ class Trainer(BaseTrainer):
         return optim.Adam(model.parameters(), lr=lr_init)
 
     def setup_torch(self):
-        torch.manual_seed(self.config.trainer.seed)
+        # torch.manual_seed(self.config.trainer.seed)
         # if self.device == 'gpu':
-        if torch.cuda.is_available():
-            # DDP: pin GPU to local rank
-            # torch.cuda.set_device(int(LOCAL_RANK))
-            torch.cuda.manual_seed(self.config.trainer.seed)
-
+        # if torch.cuda.is_available():
+        #     # DDP: pin GPU to local rank
+        #     # torch.cuda.set_device(int(LOCAL_RANK))
+        #     torch.cuda.manual_seed(self.config.trainer.seed)
         if (
                 self.config.trainer.num_threads is not None
                 and isinstance(self.config.trainer.num_threads, int)
@@ -480,19 +512,19 @@ class Trainer(BaseTrainer):
         # with torch.cuda.amp.autocast():  # type:ignore
         # with torch.autocast(self._device):
         # if self.model_engine is not None:
-            # assert self.config.backend.lower() in [
-            #     'ds',
-            #     'deepspeed',
-            #     'DDP',
-            # ]
-            # i.e. using either DDP or DeepSpeed backends
+        # assert self.config.backend.lower() in [
+        #     'ds',
+        #     'deepspeed',
+        #     'DDP',
+        # ]
+        # i.e. using either DDP or DeepSpeed backends
         probs = self.model_engine(data)
         loss = self.loss_fn(probs, target)
         if self.config.backend.lower() in ['ds', 'deepspeed']:
             self.model_engine.backward(loss)  # type: ignore
             self.model_engine.step()          # type: ignore
         else:
-            # if: 
+            # if:
             # ctx = torch.autocast(  # type:ignore
             #         device_type=self.device,
             #         dtype=self.dtype
@@ -606,6 +638,8 @@ class Trainer(BaseTrainer):
                 and self.wbrun is wandb.run  # type:ignore
             )
             self.wbrun.log({'train/loss': loss_avg, 'train/acc': training_acc})
+        # if self.config.backend in ['ds', 'deepspeed'] and self.rank == 0:
+        #     dscomm.log_summary()
 
         return {'loss': loss_avg, 'acc': training_acc}
 
@@ -613,7 +647,7 @@ class Trainer(BaseTrainer):
         epoch_times = []
         start = time.time()
         from tqdm.auto import trange
-        if self._is_chief:
+        if self._is_rank_0:
             log.info(', '.join([
                 f'self.device: {self.device}',
                 f'self.dtype: {self.dtype}',
@@ -621,7 +655,7 @@ class Trainer(BaseTrainer):
         for epoch in trange(
                 1,
                 self.config.trainer.epochs + 1,
-                disable=(not self._is_chief),
+                disable=(not self._is_rank_0),
                 dynamic_ncols=True,
                 leave=True,
                 desc='Training',
@@ -630,7 +664,7 @@ class Trainer(BaseTrainer):
             metrics = self.train_epoch(epoch)
             epoch_times.append(time.time() - t0)
 
-            if epoch % self.config.trainer.logfreq and self._is_chief:
+            if epoch % self.config.trainer.logfreq and self._is_rank_0:
                 acc = self.test()
                 astr = f'[TEST] Accuracy: {100.0 * acc:.0f}%'
                 sepstr = '-' * len(astr)
