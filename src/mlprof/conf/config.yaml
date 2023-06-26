@@ -25,7 +25,7 @@ defaults:
   - debug: null
 
   - override hydra/hydra_logging: colorlog
-  - override hydra/job_logging: colorlog
+  - override hydra/job_logging: custom
 
 
 # tags to help you identify your experiments
