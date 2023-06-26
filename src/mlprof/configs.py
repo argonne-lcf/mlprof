@@ -144,8 +144,6 @@ class BaseConfig:
         self.__init__(**config)
 
 
-
-
 @dataclass
 class ConvNetworkConfig(BaseConfig):
     drop1: float
@@ -165,7 +163,7 @@ class ConvNetworkConfig(BaseConfig):
         ])
 
 
-@dataclass 
+@dataclass
 class Conv2dConfig(BaseConfig):
     filters: int
     kernel_size: int
@@ -175,7 +173,6 @@ class Conv2dConfig(BaseConfig):
             f'f-{self.filters}',
             f'k-{self.kernel_size}'
         ])
-
 
 
 @dataclass
@@ -216,8 +213,8 @@ class TrainerConfig(BaseConfig):
     lr_init: float
     logfreq: int = 10
     epochs: int = 5
-    seed: int = 9992
     num_threads: int = 16
+    # seed: int = 9992
     # batch_size: int
     # dataset: str = 'MNIST'
 
@@ -236,17 +233,14 @@ def load_ds_config(fpath: os.PathLike) -> dict:
     return ds_config
 
 
-
-
 @dataclass
 class FlopsProfiler:
     enabled: bool = True
     profile_step: int = 1
     module_depth: int = -1
-    top_modules: int =  1
+    top_modules: int = 1
     detailed: bool = True
     output_file: Optional[os.PathLike] = None
-
 
 
 @dataclass
@@ -259,7 +253,7 @@ class OptimizerParams:
     def __post_init__(self):
         if self.betas == []:
             self.betas = [0.8, 0.999]
-            log.warning(f'Betas not set, using defaults: [0.8, 0.999]')
+            log.warning('Betas not set, using defaults: [0.8, 0.999]')
 
 
 @dataclass
@@ -282,7 +276,6 @@ class DeepSpeedConfig:
     dump_state: bool = True
     prescale_gradients: bool = False
     wall_clock_breakdown: bool = True
-
 
 
 @dataclass
@@ -310,7 +303,7 @@ class ExperimentConfig(BaseConfig):
             )
         # self.ds_config = {}
         # if (
-        #         self.ds_config is None and 
+        #         self.ds_config is None and
         #         self.backend.lower() in ['ds', 'deepspeed']
         # ):
         #     if self.backend.lower() in ['ds', 'deepspeed']:
