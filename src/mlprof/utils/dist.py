@@ -1,5 +1,5 @@
 """
-l2hmc/utils/dist.py
+mlprof/utils/dist.py
 
 Contains methods for initializing distributed communication.
 """
@@ -11,9 +11,11 @@ from typing import Optional, Callable
 from mpi4py import MPI
 
 # import logging
-from mlprof.utils.pylogger import get_pylogger
-
-log = get_pylogger(__name__)
+# from mlprof.utils.pylogger import get_pylogger
+#
+# log = get_pylogger(__name__)
+from mlprof import get_logger
+log = get_logger(__name__)
 
 
 BACKENDS = [
@@ -23,6 +25,18 @@ BACKENDS = [
     'horovod',
     'hvd',
 ]
+
+def seed_everything(seed: int):
+    import torch
+    import random
+    import numpy as np
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+
+
 
 
 def setup_tensorflow(
@@ -158,7 +172,7 @@ def query_environment() -> dict[str, int]:
     lr = os.environ.get('LOCAL_RANK', None)
     if ws is not None and r is not None and lr is not None:
         return {
-            'size': int(ws),
+            'world_size': int(ws),
             'rank': int(r),
             'local_rank': int(lr)
         }
@@ -169,6 +183,18 @@ def query_environment() -> dict[str, int]:
         'local_rank': int(get_local_rank()),
     }
 
+
+def get_machine() -> str:
+    import socket
+    hostname = socket.gethostbyaddr(socket.gethostname())[0]
+    if hostname.startswith('x3'):
+        return 'Polaris'
+    elif hostname.startswith('x1'):
+        return 'Sunspot'
+    elif hostname.startswith('thetagpu'):
+        return 'ThetaGPU'
+    else:
+        return hostname
 
 def setup_torch_DDP(port: str = '2345') -> dict[str, int]:
     import torch
@@ -273,7 +299,6 @@ def setup_torch(
         port: str = '2345',
 ) -> int:
     import torch
-    from mlprof.common import seed_everything
     dtypes = {
         'float16': torch.float16,
         'float32': torch.float32,
