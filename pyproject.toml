@@ -1,2 +1,104 @@
-[build-system]
-requires = ["setuptools", "wheel"]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mlprof"
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = []
+authors = [
+  { name = "Sam Foreman", email = "saforem2@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "mpi4py",
+  "h5py",
+  "seaborn",
+  "xarray",
+  "deepspeed>=0.9.1",
+  "joblib",
+  "celerite",
+  "rich",
+  "hydra-core",
+  "wandb",
+  "arviz",
+  "hydra-colorlog",
+  "ipympl",
+  "matplotx",
+  "aim",
+  "tqdm",
+  "enrich @ git+https://github.com/saforem2/enrich",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+  "pudb",
+  "nodejs",
+  "pynvim",
+  "neovim",
+  "ruff",
+  "ruff-lsp",
+  "pyproject-flake8",
+  "ipython",
+  "ptipython",
+]
+
+[project.urls]
+Documentation = "https://github.com/argonne-lcf/mlprof"
+Issues = "https://github.com/argonne-lcf/mlprof/issues"
+Source = "https://github.com/argonne-lcf/mlprof"
+
+[tool.hatch.version]
+path = "src/mlprof/__about__.py"
+
+[tool.hatch.build]
+exclude = [
+  "src/mlprof/outputs/",
+  "**old**",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+
+[tool.hatch.build.targets.sdist]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mlprof"]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest",
+  "pytest-cov",
+]
+[tool.hatch.envs.default.scripts]
+cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=src/mlprof --cov=tests"
+no-cov = "cov --no-cov"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["38", "39", "310", "311"]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = [
+  "mlprof/__about__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
