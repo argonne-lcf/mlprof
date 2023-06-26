@@ -11,9 +11,11 @@ from hydra.utils import instantiate
 from omegaconf import DictConfig
 
 from mlprof.configs import ExperimentConfig
-from mlprof.utils.pylogger import get_pylogger
+# from mlprof.utils.pylogger import get_pylogger
 
-log = get_pylogger(__name__)
+# log = get_pylogger(__name__)
+from mlprof import get_logger
+log = get_logger(__name__)
 
 
 class BaseTrainer(ABC):
