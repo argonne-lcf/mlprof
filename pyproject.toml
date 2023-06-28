@@ -26,6 +26,8 @@ dependencies = [
   "seaborn",
   "xarray",
   "deepspeed>=0.9.1",
+  "pillow",
+  "torch",
   "joblib",
   "celerite",
   "rich",
