@@ -9,15 +9,10 @@ import warnings
 
 from mpi4py import MPI
 # from rich.logging import RichHandler
-try:
-    from enrich.logging import RichHandler
-except:
-    from rich.logging import RichHandler
+from enrich.logging import RichHandler
 import tqdm
 
 warnings.filterwarnings('ignore')
-
-# import os
 
 os.environ['PYTHONIOENCODING'] = 'utf-8'
 
@@ -104,9 +99,9 @@ def get_logger(
         level: str = 'INFO',
         rank_zero_only: bool = True,
         **kwargs,
-        # rich_stdout: bool = True,
 ) -> logging.Logger:
-    # logging.basicConfig(stream=DummyTqdmFile(sys.stderr))
+    import sys
+    logging.basicConfig(stream=sys.stderr)
     log = logging.getLogger(name)
     # log.handlers = []
     # from rich.logging import RichHandler
@@ -120,8 +115,8 @@ def get_logger(
     if RANK == 0:
         console = get_console(
             markup=True,  # (WORLD_SIZE == 1),
-            # redirect=(WORLD_SIZE > 1),
-            # file=outfile,
+            record=True,
+            redirect=(WORLD_SIZE > 1),
             **kwargs
         )
         if console.is_jupyter:
@@ -140,10 +135,8 @@ def get_logger(
                 show_time=True,
                 show_level=True,
                 show_path=True,
-                # tracebacks_width=120,
                 markup=use_markup,
                 enable_link_path=use_markup,
-                # keywords=['loss=', 'dt=', 'Saving']
             )
         )
         log.setLevel(level)
