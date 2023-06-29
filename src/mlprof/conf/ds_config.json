@@ -1,9 +1,9 @@
 {
   "dump_state": false,
   "wall_clock_breakdown": true,
-  "zero_allow_untested_optimizer": true,
+  "zero_allow_untested_optimizer": false,
   "flops_profiler": {
-    "enabled": true,
+    "enabled": false,
     "profile_step": 1,
     "module_depth": -1,
     "top_modules": 1,
@@ -11,7 +11,7 @@
     "output_file": null
   },
   "optimizer": {
-    "type": "AdamW",
+    "type": "Adam",
     "params": {
       "lr": 0.001,
       "betas": [
@@ -49,24 +49,7 @@
     }
   },
   "zero_optimization": {
-    "stage": 2,
-    "allgather_partitions": true,
-    "reduce_scatter": true,
-    "allgather_bucket_size": 5e8,
-    "reduce_bucket_size": 5e8,
-    "overlap_comm": true,
-    "contiguous_gradients": true,
-    "offload_param": {
-      "device": "nvme",
-      "nvme_path": "/raid/scratch/"
-    },
-    "offload_optimizer": {
-      "device": "cpu",
-      "nvme_path": "/raid/scratch/",
-      "pin_memory": false,
-      "buffer_count": 4,
-      "fast_init": true
-    }
+    "stage": 0
   },
   "amp": {
     "enabled": false
