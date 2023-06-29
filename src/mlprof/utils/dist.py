@@ -94,11 +94,11 @@ def setup_tensorflow(
             print(e)
 
     RANK = hvd.rank()
-    SIZE = hvd.size()
+    WORLD_SIZE = hvd.size()
     LOCAL_RANK = hvd.local_rank()
     # LOCAL_SIZE = hvd.local_size()
     os.environ['RANK'] = str(RANK)
-    os.environ['WORLD_SIZE'] = str(SIZE)
+    os.environ['WORLD_SIZE'] = str(WORLD_SIZE)
     os.environ['LOCAL_RANK'] = str(LOCAL_RANK)
 
     log.warning(f'Using: {TF_FLOAT} precision')
@@ -178,7 +178,7 @@ def query_environment() -> dict[str, int]:
         }
 
     return {
-        'size': int(get_size()),
+        'world_size': int(get_size()),
         'rank': int(get_rank()),
         'local_rank': int(get_local_rank()),
     }
@@ -210,12 +210,12 @@ def setup_torch_DDP(port: str = '2345') -> dict[str, int]:
     #         '0',
     #     )
     # ))
-    size = int(get_size())
+    world_size = int(get_size())
     rank = int(get_rank())
     local_rank = int(get_local_rank())
     os.environ['LOCAL_RANK'] = str(local_rank)
     os.environ['RANK'] = str(rank)
-    os.environ['WORLD_SIZE'] = str(size)
+    os.environ['WORLD_SIZE'] = str(world_size)
     master_addr = (
         socket.gethostname() if rank == 0 else None
     )
@@ -229,11 +229,11 @@ def setup_torch_DDP(port: str = '2345') -> dict[str, int]:
 
     init_process_group(
         rank=rank,
-        world_size=size,
+        world_size=world_size,
         backend='nccl' if torch.cuda.is_available() else 'gloo'
     )
 
-    return {'size': size, 'rank': rank, 'local_rank': local_rank}
+    return {'world_size': world_size, 'rank': rank, 'local_rank': local_rank}
 
 
 def setup_torch_distributed(
@@ -242,7 +242,7 @@ def setup_torch_distributed(
 ) -> dict:
     import torch
     rank = os.environ.get('RANK', get_rank())
-    size = os.environ.get('WORLD_SIZE', get_size())
+    world_size = os.environ.get('WORLD_SIZE', get_size())
     local_rank = os.environ.get('LOCAL_RANK', get_local_rank())
     #     'PMI_LOCAL_RANK',
     #     os.environ.get(
@@ -258,13 +258,13 @@ def setup_torch_distributed(
 
     if be in ['ddp', 'DDP']:
         dsetup = setup_torch_DDP(port)
-        size = dsetup['size']
+        world_size = dsetup['world_size']
         rank = dsetup['rank']
         local_rank = dsetup['local_rank']
 
     elif be in ['deepspeed', 'ds']:
         init_deepspeed()
-        size = get_size()
+        world_size = get_size()
         rank = get_rank()
         local_rank = get_local_rank()
 
@@ -272,7 +272,7 @@ def setup_torch_distributed(
         import horovod.torch as hvd
         hvd.init() if not hvd.is_initialized() else None
         rank = hvd.rank()
-        size = hvd.size()
+        world_size = hvd.size()
         local_rank = hvd.local_rank()
         if torch.cuda.is_available():
             torch.cuda.set_device(hvd.local_rank())
@@ -285,11 +285,12 @@ def setup_torch_distributed(
         # rank = 0
         # local_rank = 0
 
-    os.environ['SIZE'] = str(size)
+    os.environ['SIZE'] = str(world_size)
+    os.environ['WORLD_SIZE'] = str(world_size)
     os.environ['RANK'] = str(rank)
     os.environ['LOCAL_RANK'] = str(local_rank)
 
-    return {'size': size, 'rank': rank, 'local_rank': local_rank}
+    return {'world_size': world_size, 'rank': rank, 'local_rank': local_rank}
 
 
 def setup_torch(
@@ -312,14 +313,14 @@ def setup_torch(
     torch.use_deterministic_algorithms(True)
     dsetup = setup_torch_distributed(backend=backend, port=port)
     rank = dsetup['rank']
-    size = dsetup['size']
+    world_size = dsetup['world_size']
     local_rank = dsetup['local_rank']
     # size = int(get_size())
     # rank = int(get_rank())
     # local_rank = int(get_local_rank())
     os.environ['LOCAL_RANK'] = str(local_rank)
     os.environ['RANK'] = str(rank)
-    os.environ['WORLD_SIZE'] = str(size)
+    os.environ['WORLD_SIZE'] = str(world_size)
 
     nthreads = os.environ.get(
         'OMP_NUM_THREADS',
@@ -334,7 +335,7 @@ def setup_torch(
     if torch.cuda.is_available():
         torch.cuda.set_device(local_rank)
 
-    log.info(f'Global Rank: {rank} / {size-1}')
+    log.info(f'Global Rank: {rank} / {world_size-1}')
     # log.info(f'[{rank}]: Local rank: {local_rank}')
     seed_everything(seed * (rank + 1) * (local_rank + 1))
     return rank
