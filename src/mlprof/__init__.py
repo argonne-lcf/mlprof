@@ -100,8 +100,7 @@ def get_logger(
         rank_zero_only: bool = True,
         **kwargs,
 ) -> logging.Logger:
-    import sys
-    logging.basicConfig(stream=sys.stderr)
+    # logging.basicConfig(stream=sys.stderr)
     log = logging.getLogger(name)
     # log.handlers = []
     # from rich.logging import RichHandler
@@ -113,9 +112,11 @@ def get_logger(
         else:
             log.setLevel(level)
     if RANK == 0:
+        # import sys
         console = get_console(
             markup=True,  # (WORLD_SIZE == 1),
             record=True,
+            # file=sys.stdout,
             redirect=(WORLD_SIZE > 1),
             **kwargs
         )
@@ -132,6 +133,7 @@ def get_logger(
                 omit_repeated_times=False,
                 level=level,
                 console=console,
+                # force_terminal=True,
                 show_time=True,
                 show_level=True,
                 show_path=True,
