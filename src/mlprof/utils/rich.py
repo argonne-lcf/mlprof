@@ -20,7 +20,6 @@ from enrich.console import Console
 from enrich.logging import RichHandler
 from omegaconf import DictConfig, OmegaConf
 import pandas as pd
-import pandas as pd
 import rich
 from rich import print
 from rich.box import MINIMAL, SIMPLE, SIMPLE_HEAD, SQUARE
