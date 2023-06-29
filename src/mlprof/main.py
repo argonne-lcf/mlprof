@@ -30,10 +30,9 @@ def run(cfg: DictConfig) -> float:
         backend=cfg.backend,
         port=cfg.get('port', '2345')
     )
-    if rank == 0:
-        if cfg.get('wandb', None) is not None:
-            from mlprof.common import setup_wandb
-            setup_wandb(cfg)
+    if rank == 0 and cfg.get('wandb', None) is not None:
+        from mlprof.common import setup_wandb
+        setup_wandb(cfg)
     return train_mnist(cfg)
 
 
@@ -48,6 +47,17 @@ def main(cfg: DictConfig) -> None:
     if backend in {'deepspeed', 'ds'}:
         import deepspeed.comm as dscomm
         dscomm.log_summary()
+    DIST_ENV = dist.query_environment()
+    # WORLD_SIZE = DIST_ENV['world_size']
+    RANK = DIST_ENV["rank"]
+    import os
+    if RANK == 0:
+        console = getattr(log.handlers[0], 'console')
+        from rich.console import Console as rConsole
+        from enrich.console import Console as eConsole
+        if isinstance(console, (rConsole, eConsole)):
+            log.info(f'Saving console to: {os.getcwd()}/main-rich.log')
+            console.save_text('main-rich.log')
 
 
 if __name__ == '__main__':
