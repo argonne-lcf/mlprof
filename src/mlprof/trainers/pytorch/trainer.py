@@ -78,7 +78,7 @@ class Trainer(BaseTrainer):
         )
         dsetup = setup_torch_distributed(self.config.backend)
         self.device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
-        self.world_size = dsetup['size']
+        self.world_size = dsetup['world_size']
         self.rank = dsetup['rank']
         self.local_rank = dsetup['local_rank']
         self._is_rank_0 = (self.local_rank == 0 and self.rank == 0)
@@ -646,20 +646,21 @@ class Trainer(BaseTrainer):
     def train(self) -> list[float]:
         epoch_times = []
         start = time.time()
-        from tqdm.auto import trange
+        # from tqdm.auto import trange
         if self._is_rank_0:
             log.info(', '.join([
                 f'self.device: {self.device}',
                 f'self.dtype: {self.dtype}',
             ]))
-        for epoch in trange(
-                1,
-                self.config.trainer.epochs + 1,
-                disable=(not self._is_rank_0),
-                dynamic_ncols=True,
-                leave=True,
-                desc='Training',
-        ):
+        # for epoch in trange(
+        #         1,
+        #         self.config.trainer.epochs + 1,
+        #         disable=(not self._is_rank_0),
+        #         dynamic_ncols=True,
+        #         leave=True,
+        #         desc='Training',
+        # ):
+        for epoch in range(1, self.config.trainer.epochs + 1):
             t0 = time.time()
             metrics = self.train_epoch(epoch)
             epoch_times.append(time.time() - t0)
