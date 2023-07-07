@@ -164,6 +164,11 @@ class ConvNetworkConfig(BaseConfig):
 
 
 @dataclass
+class TransformerConfig(BaseConfig):
+    pass
+
+
+@dataclass
 class Conv2dConfig(BaseConfig):
     filters: int
     kernel_size: int
@@ -282,7 +287,7 @@ class DeepSpeedConfig:
 class ExperimentConfig(BaseConfig):
     data: DataConfig
     trainer: TrainerConfig
-    network: ConvNetworkConfig
+    network: ConvNetworkConfig | TransformerConfig
     wandb: Any
     framework: str = 'pytorch'
     backend: str = 'DDP'
